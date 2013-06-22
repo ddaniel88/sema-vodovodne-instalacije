@@ -17,7 +17,7 @@ import javax.swing.SwingUtilities;
 class Surface extends JPanel {
 
     private ZRectangle zrect;
-    private ZEllipse zell;
+  //  private ZEllipse zell;
 
     public Surface() {
 
@@ -27,13 +27,12 @@ class Surface extends JPanel {
     private void initUI() {
         MovingAdapter ma = new MovingAdapter();
 
-        addMouseMotionListener(ma); 
-        
+        addMouseMotionListener(ma);
         addMouseListener(ma);
         addMouseWheelListener(new ScaleHandler());
 
         zrect = new ZRectangle(50, 50, 50, 50);
-        zell = new ZEllipse(150, 70, 80, 80);
+     //   zell = new ZEllipse(150, 70, 80, 80);
 
         setDoubleBuffered(true);        
     }
@@ -53,7 +52,7 @@ class Surface extends JPanel {
         g2d.setColor(new Color(0, 0, 200));
         g2d.fill(zrect);
         g2d.setColor(new Color(0, 200, 0));
-        g2d.fill(zell);        
+    //    g2d.fill(zell);        
     }
 
     @Override
@@ -164,12 +163,14 @@ class Surface extends JPanel {
                 zrect.addX(dx);
                 zrect.addY(dy);
                 repaint();
-            } else if (zell.isHit(x, y)) {
+            } 
+           /* else if (zell.isHit(x, y)) 
+            {
                 
                 zell.addX(dx);
                 zell.addY(dy);
                 repaint();
-            }
+            } */
 
             x += dx;
             y += dy;
@@ -192,13 +193,14 @@ class Surface extends JPanel {
                     zrect.addWidth(amount);
                     zrect.addHeight(amount);
                     repaint();
-                } else if (zell.isHit(x, y)) {
+                } 
+                /* else if (zell.isHit(x, y)) {
                     
                     float amount =  e.getWheelRotation() * 5f;
                     zell.addWidth(amount);
                     zell.addHeight(amount);
                     repaint();
-                }
+                } */
             }
         }
     }
@@ -213,7 +215,7 @@ public class MovingScaling extends JFrame {
     
     private void initUI() {
         
-        setTitle("Moving and scaling");
+        setTitle("Java 2D proba");
 
         add(new Surface());
 
