@@ -29,7 +29,7 @@ class Surface extends JPanel {
 
         addMouseMotionListener(ma);
         addMouseListener(ma);
-        addMouseWheelListener(new ScaleHandler());
+       // addMouseWheelListener(new ScaleHandler());
 
         zrect = new ZRectangle(50, 50, 50, 50);
      //   zell = new ZEllipse(150, 70, 80, 80);
@@ -62,7 +62,7 @@ class Surface extends JPanel {
         doDrawing(g);        
     }
 
-    class ZEllipse extends Ellipse2D.Float {
+   /* class ZEllipse extends Ellipse2D.Float {
         
         public ZEllipse(float x, float y, float width, float height) {
             
@@ -100,6 +100,8 @@ class Surface extends JPanel {
             this.height += h;
         }
     }
+    
+    */
 
     class ZRectangle extends Rectangle2D.Float {
 
@@ -177,7 +179,7 @@ class Surface extends JPanel {
         }   
     }
 
-    class ScaleHandler implements MouseWheelListener {
+   /*  class ScaleHandler implements MouseWheelListener {
         
         @Override
         public void mouseWheelMoved(MouseWheelEvent e) {
@@ -200,10 +202,10 @@ class Surface extends JPanel {
                     zell.addWidth(amount);
                     zell.addHeight(amount);
                     repaint();
-                } */
+                } 
             }
         }
-    }
+    } */
 }
 
 public class MovingScaling extends JFrame {
