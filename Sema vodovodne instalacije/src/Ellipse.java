@@ -15,6 +15,11 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -60,6 +65,8 @@ public class Ellipse extends JFrame {
     int x1, y1, x2, y2;
 
     Ellipse2D ellipse;
+    
+    List<Ellipse2D> listaElemenata;
 
     Ellipse2D selectedShape;
 
@@ -74,10 +81,15 @@ public class Ellipse extends JFrame {
       setBackground(Color.white);
       addMouseListener(new MyMouseListener());
       addMouseMotionListener(new MyMouseMotionListener());
+      
+      listaElemenata = new ArrayList<Ellipse2D>();
     }
     public void paint(Graphics g) {
       Graphics2D g2D = (Graphics2D) g;
       ellipse = new Ellipse2D.Double(x, y, w, h);
+      
+      
+      
       g2D.draw(ellipse);
       if (boundingRec != null) {
         drawHighlightSquares(g2D, boundingRec);
