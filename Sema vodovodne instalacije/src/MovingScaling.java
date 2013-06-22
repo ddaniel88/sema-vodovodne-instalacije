@@ -25,7 +25,6 @@ class Surface extends JPanel {
     }
     
     private void initUI() {
-        
         MovingAdapter ma = new MovingAdapter();
 
         addMouseMotionListener(ma);
