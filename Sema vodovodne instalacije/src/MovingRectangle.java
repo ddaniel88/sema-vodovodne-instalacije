@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -15,7 +16,8 @@ import javax.swing.SwingUtilities;
 
 class Surface extends JPanel {
 
-	private ZRectangle zrect;
+	private Kvadrat kvadrat;
+	Cursor curCursor;
 
 	// private ZEllipse zell;
 
@@ -29,7 +31,7 @@ class Surface extends JPanel {
 		addMouseListener(ma);
 		// addMouseWheelListener(new ScaleHandler());
 
-		zrect = new ZRectangle(50, 50, 50, 50);
+		kvadrat = new Kvadrat(50, 50, 50, 50);
 		// zell = new ZEllipse(150, 70, 80, 80);
 
 		setDoubleBuffered(true);
@@ -47,9 +49,12 @@ class Surface extends JPanel {
 				RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
 		g2d.setColor(new Color(0, 0, 200));
-		g2d.fill(zrect);
-		g2d.setColor(new Color(0, 200, 0));
+		g2d.fill(kvadrat);
+		//g2d.setColor(new Color(0, 200, 0));
 		// g2d.fill(zell);
+		
+		if (curCursor != null)
+	        setCursor(curCursor);
 	}
 
 	@Override
@@ -88,8 +93,8 @@ class Surface extends JPanel {
 	// }
 	// }
 
-	class ZRectangle extends Rectangle2D.Float {
-		public ZRectangle(float x, float y, float width, float height) {
+	class Kvadrat extends Rectangle2D.Float {
+		public Kvadrat(float x, float y, float width, float height) {
 			setRect(x, y, width, height);
 		}
 
@@ -133,9 +138,9 @@ class Surface extends JPanel {
 			int dx = e.getX() - x;
 			int dy = e.getY() - y;
 
-			if (zrect.isHit(x, y)) {
-				zrect.addX(dx);
-				zrect.addY(dy);
+			if (kvadrat.isHit(x, y)) {
+				kvadrat.addX(dx);
+				kvadrat.addY(dy);
 				repaint();
 			}
 			/*
@@ -146,6 +151,18 @@ class Surface extends JPanel {
 			x += dx;
 			y += dy;
 		}
+		
+		  public void mouseMoved(MouseEvent e) {
+		        if (kvadrat != null) { 
+		          if (kvadrat.contains(e.getX(), e.getY())) {
+		            curCursor = Cursor
+		                .getPredefinedCursor(Cursor.HAND_CURSOR);
+		          } else {
+		            curCursor = Cursor.getDefaultCursor();
+		          }
+		        }
+		        repaint();
+		      }
 	}
 
 	// class ScaleHandler implements MouseWheelListener {
@@ -173,9 +190,9 @@ class Surface extends JPanel {
 	// }
 }
 
-public class MovingScaling extends JFrame {
+public class MovingRectangle extends JFrame {
 
-	public MovingScaling() {
+	public MovingRectangle() {
 		initUI();
 	}
 
@@ -191,7 +208,7 @@ public class MovingScaling extends JFrame {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				MovingScaling ms = new MovingScaling();
+				MovingRectangle ms = new MovingRectangle();
 				ms.setVisible(true);
 			}
 		});
