@@ -103,7 +103,7 @@ public class ScaledPanel {
 				
 				// make it a reasonable amount of zoom
 				// .1 gives a nice slow transition
-				canvas.scale += (.1 * e.getWheelRotation());
+				canvas.scale -= (.1 * e.getWheelRotation());
 				// don't cross negative threshold.
 				// also, setting scale to 0 has bad effects
 				canvas.scale = Math.max(0.00001, canvas.scale); 
