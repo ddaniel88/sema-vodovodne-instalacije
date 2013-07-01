@@ -18,6 +18,7 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
 
 
@@ -79,7 +80,7 @@ public class MovingRectangle extends JFrame {
 			MovingAdapter ma = new MovingAdapter();
 			addMouseMotionListener(ma);
 			addMouseListener(ma);
-			// addMouseWheelListener(new ScaleHandler());
+			addMouseWheelListener(ma);
 
 			kvadrat = new Kvadrat(20, 20, 20, 20);
 			// zell = new ZEllipse(150, 70, 80, 80);
@@ -104,12 +105,16 @@ public class MovingRectangle extends JFrame {
 			ourGraphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
 					RenderingHints.VALUE_TEXT_ANTIALIAS_ON);			
 			ourGraphics.setColor(Color.BLACK);
-			ourGraphics.drawRect(50, 50, 50, 50);
-			ourGraphics.fillOval(100, 100, 100, 100);
 			ourGraphics.drawString("Proba zoom-in i zoom-out", 50, 30);
 			
-			ourGraphics.setColor(new Color(0, 0, 200));
-			ourGraphics.fill(kvadrat);
+			
+			AffineTransform aa = new AffineTransform();
+			aa.scale(kvadrat.kv_scale, kvadrat.kv_scale);
+			Graphics2D kv = (Graphics2D) g;
+			kv.setColor(new Color(0, 0, 200));
+			kv.setTransform(aa);
+			kv.fill(kvadrat);
+			
 			//g2d.setColor(new Color(0, 200, 0));
 			// g2d.fill(zell);
 			
@@ -136,6 +141,7 @@ public class MovingRectangle extends JFrame {
 			// capture starting point
 			lastOffsetX = e.getX();
 			lastOffsetY = e.getY();
+			
 			}
 			
 			
@@ -180,10 +186,26 @@ public class MovingRectangle extends JFrame {
 				// also, setting scale to 0 has bad effects
 				canvas.scale = Math.max(0.00001, canvas.scale); 
 					
-				//za kvadrat skaliranje, pomeranje x,y sta vec
+				//za kvadrat skaliranje, pomeranje x,y sta vec .. skaliranje koordinata i dimeznija kvadrata
+				
+		/*		System.out.println(kvadrat.x);
+				System.out.println(kvadrat.y);
+				System.out.println(kvadrat.width);
+				System.out.println(kvadrat.height);
+				System.out.println();
 				
 				
+				kvadrat.x *= canvas.scale;
+				kvadrat.y *= canvas.scale;
+				kvadrat.width *= canvas.scale;
+				kvadrat.height *= canvas.scale;
 				
+				System.out.println(kvadrat.x);
+				System.out.println(kvadrat.y);
+				System.out.println(kvadrat.width);
+				System.out.println(kvadrat.height);
+				
+			*/
 				canvas.repaint();
 			}
 		}
@@ -191,8 +213,11 @@ public class MovingRectangle extends JFrame {
 	
 	
 	public static class Kvadrat extends Rectangle2D.Float {
-		public Kvadrat(float x, float y, float width, float height) {
-			setRect(x, y, width, height);
+		
+		double kv_scale = 1;
+		
+		public Kvadrat(double d, double e, float width, float height) {
+			setRect(d, e, width, height);
 		}
 
 		public boolean isHit(float x, float y) {
@@ -261,6 +286,19 @@ public class MovingRectangle extends JFrame {
 		       canvas.repaint();
 		      }
 		  
+		  public void mouseWheelMoved(MouseWheelEvent e)   {
+			  
+			  System.out.println(kvadrat.kv_scale);
+				// make it a reasonable amount of zoom
+				// .1 gives a nice slow transition
+				kvadrat.kv_scale -= (.1 * e.getWheelRotation());
+				// don't cross negative threshold.
+				// also, setting scale to 0 has bad effects
+				kvadrat.kv_scale = Math.max(0.00001, kvadrat.kv_scale); 
+				
+				
+		       canvas.repaint();
+		   }
 		  
 		  
 	}
