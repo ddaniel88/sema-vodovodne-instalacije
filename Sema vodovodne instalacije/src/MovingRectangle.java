@@ -21,28 +21,21 @@ import javax.swing.JPanel;
 import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
 
-
 public class MovingRectangle extends JFrame {
-	
+
 	public static TransformingCanvas canvas;
 	private static Kvadrat kvadrat;
 	static Cursor curCursor;
 
-/*	public MovingRectangle() {
-		initUI();
-	}
-
-	private void initUI() {
-		setTitle("Java 2D proba");
-		//add(new Surface());
-		setSize(300, 300);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);
-	}
-*/
+	/*
+	 * public MovingRectangle() { initUI(); }
+	 * 
+	 * private void initUI() { setTitle("Java 2D proba"); //add(new Surface());
+	 * setSize(300, 300); setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	 * setLocationRelativeTo(null); }
+	 */
 	public static void main(String[] args) {
-		
-		
+
 		JFrame frame = new JFrame();
 		canvas = new TransformingCanvas();
 		TranslateHandler translater = new TranslateHandler();
@@ -54,19 +47,18 @@ public class MovingRectangle extends JFrame {
 		frame.setSize(500, 500);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
-		
+
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				//MovingRectangle ms = new MovingRectangle();
-				//ms.setVisible(true);
-				
+				// MovingRectangle ms = new MovingRectangle();
+				// ms.setVisible(true);
+
 			}
-		}); 
-	
-}
-	
-	
+		});
+
+	}
+
 	public static class TransformingCanvas extends JComponent {
 		private double translateX;
 		private double translateY;
@@ -76,7 +68,7 @@ public class MovingRectangle extends JFrame {
 			translateX = 0;
 			translateY = 0;
 			scale = 1;
-			
+
 			MovingAdapter ma = new MovingAdapter();
 			addMouseMotionListener(ma);
 			addMouseListener(ma);
@@ -88,8 +80,6 @@ public class MovingRectangle extends JFrame {
 			setOpaque(true);
 			setDoubleBuffered(true);
 		}
-		
-		
 
 		public void doDrawing(Graphics g) {
 
@@ -103,26 +93,25 @@ public class MovingRectangle extends JFrame {
 			ourGraphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 					RenderingHints.VALUE_ANTIALIAS_ON);
 			ourGraphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
-					RenderingHints.VALUE_TEXT_ANTIALIAS_ON);			
+					RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 			ourGraphics.setColor(Color.BLACK);
 			ourGraphics.drawString("Proba zoom-in i zoom-out", 50, 30);
-			
-			
+
 			AffineTransform aa = new AffineTransform();
 			aa.scale(kvadrat.kv_scale, kvadrat.kv_scale);
 			Graphics2D kv = (Graphics2D) g;
 			kv.setColor(new Color(0, 0, 200));
 			kv.setTransform(aa);
 			kv.fill(kvadrat);
-			
-			//g2d.setColor(new Color(0, 200, 0));
+
+			// g2d.setColor(new Color(0, 200, 0));
 			// g2d.fill(zell);
-			
+
 			if (curCursor != null)
-		        setCursor(curCursor);
+				setCursor(curCursor);
 			// super.paint(g);
 		}
-		
+
 		@Override
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
@@ -130,92 +119,88 @@ public class MovingRectangle extends JFrame {
 		}
 	}
 
-
 	public static class TranslateHandler implements MouseListener,
-		MouseMotionListener {
-		
-			private int lastOffsetX;
-			private int lastOffsetY;
-			
+			MouseMotionListener {
+
+		private int lastOffsetX;
+		private int lastOffsetY;
+
 		public void mousePressed(MouseEvent e) {
 			// capture starting point
 			lastOffsetX = e.getX();
 			lastOffsetY = e.getY();
-			
-			}
-			
-			
-			public void mouseDragged(MouseEvent e) {
-		/*	
-			// new x and y are defined by current mouse location subtracted
-			// by previously processed mouse location
-			int newX = e.getX() - lastOffsetX;
-			int newY = e.getY() - lastOffsetY;
-			
-			// increment last offset to last processed by drag event.
-			lastOffsetX += newX;
-			lastOffsetY += newY;
-			
-			// update the canvas locations
-			canvas.translateX += newX;
-			canvas.translateY += newY;
-			
-			// schedule a repaint.
-			canvas.repaint();
-			*/
-			}
-			
-			
-			
-			public void mouseClicked(MouseEvent e) {}
-			public void mouseEntered(MouseEvent e) {}
-			public void mouseExited(MouseEvent e) {}
-			public void mouseMoved(MouseEvent e) {}
-			public void mouseReleased(MouseEvent e) {}
-	}
 
+		}
+
+		public void mouseDragged(MouseEvent e) {
+			/*
+			 * // new x and y are defined by current mouse location subtracted
+			 * // by previously processed mouse location int newX = e.getX() -
+			 * lastOffsetX; int newY = e.getY() - lastOffsetY;
+			 * 
+			 * // increment last offset to last processed by drag event.
+			 * lastOffsetX += newX; lastOffsetY += newY;
+			 * 
+			 * // update the canvas locations canvas.translateX += newX;
+			 * canvas.translateY += newY;
+			 * 
+			 * // schedule a repaint. canvas.repaint();
+			 */
+		}
+
+		public void mouseClicked(MouseEvent e) {
+		}
+
+		public void mouseEntered(MouseEvent e) {
+		}
+
+		public void mouseExited(MouseEvent e) {
+		}
+
+		public void mouseMoved(MouseEvent e) {
+		}
+
+		public void mouseReleased(MouseEvent e) {
+		}
+	}
 
 	public static class ScaleHandler implements MouseWheelListener {
 		public void mouseWheelMoved(MouseWheelEvent e) {
-			if(e.getScrollType() == MouseWheelEvent.WHEEL_UNIT_SCROLL) {
-				
+			if (e.getScrollType() == MouseWheelEvent.WHEEL_UNIT_SCROLL) {
+
 				// make it a reasonable amount of zoom
 				// .1 gives a nice slow transition
 				canvas.scale -= (.1 * e.getWheelRotation());
 				// don't cross negative threshold.
 				// also, setting scale to 0 has bad effects
-				canvas.scale = Math.max(0.00001, canvas.scale); 
-					
-				//za kvadrat skaliranje, pomeranje x,y sta vec .. skaliranje koordinata i dimeznija kvadrata
-				
-		/*		System.out.println(kvadrat.x);
-				System.out.println(kvadrat.y);
-				System.out.println(kvadrat.width);
-				System.out.println(kvadrat.height);
-				System.out.println();
-				
-				
-				kvadrat.x *= canvas.scale;
-				kvadrat.y *= canvas.scale;
-				kvadrat.width *= canvas.scale;
-				kvadrat.height *= canvas.scale;
-				
-				System.out.println(kvadrat.x);
-				System.out.println(kvadrat.y);
-				System.out.println(kvadrat.width);
-				System.out.println(kvadrat.height);
-				
-			*/
+				canvas.scale = Math.max(0.00001, canvas.scale);
+
+				// za kvadrat skaliranje, pomeranje x,y sta vec .. skaliranje
+				// koordinata i dimeznija kvadrata
+
+				/*
+				 * System.out.println(kvadrat.x); System.out.println(kvadrat.y);
+				 * System.out.println(kvadrat.width);
+				 * System.out.println(kvadrat.height); System.out.println();
+				 * 
+				 * 
+				 * kvadrat.x *= canvas.scale; kvadrat.y *= canvas.scale;
+				 * kvadrat.width *= canvas.scale; kvadrat.height *=
+				 * canvas.scale;
+				 * 
+				 * System.out.println(kvadrat.x); System.out.println(kvadrat.y);
+				 * System.out.println(kvadrat.width);
+				 * System.out.println(kvadrat.height);
+				 */
 				canvas.repaint();
 			}
 		}
 	}
-	
-	
+
 	public static class Kvadrat extends Rectangle2D.Float {
-		
+
 		double kv_scale = 1;
-		
+
 		public Kvadrat(double d, double e, float width, float height) {
 			setRect(d, e, width, height);
 		}
@@ -244,7 +229,7 @@ public class MovingRectangle extends JFrame {
 			this.height += h;
 		}
 	}
-	
+
 	public static class MovingAdapter extends MouseAdapter {
 		private int x;
 		private int y;
@@ -273,33 +258,45 @@ public class MovingRectangle extends JFrame {
 			x += dx;
 			y += dy;
 		}
-		
-		  public void mouseMoved(MouseEvent e) {
-		        if (kvadrat != null) { 
-		          if (kvadrat.contains(e.getX(), e.getY())) {
-		            curCursor = Cursor
-		                .getPredefinedCursor(Cursor.HAND_CURSOR);
-		          } else {
-		            curCursor = Cursor.getDefaultCursor();
-		          }
-		        }
-		       canvas.repaint();
-		      }
-		  
-		  public void mouseWheelMoved(MouseWheelEvent e)   {
-			  
-			  System.out.println(kvadrat.kv_scale);
-				// make it a reasonable amount of zoom
-				// .1 gives a nice slow transition
-				kvadrat.kv_scale -= (.1 * e.getWheelRotation());
-				// don't cross negative threshold.
-				// also, setting scale to 0 has bad effects
-				kvadrat.kv_scale = Math.max(0.00001, kvadrat.kv_scale); 
-				
-				
-		       canvas.repaint();
-		   }
-		  
-		  
+
+		public void mouseMoved(MouseEvent e) {
+			if (kvadrat != null) {
+				if (kvadrat.contains(e.getX(), e.getY())) {
+					curCursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
+				} else {
+					curCursor = Cursor.getDefaultCursor();
+				}
+			}
+			canvas.repaint();
+		}
+
+		public void mouseWheelMoved(MouseWheelEvent e) {
+			System.out.println("mouseWheelMoved " + kvadrat.getX() + ", "
+					+ kvadrat.getY());
+			
+//			kvadrat.setRect(kvadrat.x *= (1 - .1 * e.getWheelRotation()), kvadrat.y *= (1 - .1 * e.getWheelRotation()),
+//					kvadrat.width *= (1 - .1 * e.getWheelRotation()), kvadrat.height *= (1 - .1 * e.getWheelRotation()));
+			
+			// minus ide zato što je obrnuto kolce na dole i kolce na gore :-)
+			// promenimo kvadrat pravougaonika i faktièki smo ga zumirali
+			double newX = kvadrat.getX() - kvadrat.getX() * e.getWheelRotation() / 10;
+			double newY = kvadrat.getY() - kvadrat.getY() * e.getWheelRotation() / 10;
+			double newWidth = kvadrat.getWidth() - kvadrat.getWidth() * e.getWheelRotation() / 10;
+			double newHeight = kvadrat.getHeight() - kvadrat.getHeight() * e.getWheelRotation() / 10;
+			
+			kvadrat.setRect(newX, newY, newWidth, newHeight);
+			
+			// make it a reasonable amount of zoom
+			// .1 gives a nice slow transition
+//			kvadrat.kv_scale -= (.1 * e.getWheelRotation());
+			// don't cross negative threshold.
+			// also, setting scale to 0 has bad effects
+//			kvadrat.kv_scale = Math.max(0.00001, kvadrat.kv_scale);
+
+			System.out.println("Trenutni zoom: " + kvadrat.kv_scale);
+
+			canvas.repaint();
+		}
+
 	}
 }
