@@ -5,6 +5,9 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -15,11 +18,50 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
+
+ class Example extends JFrame {
+
+    public Example() {
+        initUI();
+    }
+
+    public final void initUI() {
+
+        JMenuBar menubar = new JMenuBar();
+
+        JMenu file = new JMenu("File");
+        file.setMnemonic(KeyEvent.VK_F);
+
+        JMenuItem eMenuItem = new JMenuItem("Exit");
+        eMenuItem.setMnemonic(KeyEvent.VK_E);
+        eMenuItem.setToolTipText("Exit application");
+        eMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                System.exit(0);
+            }
+        });
+
+        file.add(eMenuItem);
+
+        menubar.add(file);
+
+        setJMenuBar(menubar);
+
+        setTitle("Simple menu");
+        setSize(300, 200);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+}
 
 public class MovingRectangle extends JFrame {
 
@@ -37,26 +79,38 @@ public class MovingRectangle extends JFrame {
 	public static void main(String[] args) {
 
 		JFrame frame = new JFrame();
+		
+		JMenuBar frameMenuBar=new JMenuBar(); 
+		JMenu menu1=new JMenu("Element"); 
+		
+		//Create first menu item for first menu  
+		JMenuItem menuItem1=new JMenuItem("001");  
+		
+		//add first menu item into first menu  
+		menu1.add(menuItem1);
+		
+		frameMenuBar.add(menu1);
+		
+		frame.setJMenuBar(frameMenuBar);
+		
+		//Set default close operation for JFrame  
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+		
 		canvas = new TransformingCanvas();
 		TranslateHandler translater = new TranslateHandler();
 		canvas.addMouseListener(translater);
 		canvas.addMouseMotionListener(translater);
 		canvas.addMouseWheelListener(new ScaleHandler());
+		
+		
 		frame.setLayout(new BorderLayout());
 		frame.getContentPane().add(canvas, BorderLayout.CENTER);
 		frame.setSize(500, 500);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
-
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				// MovingRectangle ms = new MovingRectangle();
-				// ms.setVisible(true);
-
-			}
-		});
-
+		
+	
+		
 	}
 
 	public static class TransformingCanvas extends JComponent {
@@ -68,7 +122,7 @@ public class MovingRectangle extends JFrame {
 			translateX = 0;
 			translateY = 0;
 			scale = 1;
-
+	
 			MovingAdapter ma = new MovingAdapter();
 			addMouseMotionListener(ma);
 			addMouseListener(ma);
@@ -82,6 +136,8 @@ public class MovingRectangle extends JFrame {
 		}
 
 		public void doDrawing(Graphics g) {
+			
+			  
 
 			AffineTransform tx = new AffineTransform();
 			tx.translate(translateX, translateY);
