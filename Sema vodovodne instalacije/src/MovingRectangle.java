@@ -28,40 +28,6 @@ import javax.swing.JPanel;
 import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
 
- class Example extends JFrame {
-
-    public Example() {
-        initUI();
-    }
-
-    public final void initUI() {
-
-        JMenuBar menubar = new JMenuBar();
-
-        JMenu file = new JMenu("File");
-        file.setMnemonic(KeyEvent.VK_F);
-
-        JMenuItem eMenuItem = new JMenuItem("Exit");
-        eMenuItem.setMnemonic(KeyEvent.VK_E);
-        eMenuItem.setToolTipText("Exit application");
-        eMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                System.exit(0);
-            }
-        });
-
-        file.add(eMenuItem);
-
-        menubar.add(file);
-
-        setJMenuBar(menubar);
-
-        setTitle("Simple menu");
-        setSize(300, 200);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-    }
-}
 
 public class MovingRectangle extends JFrame {
 
@@ -106,6 +72,9 @@ public class MovingRectangle extends JFrame {
 		frame.setLayout(new BorderLayout());
 		frame.getContentPane().add(canvas, BorderLayout.CENTER);
 		frame.setSize(500, 500);
+		
+		
+		
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
 		
@@ -128,7 +97,7 @@ public class MovingRectangle extends JFrame {
 			addMouseListener(ma);
 			addMouseWheelListener(ma);
 
-			kvadrat = new Kvadrat(20, 20, 20, 20);
+			kvadrat = new Kvadrat(70, 70, 20, 20);
 			// zell = new ZEllipse(150, 70, 80, 80);
 
 			setOpaque(true);
@@ -137,8 +106,6 @@ public class MovingRectangle extends JFrame {
 
 		public void doDrawing(Graphics g) {
 			
-			  
-
 			AffineTransform tx = new AffineTransform();
 			tx.translate(translateX, translateY);
 			tx.scale(scale, scale);
@@ -151,7 +118,7 @@ public class MovingRectangle extends JFrame {
 			ourGraphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
 					RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 			ourGraphics.setColor(Color.BLACK);
-			ourGraphics.drawString("Proba zoom-in i zoom-out", 50, 30);
+			ourGraphics.drawString("Proba zoom-in i zoom-out", 100, 100);
 
 			AffineTransform aa = new AffineTransform();
 			aa.scale(kvadrat.kv_scale, kvadrat.kv_scale);
