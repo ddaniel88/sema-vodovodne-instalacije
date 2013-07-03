@@ -24,7 +24,9 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
 
@@ -34,30 +36,66 @@ public class MovingRectangle extends JFrame {
 	public static TransformingCanvas canvas;
 	private static Kvadrat kvadrat;
 	static Cursor curCursor;
+	
+	
+	
+	//Klik na neki elemeent iz menija 
+	public static class MenuActionListener implements ActionListener {
+		  public void actionPerformed(ActionEvent e) {
+		    System.out.println("Selected: " + e.getActionCommand());
 
-	/*
-	 * public MovingRectangle() { initUI(); }
-	 * 
-	 * private void initUI() { setTitle("Java 2D proba"); //add(new Surface());
-	 * setSize(300, 300); setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	 * setLocationRelativeTo(null); }
-	 */
+		  }
+		}
+	
+	//meni
+	public static class SwingMenu implements ActionListener{
+		 
+		  public JMenuBar SwingMenu(){
+		  JMenuBar menubar = new JMenuBar();
+		  JMenu filemenu = new JMenu("Figure");
+		  filemenu.add(new JSeparator());
+		  JMenu editmenu = new JMenu("Edit");
+		  editmenu.add(new JSeparator());
+		  JMenuItem fileItem1 = new JMenuItem("001");
+		  fileItem1.addActionListener(new MenuActionListener());
+		  JMenuItem fileItem2 = new JMenuItem("002");
+		  fileItem2.addActionListener(new MenuActionListener());
+		  JMenuItem fileItem3 = new JMenuItem("003");
+		  
+		  fileItem3.addActionListener(new MenuActionListener());
+		  JMenuItem editItem1 = new JMenuItem("Rotate");
+		  JMenuItem editItem2 = new JMenuItem("Translae");
+		  JMenuItem editItem3 = new JMenuItem("Zoom");
+		  filemenu.add(fileItem1);
+		  filemenu.add(fileItem2);
+		  filemenu.add(fileItem3);
+		  
+		  editmenu.add(editItem1);
+		  editmenu.add(editItem2);
+		  editmenu.add(editItem3);
+		  menubar.add(filemenu);
+		  menubar.add(editmenu);
+		  
+		  
+		  
+		  return menubar;
+		  }
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+			System.out.println("aaa");
+			
+		}
+		
+		}
 	public static void main(String[] args) {
 
 		JFrame frame = new JFrame();
 		
-		JMenuBar frameMenuBar=new JMenuBar(); 
-		JMenu menu1=new JMenu("Element"); 
-		
-		//Create first menu item for first menu  
-		JMenuItem menuItem1=new JMenuItem("001");  
-		
-		//add first menu item into first menu  
-		menu1.add(menuItem1);
-		
-		frameMenuBar.add(menu1);
-		
-		frame.setJMenuBar(frameMenuBar);
+		SwingMenu s = new SwingMenu();
+		frame.setJMenuBar(s.SwingMenu());
 		
 		//Set default close operation for JFrame  
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
@@ -106,6 +144,7 @@ public class MovingRectangle extends JFrame {
 
 		public void doDrawing(Graphics g) {
 			
+			canvas.repaint();
 			AffineTransform tx = new AffineTransform();
 			tx.translate(translateX, translateY);
 			tx.scale(scale, scale);
@@ -198,23 +237,7 @@ public class MovingRectangle extends JFrame {
 				// also, setting scale to 0 has bad effects
 				canvas.scale = Math.max(0.00001, canvas.scale);
 
-				// za kvadrat skaliranje, pomeranje x,y sta vec .. skaliranje
-				// koordinata i dimeznija kvadrata
-
-				/*
-				 * System.out.println(kvadrat.x); System.out.println(kvadrat.y);
-				 * System.out.println(kvadrat.width);
-				 * System.out.println(kvadrat.height); System.out.println();
-				 * 
-				 * 
-				 * kvadrat.x *= canvas.scale; kvadrat.y *= canvas.scale;
-				 * kvadrat.width *= canvas.scale; kvadrat.height *=
-				 * canvas.scale;
-				 * 
-				 * System.out.println(kvadrat.x); System.out.println(kvadrat.y);
-				 * System.out.println(kvadrat.width);
-				 * System.out.println(kvadrat.height);
-				 */
+				
 				canvas.repaint();
 			}
 		}
