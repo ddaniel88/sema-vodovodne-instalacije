@@ -42,15 +42,34 @@ public class MovingRectangle extends JFrame {
 	//Klik na neki elemeent iz menija 
 	public static class MenuActionListener implements ActionListener {
 		  public void actionPerformed(ActionEvent e) {
-		    System.out.println("Selected: " + e.getActionCommand());
+			  
+			  System.out.println("Selected: " + e.getActionCommand());
+			  
+			  String figura;
+			  
+		        switch (e.getActionCommand()) {
+		            case "001":   System.out.println("aaa");
+		                     break;
+		            case "002":   System.out.println("bbb");
+		                     break;
+		            case "003":  System.out.println("ccc");
+		                     break;
+		            
+		            default: figura = "Invalid month";
+		                     break;
+		        }
+		    }
+			  
+		    
 
 		  }
-		}
+		
 	
 	//meni
 	public static class SwingMenu implements ActionListener{
 		 
-		  public JMenuBar SwingMenu(){
+		  public JMenuBar SwingMenu()
+		  {
 		  JMenuBar menubar = new JMenuBar();
 		  JMenu filemenu = new JMenu("Figure");
 		  filemenu.add(new JSeparator());
