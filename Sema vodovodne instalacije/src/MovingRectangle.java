@@ -16,6 +16,7 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
 import javax.swing.ImageIcon;
@@ -35,6 +36,7 @@ public class MovingRectangle extends JFrame {
 
 	public static TransformingCanvas canvas;
 	private static Kvadrat kvadrat;
+	private static Nesto linija;
 	static Cursor curCursor;
 	
 	
@@ -155,6 +157,7 @@ public class MovingRectangle extends JFrame {
 			addMouseWheelListener(ma);
 
 			kvadrat = new Kvadrat(70, 70, 20, 20);
+			linija = new Nesto(100, 100, 200, 100);
 			// zell = new ZEllipse(150, 70, 80, 80);
 
 			setOpaque(true);
@@ -177,7 +180,7 @@ public class MovingRectangle extends JFrame {
 					RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 			ourGraphics.setColor(Color.BLACK);
 			ourGraphics.drawString("Proba zoom-in i zoom-out", 100, 100);
-
+			
 			AffineTransform aa = new AffineTransform();
 			aa.scale(kvadrat.kv_scale, kvadrat.kv_scale);
 			Graphics2D kv = (Graphics2D) g;
@@ -292,6 +295,14 @@ public class MovingRectangle extends JFrame {
 
 		public void addHeight(float h) {
 			this.height += h;
+		}
+	}
+	
+	public static class Nesto extends Line2D.Float {
+		private static final long serialVersionUID = 1L;
+		
+		public Nesto(float a, float b, float c, float d) {
+			setLine(a, b, c, d);
 		}
 	}
 

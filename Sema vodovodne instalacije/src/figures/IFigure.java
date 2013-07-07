@@ -20,7 +20,7 @@ public interface IFigure {
 	 * @param endCanvas - end point of canvas
 	 * @return true if all figure is visible, otherwise false
 	 */
-	boolean moveFigure(int x, int y, Point endCanvas);
+	boolean moveFigure(float x, float y, Point endCanvas);
 	
 	/**
 	 * Move figure to new start point position
@@ -37,7 +37,7 @@ public interface IFigure {
 	 * @param endCanvas - end point of canvas
 	 * @return
 	 */
-	boolean scaleFigure(int mX, int mY, Point endCanvas);
+	boolean scaleFigure(float mX, float mY, Point endCanvas);
 	
 	/**
 	 * Scale figure, start point of figure is fix
@@ -45,7 +45,7 @@ public interface IFigure {
 	 * @param endCanvas - end point of canvas
 	 * @return
 	 */
-	boolean scaleFigure(int multiple, Point endCanvas);
+	boolean scaleFigure(float multiple, Point endCanvas);
 	
 	/**
 	 * Resize figure to new width and height
@@ -54,7 +54,7 @@ public interface IFigure {
 	 * @param endCanvas - end point of canvas
 	 * @return - true if all figure is visible and size is greater than 0, otherwise false
 	 */
-	boolean resizeFigure(int newWidth, int newHeight, Point endCanvas);
+	boolean resizeFigure(float newWidth, float newHeight, Point endCanvas);
 }
 
 

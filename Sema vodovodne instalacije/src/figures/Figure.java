@@ -1,10 +1,17 @@
 package figures;
 
 public abstract class Figure implements IFigure {
-	protected int x, y, width, height;
+	protected float x, y, width, height;
 	
 	public Figure() {
 		
+	}
+	
+	public Figure(float x, float y, float width, float height) {
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
 	}
 
 	@Override
@@ -18,7 +25,7 @@ public abstract class Figure implements IFigure {
 	}
 
 	@Override
-	public boolean moveFigure(int x, int y, Point endCanvas) {
+	public boolean moveFigure(float x, float y, Point endCanvas) {
 		return x >= 0 &&
 				y >= 0 &&
 				x + width <= endCanvas.getX() &&
@@ -34,7 +41,7 @@ public abstract class Figure implements IFigure {
 	}
 
 	@Override
-	public boolean scaleFigure(int mX, int mY, Point endCanvas) {
+	public boolean scaleFigure(float mX, float mY, Point endCanvas) {
 		width *= mX;
 		height *= mY;
 		return x >= 0 &&
@@ -44,7 +51,7 @@ public abstract class Figure implements IFigure {
 	}
 
 	@Override
-	public boolean scaleFigure(int multiple, Point endCanvas) {
+	public boolean scaleFigure(float multiple, Point endCanvas) {
 		width *= multiple;
 		height *= multiple;
 		return x >= 0 &&
@@ -54,7 +61,7 @@ public abstract class Figure implements IFigure {
 	}
 
 	@Override
-	public boolean resizeFigure(int newWidth, int newHeight, Point endCanvas) {
+	public boolean resizeFigure(float newWidth, float newHeight, Point endCanvas) {
 		this.width = newWidth;
 		this.height = newHeight;
 		return x >= 0 &&
