@@ -25,5 +25,4 @@ public final class E_Spn extends Figure {
 
 		return true;
 	}
-	
 }

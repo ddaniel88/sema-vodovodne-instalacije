@@ -330,7 +330,6 @@ public class MovingRectangle extends JFrame {
 			 * else if (zell.isHit(x, y)) { zell.addX(dx); zell.addY(dy);
 			 * repaint(); }
 			 */
-
 			x += dx;
 			y += dy;
 		}
