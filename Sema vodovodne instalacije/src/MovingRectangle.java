@@ -370,7 +370,6 @@ public class MovingRectangle extends JFrame {
 //			kvadrat.kv_scale = Math.max(0.00001, kvadrat.kv_scale);
 
 			System.out.println("Trenutni zoom: " + kvadrat.kv_scale);
-
 			canvas.repaint();
 		}
 
