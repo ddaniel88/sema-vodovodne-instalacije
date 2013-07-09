@@ -31,6 +31,8 @@ import javax.swing.JSeparator;
 import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
 
+import figures.E_Spn;
+
 
 public class MovingRectangle extends JFrame {
 
@@ -187,6 +189,9 @@ public class MovingRectangle extends JFrame {
 			kv.setColor(new Color(0, 0, 200));
 			kv.setTransform(aa);
 			kv.fill(kvadrat);
+			
+			//E_Spn espn = new E_Spn(200, 200, 100, 50);
+			E_Spn.draw(200, 200, 100, 50, ourGraphics);
 
 			// g2d.setColor(new Color(0, 200, 0));
 			// g2d.fill(zell);
