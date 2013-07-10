@@ -1,7 +1,10 @@
 package figures;
 
+import java.awt.event.MouseEvent;
+
 public abstract class Figure implements IFigure {
 	protected float x, y, width, height;
+	protected String description;
 	
 	public Figure() {
 		
@@ -26,10 +29,14 @@ public abstract class Figure implements IFigure {
 
 	@Override
 	public boolean moveFigure(float x, float y, Point endCanvas) {
-		return x >= 0 &&
-				y >= 0 &&
+		if (x >= 0 && y >= 0 &&
 				x + width <= endCanvas.getX() &&
-				y + height <= endCanvas.getY();
+				y + height <= endCanvas.getY()) {
+			this.x = x;
+			this.y = y;
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -38,6 +45,14 @@ public abstract class Figure implements IFigure {
 				p.getY() >= 0 &&
 				p.getX() + width <= endCanvas.getX() &&
 				p.getY() + height <= endCanvas.getY();
+	}
+	
+	@Override
+	public boolean moveFigureFor(float x, float y) {
+		//TODO Daniel - hardcoded!!! 
+		this.x += x;
+		this.y += y;
+		return true;
 	}
 
 	@Override
@@ -70,4 +85,31 @@ public abstract class Figure implements IFigure {
 				y + height <= endCanvas.getY();
 	}
 	
+	@Override
+	public boolean isHit(Point cursor) {
+		return cursor.getX() > this.x && cursor.getX() < this.x + width &&
+				cursor.getY() > this.y && cursor.getY() < this.y + height;
+	}
+	
+	@Override
+	public boolean isHit(float cursorX, float cursorY) {
+		return cursorX > this.x && cursorX < this.x + width &&
+				cursorY > this.y && cursorY < this.y + height;
+	}
+	
+	@Override
+	public boolean isHit(MouseEvent e) {
+		return e.getX() > this.x && e.getX() < this.x + width &&
+				e.getY() > this.y && e.getY() < this.y + height;
+	}
+	
+	@Override
+	public String getDescription() {
+		return this.description;
+	}
+	
+	@Override
+	public void setDescription(String description) {
+		this.description = description;
+	}
 }

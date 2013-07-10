@@ -4,6 +4,7 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.List;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +19,10 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
+import java.io.Console;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -32,6 +37,8 @@ import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
 
 import figures.E_Spn;
+import figures.Figure;
+import figures.Point;
 
 
 public class MovingRectangle extends JFrame {
@@ -40,6 +47,8 @@ public class MovingRectangle extends JFrame {
 	private static Kvadrat kvadrat;
 	private static Nesto linija;
 	static Cursor curCursor;
+	private static E_Spn espn, sspn;
+	private static ArrayList<Figure> figure;
 	
 	
 	
@@ -74,34 +83,34 @@ public class MovingRectangle extends JFrame {
 		 
 		  public JMenuBar SwingMenu()
 		  {
-		  JMenuBar menubar = new JMenuBar();
-		  JMenu filemenu = new JMenu("Figure");
-		  filemenu.add(new JSeparator());
-		  JMenu editmenu = new JMenu("Edit");
-		  editmenu.add(new JSeparator());
-		  JMenuItem fileItem1 = new JMenuItem("001");
-		  fileItem1.addActionListener(new MenuActionListener());
-		  JMenuItem fileItem2 = new JMenuItem("002");
-		  fileItem2.addActionListener(new MenuActionListener());
-		  JMenuItem fileItem3 = new JMenuItem("003");
-		  
-		  fileItem3.addActionListener(new MenuActionListener());
-		  JMenuItem editItem1 = new JMenuItem("Rotate");
-		  JMenuItem editItem2 = new JMenuItem("Translae");
-		  JMenuItem editItem3 = new JMenuItem("Zoom");
-		  filemenu.add(fileItem1);
-		  filemenu.add(fileItem2);
-		  filemenu.add(fileItem3);
-		  
-		  editmenu.add(editItem1);
-		  editmenu.add(editItem2);
-		  editmenu.add(editItem3);
-		  menubar.add(filemenu);
-		  menubar.add(editmenu);
-		  
-		  
-		  
-		  return menubar;
+			  JMenuBar menubar = new JMenuBar();
+			  JMenu filemenu = new JMenu("Figure");
+			  filemenu.add(new JSeparator());
+			  JMenu editmenu = new JMenu("Edit");
+			  editmenu.add(new JSeparator());
+			  JMenuItem fileItem1 = new JMenuItem("001");
+			  fileItem1.addActionListener(new MenuActionListener());
+			  JMenuItem fileItem2 = new JMenuItem("002");
+			  fileItem2.addActionListener(new MenuActionListener());
+			  JMenuItem fileItem3 = new JMenuItem("003");
+			  
+			  fileItem3.addActionListener(new MenuActionListener());
+			  JMenuItem editItem1 = new JMenuItem("Rotate");
+			  JMenuItem editItem2 = new JMenuItem("Translae");
+			  JMenuItem editItem3 = new JMenuItem("Zoom");
+			  filemenu.add(fileItem1);
+			  filemenu.add(fileItem2);
+			  filemenu.add(fileItem3);
+			  
+			  editmenu.add(editItem1);
+			  editmenu.add(editItem2);
+			  editmenu.add(editItem3);
+			  menubar.add(filemenu);
+			  menubar.add(editmenu);
+			  
+			  
+			  
+			  return menubar;
 		  }
 
 		@Override
@@ -124,6 +133,7 @@ public class MovingRectangle extends JFrame {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
 		
 		canvas = new TransformingCanvas();
+		figure = new ArrayList<>();
 		TranslateHandler translater = new TranslateHandler();
 		canvas.addMouseListener(translater);
 		canvas.addMouseMotionListener(translater);
@@ -190,8 +200,21 @@ public class MovingRectangle extends JFrame {
 			kv.setTransform(aa);
 			kv.fill(kvadrat);
 			
-			//E_Spn espn = new E_Spn(200, 200, 100, 50);
-			E_Spn.draw(200, 200, 100, 50, ourGraphics);
+			/******** DRAW CUSTOM FIGURES ********/
+			kv.setColor(Color.RED);
+//			figure = new ArrayList<>();
+
+			espn = new E_Spn();
+			espn.draw(200, 200, 100, 50, ourGraphics);
+			espn.setDescription("Prva figura");
+			figure.add(espn);
+			
+			sspn = new E_Spn(10, 10, 40, 10);
+			sspn.setDescription("Mala figura");
+			sspn.draw(ourGraphics);
+			
+			figure.add(sspn);
+			/******** END OF DRAW CUSTOM FIGURES ********/
 
 			// g2d.setColor(new Color(0, 200, 0));
 			// g2d.fill(zell);
@@ -335,11 +358,38 @@ public class MovingRectangle extends JFrame {
 			 * else if (zell.isHit(x, y)) { zell.addX(dx); zell.addY(dy);
 			 * repaint(); }
 			 */
+			
+			for (Figure fig : figure) {
+				if (fig.isHit(e)) {
+//					System.out.println(fig.getStartPosition().getX() + " " + fig.getStartPosition().getY());
+//					System.out.println(e.getX() + " " + e.getY());
+//					System.out.println(dx + " " + dy);
+					
+					boolean move = fig.moveFigureFor(dx, dy);
+					canvas.repaint();
+				}
+			}
+			
 			x += dx;
 			y += dy;
+			
 		}
 
 		public void mouseMoved(MouseEvent e) {
+//			for (Figure fig : figure) {
+//				if (fig.isHit(e)) {
+//					System.out.print(fig.getDescription() + " ");
+//					System.out.println(System.currentTimeMillis());
+//				}
+//			}
+			
+			
+//			System.out.print("X: " + espn.getStartPosition().getX() + " " + e.getX() + "\t");
+//			System.out.println("Y: " + espn.getStartPosition().getY() + " " + e.getY());
+//			if (espn.isHit(e.getX(), e.getY())) {
+//				System.out.println("Figura pogoðena");
+//			}
+			
 			if (kvadrat != null) {
 				if (kvadrat.contains(e.getX(), e.getY())) {
 					curCursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
@@ -351,29 +401,35 @@ public class MovingRectangle extends JFrame {
 		}
 
 		public void mouseWheelMoved(MouseWheelEvent e) {
-			System.out.println("mouseWheelMoved " + kvadrat.getX() + ", "
-					+ kvadrat.getY());
+			for (Figure fig : figure) {
+				if (fig.isHit(e)) {
+					fig.scaleFigure(e.getWheelRotation() / 10, new Point(canvas.getWidth(), canvas.getHeight()));
+				}
+			}
 			
-//			kvadrat.setRect(kvadrat.x *= (1 - .1 * e.getWheelRotation()), kvadrat.y *= (1 - .1 * e.getWheelRotation()),
-//					kvadrat.width *= (1 - .1 * e.getWheelRotation()), kvadrat.height *= (1 - .1 * e.getWheelRotation()));
-			
-			// minus ide zato što je obrnuto kolce na dole i kolce na gore :-)
-			// promenimo kvadrat pravougaonika i faktièki smo ga zumirali
-			double newX = kvadrat.getX() - kvadrat.getX() * e.getWheelRotation() / 10;
-			double newY = kvadrat.getY() - kvadrat.getY() * e.getWheelRotation() / 10;
-			double newWidth = kvadrat.getWidth() - kvadrat.getWidth() * e.getWheelRotation() / 10;
-			double newHeight = kvadrat.getHeight() - kvadrat.getHeight() * e.getWheelRotation() / 10;
-			
-			kvadrat.setRect(newX, newY, newWidth, newHeight);
-			
-			// make it a reasonable amount of zoom
-			// .1 gives a nice slow transition
-//			kvadrat.kv_scale -= (.1 * e.getWheelRotation());
-			// don't cross negative threshold.
-			// also, setting scale to 0 has bad effects
-//			kvadrat.kv_scale = Math.max(0.00001, kvadrat.kv_scale);
-
-			System.out.println("Trenutni zoom: " + kvadrat.kv_scale);
+//			System.out.println("mouseWheelMoved " + kvadrat.getX() + ", "
+//					+ kvadrat.getY());
+//			
+////			kvadrat.setRect(kvadrat.x *= (1 - .1 * e.getWheelRotation()), kvadrat.y *= (1 - .1 * e.getWheelRotation()),
+////					kvadrat.width *= (1 - .1 * e.getWheelRotation()), kvadrat.height *= (1 - .1 * e.getWheelRotation()));
+//			
+//			// minus ide zato što je obrnuto kolce na dole i kolce na gore :-)
+//			// promenimo kvadrat pravougaonika i faktièki smo ga zumirali
+//			double newX = kvadrat.getX() - kvadrat.getX() * e.getWheelRotation() / 10;
+//			double newY = kvadrat.getY() - kvadrat.getY() * e.getWheelRotation() / 10;
+//			double newWidth = kvadrat.getWidth() - kvadrat.getWidth() * e.getWheelRotation() / 10;
+//			double newHeight = kvadrat.getHeight() - kvadrat.getHeight() * e.getWheelRotation() / 10;
+//			
+//			kvadrat.setRect(newX, newY, newWidth, newHeight);
+//			
+//			// make it a reasonable amount of zoom
+//			// .1 gives a nice slow transition
+////			kvadrat.kv_scale -= (.1 * e.getWheelRotation());
+//			// don't cross negative threshold.
+//			// also, setting scale to 0 has bad effects
+////			kvadrat.kv_scale = Math.max(0.00001, kvadrat.kv_scale);
+//
+//			System.out.println("Trenutni zoom: " + kvadrat.kv_scale);
 			canvas.repaint();
 		}
 

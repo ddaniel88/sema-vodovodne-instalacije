@@ -1,5 +1,7 @@
 package figures;
 
+import java.awt.event.MouseEvent;
+
 public interface IFigure {
 	/**
 	 * Get figure's central position
@@ -30,6 +32,8 @@ public interface IFigure {
 	 */
 	boolean moveFigure(Point p, Point endCanvas);
 	
+	boolean moveFigureFor(float x, float y);
+	
 	/**
 	 * Scale figure, start point of figure is fix
 	 * @param mX - multiply for width
@@ -55,6 +59,27 @@ public interface IFigure {
 	 * @return - true if all figure is visible and size is greater than 0, otherwise false
 	 */
 	boolean resizeFigure(float newWidth, float newHeight, Point endCanvas);
+	
+	/**
+	 * Check if mouse is over figure
+	 * @param cursor - position of mouse cursor
+	 * @return true if mouse cursor is over figure
+	 */
+	boolean isHit(Point cursor);
+	
+	/**
+	 * Check if mouse is over figure
+	 * @param cursorX - X position of mouse cursor
+	 * @param cursorY - Y position of mouse cursor
+	 * @return true if mouse cursor is over figure
+	 */
+	boolean isHit(float cursorX, float cursorY);
+	
+	boolean isHit(MouseEvent e);
+	
+	String getDescription();
+	
+	void setDescription(String description);
 }
 
 
