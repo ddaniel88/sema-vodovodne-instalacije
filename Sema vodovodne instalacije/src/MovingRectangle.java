@@ -49,6 +49,7 @@ public class MovingRectangle extends JFrame {
 	static Cursor curCursor;
 	private static E_Spn espn, sspn;
 	private static ArrayList<Figure> figure;
+	private static Graphics2D ourGraphics;
 	
 	
 	
@@ -182,7 +183,7 @@ public class MovingRectangle extends JFrame {
 			AffineTransform tx = new AffineTransform();
 			tx.translate(translateX, translateY);
 			tx.scale(scale, scale);
-			Graphics2D ourGraphics = (Graphics2D) g;
+			ourGraphics = (Graphics2D) g;
 			ourGraphics.setColor(Color.WHITE);
 			ourGraphics.fillRect(0, 0, getWidth(), getHeight());
 			ourGraphics.setTransform(tx);
@@ -366,6 +367,8 @@ public class MovingRectangle extends JFrame {
 //					System.out.println(dx + " " + dy);
 					
 					boolean move = fig.moveFigureFor(dx, dy);
+					E_Spn a = (E_Spn)fig;
+					a.draw(ourGraphics);
 					canvas.repaint();
 				}
 			}
