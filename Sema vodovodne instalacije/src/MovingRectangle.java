@@ -303,7 +303,9 @@ public class MovingRectangle extends JFrame {
 		}
 
 		public boolean isHit(float x, float y) {
-			if (getBounds2D().contains(x, y)) {
+			
+			if (getBounds2D().contains(x, y))
+			{
 				return true;
 			} else {
 				return false;
@@ -365,7 +367,6 @@ public class MovingRectangle extends JFrame {
 //					System.out.println(fig.getStartPosition().getX() + " " + fig.getStartPosition().getY());
 //					System.out.println(e.getX() + " " + e.getY());
 //					System.out.println(dx + " " + dy);
-					
 					boolean move = fig.moveFigureFor(dx, dy);
 					E_Spn a = (E_Spn)fig;
 					a.draw(ourGraphics);
@@ -392,12 +393,21 @@ public class MovingRectangle extends JFrame {
 //			if (espn.isHit(e.getX(), e.getY())) {
 //				System.out.println("Figura pogoðena");
 //			}
+		
 			
-			if (kvadrat != null) {
-				if (kvadrat.contains(e.getX(), e.getY())) {
+			for (Figure fig : figure) {
+				if (fig.isHit(e)) {
 					curCursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
-				} else {
-					curCursor = Cursor.getDefaultCursor();
+					System.out.println(fig.getStartPosition().getX());
+				}
+				else {
+					if (kvadrat != null) {
+						if (kvadrat.contains(e.getX(), e.getY())) {
+							curCursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
+						} else {
+							curCursor = Cursor.getDefaultCursor();
+						}
+					} 
 				}
 			}
 			canvas.repaint();
