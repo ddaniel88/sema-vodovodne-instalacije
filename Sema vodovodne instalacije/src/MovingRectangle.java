@@ -218,15 +218,17 @@ public class MovingRectangle extends JFrame {
 			kv.setTransform(aa);
 			kv.fill(kvadrat);
 			
-			espn.draw(ourGraphics);
-			sspn.draw(ourGraphics);
-
-			// g2d.setColor(new Color(0, 200, 0));
-			// g2d.fill(zell);
+			drawAllFigures(ourGraphics);
 
 			if (curCursor != null)
 				setCursor(curCursor);
 			// super.paint(g);
+		}
+
+		public void drawAllFigures(Graphics2D ourGraphics) {
+			for (Figure fig : figure) {
+				((E_Spn) fig).draw(ourGraphics);
+			}
 		}
 
 		@Override
