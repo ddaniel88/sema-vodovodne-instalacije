@@ -50,6 +50,8 @@ public class MovingRectangle extends JFrame {
 	private static E_Spn espn, sspn;
 	private static ArrayList<Figure> figure;
 	private static Graphics2D ourGraphics;
+	private static Figure tmpFigure;
+	private static int bb = 0;
 	
 	
 	
@@ -134,7 +136,7 @@ public class MovingRectangle extends JFrame {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
 		
 		canvas = new TransformingCanvas();
-		figure = new ArrayList<>();
+//		figure = new ArrayList<>();
 		TranslateHandler translater = new TranslateHandler();
 		canvas.addMouseListener(translater);
 		canvas.addMouseMotionListener(translater);
@@ -163,6 +165,7 @@ public class MovingRectangle extends JFrame {
 			translateX = 0;
 			translateY = 0;
 			scale = 1;
+			figure = new ArrayList<>();
 	
 			MovingAdapter ma = new MovingAdapter();
 			addMouseMotionListener(ma);
@@ -172,12 +175,26 @@ public class MovingRectangle extends JFrame {
 			kvadrat = new Kvadrat(70, 70, 20, 20);
 			linija = new Nesto(100, 100, 200, 100);
 			// zell = new ZEllipse(150, 70, 80, 80);
+			
+			/******** DRAW CUSTOM FIGURES ********/
+			espn = new E_Spn(200, 200, 100, 50);
+			espn.setDescription("Prva figura");
+//			espn.draw(ourGraphics);
+			figure.add(espn);
+			
+			sspn = new E_Spn(10, 10, 40, 10);
+			sspn.setDescription("Mala figura");
+//			sspn.draw(ourGraphics);
+			
+			figure.add(sspn);
+			/******** END OF DRAW CUSTOM FIGURES ********/
 
 			setOpaque(true);
 			setDoubleBuffered(true);
 		}
 
 		public void doDrawing(Graphics g) {
+			System.out.println("doDrawing " + bb++);
 			
 			canvas.repaint();
 			AffineTransform tx = new AffineTransform();
@@ -201,21 +218,8 @@ public class MovingRectangle extends JFrame {
 			kv.setTransform(aa);
 			kv.fill(kvadrat);
 			
-			/******** DRAW CUSTOM FIGURES ********/
-			kv.setColor(Color.RED);
-//			figure = new ArrayList<>();
-
-			espn = new E_Spn();
-			espn.draw(200, 200, 100, 50, ourGraphics);
-			espn.setDescription("Prva figura");
-			figure.add(espn);
-			
-			sspn = new E_Spn(10, 10, 40, 10);
-			sspn.setDescription("Mala figura");
+			espn.draw(ourGraphics);
 			sspn.draw(ourGraphics);
-			
-			figure.add(sspn);
-			/******** END OF DRAW CUSTOM FIGURES ********/
 
 			// g2d.setColor(new Color(0, 200, 0));
 			// g2d.fill(zell);
@@ -345,6 +349,15 @@ public class MovingRectangle extends JFrame {
 		public void mousePressed(MouseEvent e) {
 			x = e.getX();
 			y = e.getY();
+			int brojac = 0;
+			
+			for (Figure fig : figure) {
+				if (fig.isHit(e)) {
+					tmpFigure = fig;
+//					System.out.println(fig.getDescription() + " klik × " + brojac);
+					brojac++;
+				}
+			}
 		}
 
 		@Override
@@ -362,21 +375,29 @@ public class MovingRectangle extends JFrame {
 			 * repaint(); }
 			 */
 			
-			for (Figure fig : figure) {
-				if (fig.isHit(e)) {
-//					System.out.println(fig.getStartPosition().getX() + " " + fig.getStartPosition().getY());
-//					System.out.println(e.getX() + " " + e.getY());
-//					System.out.println(dx + " " + dy);
-					boolean move = fig.moveFigureFor(dx, dy);
-					E_Spn a = (E_Spn)fig;
-					a.draw(ourGraphics);
-					canvas.repaint();
-				}
+//			for (Figure fig : figure) {
+//				if (fig.isHit(e)) {
+////					System.out.println(fig.getStartPosition().getX() + " " + fig.getStartPosition().getY());
+////					System.out.println(e.getX() + " " + e.getY());
+////					System.out.println(dx + " " + dy);
+//					
+//					System.out.println("Pogoðeno " + fig.getDescription());
+//					boolean move = fig.moveFigureFor(dx, dy);
+//					E_Spn a = (E_Spn)fig;
+//					((E_Spn) fig).draw(ourGraphics);
+//					canvas.repaint();
+//				}
+//			}
+			
+			if (tmpFigure != null) {
+				tmpFigure.moveFigureFor(dx, dy);
+				((E_Spn) tmpFigure).draw(ourGraphics);
 			}
 			
 			x += dx;
 			y += dy;
 			
+			canvas.repaint();
 		}
 
 		public void mouseMoved(MouseEvent e) {
@@ -398,7 +419,7 @@ public class MovingRectangle extends JFrame {
 			for (Figure fig : figure) {
 				if (fig.isHit(e)) {
 					curCursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
-					System.out.println(fig.getStartPosition().getX());
+//					System.out.println(fig.getStartPosition().getX());
 				}
 				else {
 					if (kvadrat != null) {
@@ -444,6 +465,11 @@ public class MovingRectangle extends JFrame {
 //
 //			System.out.println("Trenutni zoom: " + kvadrat.kv_scale);
 			canvas.repaint();
+		}
+		
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			tmpFigure = null;
 		}
 
 	}
