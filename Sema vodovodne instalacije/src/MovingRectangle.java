@@ -36,124 +36,106 @@ import javax.swing.JSeparator;
 import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
 
+import enums.ScaleEnum;
 import figures.E_Spn;
 import figures.Figure;
 import figures.Point;
 
-
 public class MovingRectangle extends JFrame {
-
 	public static TransformingCanvas canvas;
 	private static Kvadrat kvadrat;
-	private static Nesto linija;
 	static Cursor curCursor;
-	private static E_Spn espn, sspn;
+	private static E_Spn espn, sspn,espn2;
 	private static ArrayList<Figure> figure;
 	private static Graphics2D ourGraphics;
 	private static Figure tmpFigure;
-	private static int bb = 0;
 	
-	
-	
-	//Klik na neki elemeent iz menija 
+	// Klik na neki elemeent iz menija
 	public static class MenuActionListener implements ActionListener {
-		  public void actionPerformed(ActionEvent e) {
-			  
-			  System.out.println("Selected: " + e.getActionCommand());
-			  
-			  String figura;
-			  
-		        switch (e.getActionCommand()) {
-		            case "001":   System.out.println("aaa");
-		                     break;
-		            case "002":   System.out.println("bbb");
-		                     break;
-		            case "003":  System.out.println("ccc");
-		                     break;
-		            
-		            default: figura = "Invalid month";
-		                     break;
-		        }
-		    }
-			  
-		    
+		public void actionPerformed(ActionEvent e) {
 
-		  }
-		
-	
-	//meni
-	public static class SwingMenu implements ActionListener{
-		 
-		  public JMenuBar SwingMenu()
-		  {
-			  JMenuBar menubar = new JMenuBar();
-			  JMenu filemenu = new JMenu("Figure");
-			  filemenu.add(new JSeparator());
-			  JMenu editmenu = new JMenu("Edit");
-			  editmenu.add(new JSeparator());
-			  JMenuItem fileItem1 = new JMenuItem("001");
-			  fileItem1.addActionListener(new MenuActionListener());
-			  JMenuItem fileItem2 = new JMenuItem("002");
-			  fileItem2.addActionListener(new MenuActionListener());
-			  JMenuItem fileItem3 = new JMenuItem("003");
-			  
-			  fileItem3.addActionListener(new MenuActionListener());
-			  JMenuItem editItem1 = new JMenuItem("Rotate");
-			  JMenuItem editItem2 = new JMenuItem("Translae");
-			  JMenuItem editItem3 = new JMenuItem("Zoom");
-			  filemenu.add(fileItem1);
-			  filemenu.add(fileItem2);
-			  filemenu.add(fileItem3);
-			  
-			  editmenu.add(editItem1);
-			  editmenu.add(editItem2);
-			  editmenu.add(editItem3);
-			  menubar.add(filemenu);
-			  menubar.add(editmenu);
-			  
-			  
-			  
-			  return menubar;
-		  }
+			System.out.println("Selected: " + e.getActionCommand());
+
+			String figura;
+
+			switch (e.getActionCommand()) {
+			case "001":
+				System.out.println("aaa");
+				break;
+			case "002":
+				System.out.println("bbb");
+				break;
+			case "003":
+				System.out.println("ccc");
+				break;
+
+			default:
+				figura = "Invalid month";
+				break;
+			}
+		}
+
+	}
+
+	// meni
+	public static class SwingMenu implements ActionListener {
+
+		public JMenuBar SwingMenu() {
+			JMenuBar menubar = new JMenuBar();
+			JMenu filemenu = new JMenu("Figure");
+			filemenu.add(new JSeparator());
+			JMenu editmenu = new JMenu("Edit");
+			editmenu.add(new JSeparator());
+			JMenuItem fileItem1 = new JMenuItem("001");
+			fileItem1.addActionListener(new MenuActionListener());
+			JMenuItem fileItem2 = new JMenuItem("002");
+			fileItem2.addActionListener(new MenuActionListener());
+			JMenuItem fileItem3 = new JMenuItem("003");
+
+			fileItem3.addActionListener(new MenuActionListener());
+			JMenuItem editItem1 = new JMenuItem("Rotate");
+			JMenuItem editItem2 = new JMenuItem("Translae");
+			JMenuItem editItem3 = new JMenuItem("Zoom");
+			filemenu.add(fileItem1);
+			filemenu.add(fileItem2);
+			filemenu.add(fileItem3);
+
+			editmenu.add(editItem1);
+			editmenu.add(editItem2);
+			editmenu.add(editItem3);
+			menubar.add(filemenu);
+			menubar.add(editmenu);
+
+			return menubar;
+		}
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			
-			System.out.println("aaa");
-			
-		}
-		
-		}
-	public static void main(String[] args) {
 
+			System.out.println("aaa");
+
+		}
+
+	}
+
+	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-		
+
 		SwingMenu s = new SwingMenu();
 		frame.setJMenuBar(s.SwingMenu());
-		
-		//Set default close operation for JFrame  
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
-		
+
+		// Set default close operation for JFrame
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		canvas = new TransformingCanvas();
-//		figure = new ArrayList<>();
-		TranslateHandler translater = new TranslateHandler();
-		canvas.addMouseListener(translater);
-		canvas.addMouseMotionListener(translater);
-		canvas.addMouseWheelListener(new ScaleHandler());
-		
-		
+
 		frame.setLayout(new BorderLayout());
 		frame.getContentPane().add(canvas, BorderLayout.CENTER);
 		frame.setSize(500, 500);
-		
-		
-		
+
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
-		
-	
-		
 	}
 
 	public static class TransformingCanvas extends JComponent {
@@ -166,27 +148,27 @@ public class MovingRectangle extends JFrame {
 			translateY = 0;
 			scale = 1;
 			figure = new ArrayList<>();
-	
+
 			MovingAdapter ma = new MovingAdapter();
 			addMouseMotionListener(ma);
 			addMouseListener(ma);
 			addMouseWheelListener(ma);
 
 			kvadrat = new Kvadrat(70, 70, 20, 20);
-			linija = new Nesto(100, 100, 200, 100);
 			// zell = new ZEllipse(150, 70, 80, 80);
-			
+
 			/******** DRAW CUSTOM FIGURES ********/
 			espn = new E_Spn(200, 200, 100, 50);
 			espn.setDescription("Prva figura");
-//			espn.draw(ourGraphics);
 			figure.add(espn);
-			
+
 			sspn = new E_Spn(10, 10, 40, 10);
 			sspn.setDescription("Mala figura");
-//			sspn.draw(ourGraphics);
-			
 			figure.add(sspn);
+			
+			espn2 = new E_Spn(100, 50, 40, 20);
+			espn2.setDescription("Treca figura");
+			figure.add(espn2);
 			/******** END OF DRAW CUSTOM FIGURES ********/
 
 			setOpaque(true);
@@ -194,8 +176,6 @@ public class MovingRectangle extends JFrame {
 		}
 
 		public void doDrawing(Graphics g) {
-			System.out.println("doDrawing " + bb++);
-			
 			canvas.repaint();
 			AffineTransform tx = new AffineTransform();
 			tx.translate(translateX, translateY);
@@ -210,19 +190,19 @@ public class MovingRectangle extends JFrame {
 					RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 			ourGraphics.setColor(Color.BLACK);
 			ourGraphics.drawString("Proba zoom-in i zoom-out", 100, 100);
-			
+
 			AffineTransform aa = new AffineTransform();
 			aa.scale(kvadrat.kv_scale, kvadrat.kv_scale);
 			Graphics2D kv = (Graphics2D) g;
 			kv.setColor(new Color(0, 0, 200));
 			kv.setTransform(aa);
 			kv.fill(kvadrat);
-			
+
 			drawAllFigures(ourGraphics);
 
-			if (curCursor != null)
+			if (curCursor != null) {
 				setCursor(curCursor);
-			// super.paint(g);
+			}
 		}
 
 		public void drawAllFigures(Graphics2D ourGraphics) {
@@ -238,51 +218,6 @@ public class MovingRectangle extends JFrame {
 		}
 	}
 
-	public static class TranslateHandler implements MouseListener,
-			MouseMotionListener {
-
-		private int lastOffsetX;
-		private int lastOffsetY;
-
-		public void mousePressed(MouseEvent e) {
-			// capture starting point
-			lastOffsetX = e.getX();
-			lastOffsetY = e.getY();
-
-		}
-
-		public void mouseDragged(MouseEvent e) {
-			/*
-			 * // new x and y are defined by current mouse location subtracted
-			 * // by previously processed mouse location int newX = e.getX() -
-			 * lastOffsetX; int newY = e.getY() - lastOffsetY;
-			 * 
-			 * // increment last offset to last processed by drag event.
-			 * lastOffsetX += newX; lastOffsetY += newY;
-			 * 
-			 * // update the canvas locations canvas.translateX += newX;
-			 * canvas.translateY += newY;
-			 * 
-			 * // schedule a repaint. canvas.repaint();
-			 */
-		}
-
-		public void mouseClicked(MouseEvent e) {
-		}
-
-		public void mouseEntered(MouseEvent e) {
-		}
-
-		public void mouseExited(MouseEvent e) {
-		}
-
-		public void mouseMoved(MouseEvent e) {
-		}
-
-		public void mouseReleased(MouseEvent e) {
-		}
-	}
-
 	public static class ScaleHandler implements MouseWheelListener {
 		public void mouseWheelMoved(MouseWheelEvent e) {
 			if (e.getScrollType() == MouseWheelEvent.WHEEL_UNIT_SCROLL) {
@@ -294,7 +229,6 @@ public class MovingRectangle extends JFrame {
 				// also, setting scale to 0 has bad effects
 				canvas.scale = Math.max(0.00001, canvas.scale);
 
-				
 				canvas.repaint();
 			}
 		}
@@ -309,9 +243,8 @@ public class MovingRectangle extends JFrame {
 		}
 
 		public boolean isHit(float x, float y) {
-			
-			if (getBounds2D().contains(x, y))
-			{
+
+			if (getBounds2D().contains(x, y)) {
 				return true;
 			} else {
 				return false;
@@ -334,10 +267,10 @@ public class MovingRectangle extends JFrame {
 			this.height += h;
 		}
 	}
-	
+
 	public static class Nesto extends Line2D.Float {
 		private static final long serialVersionUID = 1L;
-		
+
 		public Nesto(float a, float b, float c, float d) {
 			setLine(a, b, c, d);
 		}
@@ -351,13 +284,10 @@ public class MovingRectangle extends JFrame {
 		public void mousePressed(MouseEvent e) {
 			x = e.getX();
 			y = e.getY();
-			int brojac = 0;
-			
+
 			for (Figure fig : figure) {
 				if (fig.isHit(e)) {
 					tmpFigure = fig;
-//					System.out.println(fig.getDescription() + " klik × " + brojac);
-					brojac++;
 				}
 			}
 		}
@@ -370,68 +300,38 @@ public class MovingRectangle extends JFrame {
 			if (kvadrat.isHit(x, y)) {
 				kvadrat.addX(dx);
 				kvadrat.addY(dy);
-				canvas.repaint();
 			}
-			/*
-			 * else if (zell.isHit(x, y)) { zell.addX(dx); zell.addY(dy);
-			 * repaint(); }
-			 */
-			
-//			for (Figure fig : figure) {
-//				if (fig.isHit(e)) {
-////					System.out.println(fig.getStartPosition().getX() + " " + fig.getStartPosition().getY());
-////					System.out.println(e.getX() + " " + e.getY());
-////					System.out.println(dx + " " + dy);
-//					
-//					System.out.println("Pogoðeno " + fig.getDescription());
-//					boolean move = fig.moveFigureFor(dx, dy);
-//					E_Spn a = (E_Spn)fig;
-//					((E_Spn) fig).draw(ourGraphics);
-//					canvas.repaint();
-//				}
-//			}
-			
+
 			if (tmpFigure != null) {
-				tmpFigure.moveFigureFor(dx, dy);
+				tmpFigure.moveFigureFor(dx, dy, endCanvas());
 				((E_Spn) tmpFigure).draw(ourGraphics);
 			}
-			
+
 			x += dx;
 			y += dy;
-			
+
 			canvas.repaint();
 		}
 
 		public void mouseMoved(MouseEvent e) {
-//			for (Figure fig : figure) {
-//				if (fig.isHit(e)) {
-//					System.out.print(fig.getDescription() + " ");
-//					System.out.println(System.currentTimeMillis());
-//				}
-//			}
-			
-			
-//			System.out.print("X: " + espn.getStartPosition().getX() + " " + e.getX() + "\t");
-//			System.out.println("Y: " + espn.getStartPosition().getY() + " " + e.getY());
-//			if (espn.isHit(e.getX(), e.getY())) {
-//				System.out.println("Figura pogoðena");
-//			}
-		
-			
 			for (Figure fig : figure) {
 				if (fig.isHit(e)) {
 					curCursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
-//					System.out.println(fig.getStartPosition().getX());
+					break;
+				} else {
+					curCursor = Cursor.getDefaultCursor();
 				}
-				else {
+				
+				/*else {
 					if (kvadrat != null) {
 						if (kvadrat.contains(e.getX(), e.getY())) {
-							curCursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
+							curCursor = Cursor
+									.getPredefinedCursor(Cursor.HAND_CURSOR);
 						} else {
 							curCursor = Cursor.getDefaultCursor();
 						}
-					} 
-				}
+					}
+				}*/
 			}
 			canvas.repaint();
 		}
@@ -439,40 +339,61 @@ public class MovingRectangle extends JFrame {
 		public void mouseWheelMoved(MouseWheelEvent e) {
 			for (Figure fig : figure) {
 				if (fig.isHit(e)) {
-					fig.scaleFigure(e.getWheelRotation() / 10, new Point(canvas.getWidth(), canvas.getHeight()));
+					if (e.getWheelRotation() < 0) {
+						fig.scaleFigure(ScaleEnum.ZOOM_IN.getCode(),
+										new Point(canvas.getWidth(),
+												  canvas.getHeight()));
+					}
+					else if (e.getWheelRotation() > 0) {
+						fig.scaleFigure(ScaleEnum.ZOOM_OUT.getCode(),
+										new Point(canvas.getWidth(),
+												  canvas.getHeight()));
+					}
+					break;
 				}
 			}
-			
-//			System.out.println("mouseWheelMoved " + kvadrat.getX() + ", "
-//					+ kvadrat.getY());
-//			
-////			kvadrat.setRect(kvadrat.x *= (1 - .1 * e.getWheelRotation()), kvadrat.y *= (1 - .1 * e.getWheelRotation()),
-////					kvadrat.width *= (1 - .1 * e.getWheelRotation()), kvadrat.height *= (1 - .1 * e.getWheelRotation()));
-//			
-//			// minus ide zato što je obrnuto kolce na dole i kolce na gore :-)
-//			// promenimo kvadrat pravougaonika i faktièki smo ga zumirali
-//			double newX = kvadrat.getX() - kvadrat.getX() * e.getWheelRotation() / 10;
-//			double newY = kvadrat.getY() - kvadrat.getY() * e.getWheelRotation() / 10;
-//			double newWidth = kvadrat.getWidth() - kvadrat.getWidth() * e.getWheelRotation() / 10;
-//			double newHeight = kvadrat.getHeight() - kvadrat.getHeight() * e.getWheelRotation() / 10;
-//			
-//			kvadrat.setRect(newX, newY, newWidth, newHeight);
-//			
-//			// make it a reasonable amount of zoom
-//			// .1 gives a nice slow transition
-////			kvadrat.kv_scale -= (.1 * e.getWheelRotation());
-//			// don't cross negative threshold.
-//			// also, setting scale to 0 has bad effects
-////			kvadrat.kv_scale = Math.max(0.00001, kvadrat.kv_scale);
-//
-//			System.out.println("Trenutni zoom: " + kvadrat.kv_scale);
+
+			// System.out.println("mouseWheelMoved " + kvadrat.getX() + ", "
+			// + kvadrat.getY());
+			//
+			// // kvadrat.setRect(kvadrat.x *= (1 - .1 * e.getWheelRotation()),
+			// kvadrat.y *= (1 - .1 * e.getWheelRotation()),
+			// // kvadrat.width *= (1 - .1 * e.getWheelRotation()),
+			// kvadrat.height *= (1 - .1 * e.getWheelRotation()));
+			//
+			// // minus ide zato što je obrnuto kolce na dole i kolce na gore
+			// :-)
+			// // promenimo kvadrat pravougaonika i faktièki smo ga zumirali
+			// double newX = kvadrat.getX() - kvadrat.getX() *
+			// e.getWheelRotation() / 10;
+			// double newY = kvadrat.getY() - kvadrat.getY() *
+			// e.getWheelRotation() / 10;
+			// double newWidth = kvadrat.getWidth() - kvadrat.getWidth() *
+			// e.getWheelRotation() / 10;
+			// double newHeight = kvadrat.getHeight() - kvadrat.getHeight() *
+			// e.getWheelRotation() / 10;
+			//
+			// kvadrat.setRect(newX, newY, newWidth, newHeight);
+			//
+			// // make it a reasonable amount of zoom
+			// // .1 gives a nice slow transition
+			// // kvadrat.kv_scale -= (.1 * e.getWheelRotation());
+			// // don't cross negative threshold.
+			// // also, setting scale to 0 has bad effects
+			// // kvadrat.kv_scale = Math.max(0.00001, kvadrat.kv_scale);
+			//
+			// System.out.println("Trenutni zoom: " + kvadrat.kv_scale);
 			canvas.repaint();
 		}
-		
+
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			tmpFigure = null;
 		}
 
+	}
+	
+	public static Point endCanvas() {
+		return new Point(canvas.getWidth(), canvas.getHeight());
 	}
 }

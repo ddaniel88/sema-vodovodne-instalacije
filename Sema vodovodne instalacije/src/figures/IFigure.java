@@ -32,14 +32,21 @@ public interface IFigure {
 	 */
 	boolean moveFigure(Point p, Point endCanvas);
 	
-	boolean moveFigureFor(float x, float y);
+	/**
+	 * Move figure for specific pixels
+	 * @param x - horizontal pixels for moving
+	 * @param y - vertical pixels for moving
+	 * @param endCanvas - end point of canvas
+	 * @return true if all figure is visible, otherwise false
+	 */
+	boolean moveFigureFor(float x, float y, Point endCanvas);
 	
 	/**
 	 * Scale figure, start point of figure is fix
 	 * @param mX - multiply for width
 	 * @param mY - multiply for height
 	 * @param endCanvas - end point of canvas
-	 * @return
+	 * @return true if all figure is visible, otherwise false
 	 */
 	boolean scaleFigure(float mX, float mY, Point endCanvas);
 	
@@ -56,7 +63,7 @@ public interface IFigure {
 	 * @param newWidth - new figure's width
 	 * @param newHeight - new figure's height
 	 * @param endCanvas - end point of canvas
-	 * @return - true if all figure is visible and size is greater than 0, otherwise false
+	 * @return true if all figure is visible and size is greater than 0, otherwise false
 	 */
 	boolean resizeFigure(float newWidth, float newHeight, Point endCanvas);
 	
@@ -75,10 +82,23 @@ public interface IFigure {
 	 */
 	boolean isHit(float cursorX, float cursorY);
 	
+	/**
+	 * Check if mouse is over figure
+	 * @param e - position of mouse cursor
+	 * @return true if mouse cursor is over figure
+	 */
 	boolean isHit(MouseEvent e);
 	
+	/**
+	 * Get figure description
+	 * @return figure description
+	 */
 	String getDescription();
 	
+	/**
+	 * Set figure description
+	 * @param description - new figure description
+	 */
 	void setDescription(String description);
 }
 

@@ -31,7 +31,8 @@ public abstract class Figure implements IFigure {
 	public boolean moveFigure(float x, float y, Point endCanvas) {
 		if (x >= 0 && y >= 0 &&
 				x + width <= endCanvas.getX() &&
-				y + height <= endCanvas.getY()) {
+				y + height <= endCanvas.getY())
+		{
 			this.x = x;
 			this.y = y;
 			return true;
@@ -41,38 +42,69 @@ public abstract class Figure implements IFigure {
 
 	@Override
 	public boolean moveFigure(Point p, Point endCanvas) {
-		return p.getX() >= 0 &&
+		if (p.getX() >= 0 &&
 				p.getY() >= 0 &&
 				p.getX() + width <= endCanvas.getX() &&
-				p.getY() + height <= endCanvas.getY();
+				p.getY() + height <= endCanvas.getY())
+		{
+			this.x = p.getX();
+			this.y = p.getY();
+			return true;
+		}
+		return false;
 	}
 	
 	@Override
-	public boolean moveFigureFor(float x, float y) {
-		//TODO Daniel - hardcoded!!! 
-		this.x += x;
-		this.y += y;
-		return true;
+	public boolean moveFigureFor(float x, float y, Point endCanvas) {
+		float newX = this.x + x;
+		float newY = this.y + y;
+		if (newX > 0 &&
+			newY > 0 &&
+			newX + width < endCanvas.getX() &&
+			newY + height < endCanvas.getY())
+		{
+			this.x = newX;
+			this.y = newY;
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
 	public boolean scaleFigure(float mX, float mY, Point endCanvas) {
-		width *= mX;
-		height *= mY;
-		return x >= 0 &&
-				y >= 0 &&
-				x + width <= endCanvas.getX() &&
-				y + height <= endCanvas.getY();
+		float newWidth = width * mX;
+		float newHeight = height * mY;
+		
+		if (this.x > 0 &&
+				this.y > 0 &&
+				this.x + newWidth < endCanvas.getX() &&
+				this.y + newHeight < endCanvas.getY())
+		{
+			this.width = newWidth;
+			this.height = newHeight;
+			return true;
+		}
+		
+		return false;
 	}
 
 	@Override
 	public boolean scaleFigure(float multiple, Point endCanvas) {
-		width *= multiple;
-		height *= multiple;
-		return x >= 0 &&
-				y >= 0 &&
-				x + width <= endCanvas.getX() &&
-				y + height <= endCanvas.getY();
+		float newWidth = width * multiple;
+		float newHeight = height * multiple;
+		
+		if (this.x > 0 &&
+				this.y > 0 &&
+				this.x + newWidth < endCanvas.getX() &&
+				this.y + newHeight < endCanvas.getY())
+		{
+			this.width = newWidth;
+			this.height = newHeight;
+			return true;
+		}
+		
+		return false;
 	}
 
 	@Override
