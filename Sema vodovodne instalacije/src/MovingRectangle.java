@@ -27,7 +27,7 @@ import figures.Point;
 public class MovingRectangle extends JFrame {
 	public static TransformingCanvas canvas;
 	static Cursor curCursor;
-	private static Figure espn, sspn,espn2, fs;
+	private static Figure espn, sspn, fs;
 	private static ArrayList<Figure> figure;
 	private static Graphics2D ourGraphics;
 	private static Figure tmpFigure;
