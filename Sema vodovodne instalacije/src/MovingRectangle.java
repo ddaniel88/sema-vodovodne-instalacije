@@ -20,13 +20,14 @@ import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 import enums.ScaleEnum;
 import figures.E_Spn;
+import figures.F_S;
 import figures.Figure;
 import figures.Point;
 
 public class MovingRectangle extends JFrame {
 	public static TransformingCanvas canvas;
 	static Cursor curCursor;
-	private static E_Spn espn, sspn,espn2;
+	private static Figure espn, sspn,espn2, fs;
 	private static ArrayList<Figure> figure;
 	private static Graphics2D ourGraphics;
 	private static Figure tmpFigure;
@@ -49,9 +50,9 @@ public class MovingRectangle extends JFrame {
 				figure.add(sspn);
 				break;
 			case "003":
-				espn2 = new E_Spn(100, 50, 40, 20);
-				espn2.setDescription("Treca figura");
-				figure.add(espn2);
+				fs = new F_S(100, 50, 40, 20);
+				fs.setDescription("Treca figura");
+				figure.add(fs);
 				break;
 
 			default:
@@ -185,7 +186,7 @@ public class MovingRectangle extends JFrame {
 
 		public void drawAllFigures(Graphics2D ourGraphics) {
 			for (Figure fig : figure) {
-				((E_Spn) fig).draw(ourGraphics);
+				fig.draw(ourGraphics);
 			}
 		}
 
@@ -238,7 +239,7 @@ public class MovingRectangle extends JFrame {
 
 			if (tmpFigure != null) {
 				tmpFigure.moveFigureFor(dx, dy, endCanvas());
-				((E_Spn) tmpFigure).draw(ourGraphics);
+				tmpFigure.draw(ourGraphics);
 			}
 
 			x += dx;

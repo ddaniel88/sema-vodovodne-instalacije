@@ -1,5 +1,6 @@
 package figures;
 
+import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
 public abstract class Figure implements IFigure {
@@ -144,4 +145,10 @@ public abstract class Figure implements IFigure {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	@Override
+	public abstract boolean draw(float x, float y, float width, float height, Graphics g);
+	
+	@Override
+	public abstract boolean draw(Graphics g);
 }

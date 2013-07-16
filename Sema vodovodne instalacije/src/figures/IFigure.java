@@ -1,5 +1,6 @@
 package figures;
 
+import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
 public interface IFigure {
@@ -100,6 +101,24 @@ public interface IFigure {
 	 * @param description - new figure description
 	 */
 	void setDescription(String description);
+	
+	/**
+	 * Draw figure with specified coordinates
+	 * @param x - figure start x coordinate
+	 * @param y - figure start y coordinate
+	 * @param width - figure width
+	 * @param height - figure height
+	 * @param g - used Graphics
+	 * @return true
+	 */
+	abstract boolean draw(float x, float y, float width, float height, Graphics g);
+	
+	/**
+	 * Draw figure with coordinates and dimensions defined in constructor
+	 * @param g - used Graphics
+	 * @return true
+	 */
+	abstract boolean draw(Graphics g);
 }
 
 
