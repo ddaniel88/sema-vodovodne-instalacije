@@ -24,7 +24,7 @@ public final class F_S extends Figure {
 		// |-
 		graphics.drawLine((int) x, (int) y, (int) x, (int) (y + height));		// |
 		graphics.drawLine((int) x, (int) (y + height / 2),
-				(int) (x + width - height/2), (int) (y + height / 2));			//  -
+				(int) (x + width), (int) (y + height / 2));			//  -
 
 		return true;
 	}
@@ -36,7 +36,7 @@ Graphics2D graphics = (Graphics2D) g;
 		// |-
 		graphics.drawLine((int) x, (int) y, (int) x, (int) (y + height));		// |
 		graphics.drawLine((int) x, (int) (y + height / 2),
-				(int) (x + width - height/2), (int) (y + height / 2));			//  -
+				(int) (x + width), (int) (y + height / 2));			//  -
 
 		return true;
 	}
