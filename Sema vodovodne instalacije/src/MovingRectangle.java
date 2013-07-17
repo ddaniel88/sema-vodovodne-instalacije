@@ -56,7 +56,7 @@ public class MovingRectangle extends JFrame {
 				break;
 
 			default:
-				figura = "Invalid month";
+				figura = "Invalid figure";
 				break;
 			}
 		}
