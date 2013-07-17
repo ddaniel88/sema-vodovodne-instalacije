@@ -60,7 +60,6 @@ public class MovingRectangle extends JFrame {
 				break;
 			}
 		}
-
 	}
 
 	// meni
