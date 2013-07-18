@@ -266,6 +266,8 @@ public class MovingRectangle extends JFrame {
 		}
 
 		public void mouseWheelMoved(MouseWheelEvent e) {
+
+			AffineTransform saveXform = ourGraphics.getTransform();
 			for (Figure fig : figure) {
 				if (fig.isHit(e)) {
 					if (e.getWheelRotation() < 0) {
@@ -285,6 +287,7 @@ public class MovingRectangle extends JFrame {
 			}
 
 			canvas.repaint();
+			ourGraphics.setTransform(saveXform); 
 		}
 
 		@Override

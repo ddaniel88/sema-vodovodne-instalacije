@@ -156,15 +156,14 @@ public abstract class Figure implements IFigure {
 	
 	@Override
 	public boolean rotateFigure(double angle, Graphics g) {
-		// TODO Auto-generated method stub
 		Graphics2D graphics = (Graphics2D) g;
 		
-		AffineTransform saveXform = graphics.getTransform();
 		AffineTransform rotation = new AffineTransform();
 		rotation.rotate(Math.PI/8.0);
 		graphics.transform(rotation);
 		
-		graphics.setTransform(saveXform); 
-		return false;
+		
+		
+		return true;
 	}
 }
