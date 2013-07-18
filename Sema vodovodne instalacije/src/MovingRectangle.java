@@ -54,6 +54,11 @@ public class MovingRectangle extends JFrame {
 				fs.setDescription("Treca figura");
 				figure.add(fs);
 				break;
+			case "Rotate":
+				fs = new F_S(100, 50, 40, 20);
+				fs.setDescription("Treca figura");
+				figure.add(fs);
+				break;
 
 			default:
 				figura = "Invalid figure";
@@ -79,6 +84,7 @@ public class MovingRectangle extends JFrame {
 
 			fileItem3.addActionListener(new MenuActionListener());
 			JMenuItem editItem1 = new JMenuItem("Rotate");
+			editItem1.addActionListener(new MenuActionListener());
 			JMenuItem editItem2 = new JMenuItem("Translae");
 			JMenuItem editItem3 = new JMenuItem("Zoom");
 			filemenu.add(fileItem1);
@@ -263,9 +269,11 @@ public class MovingRectangle extends JFrame {
 			for (Figure fig : figure) {
 				if (fig.isHit(e)) {
 					if (e.getWheelRotation() < 0) {
+						/*
 						fig.scaleFigure(ScaleEnum.ZOOM_IN.getCode(),
 										new Point(canvas.getWidth(),
-												  canvas.getHeight()));
+												  canvas.getHeight())); */
+						fig.rotateFigure(0, ourGraphics);
 					}
 					else if (e.getWheelRotation() > 0) {
 						fig.scaleFigure(ScaleEnum.ZOOM_OUT.getCode(),

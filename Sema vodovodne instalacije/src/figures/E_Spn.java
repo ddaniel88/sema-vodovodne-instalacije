@@ -2,6 +2,7 @@ package figures;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 
 public final class E_Spn extends Figure {
 	public E_Spn() {
@@ -38,6 +39,7 @@ public final class E_Spn extends Figure {
 	}
 	
 	@Override
+	
 	public boolean draw(Graphics g) {
 		Graphics2D graphics = (Graphics2D) g;
 		
@@ -49,6 +51,7 @@ public final class E_Spn extends Figure {
 						 (int) (height), (int) height,
 						 90, 180);												//   (
 
+		
 		return true;
 	}
 }

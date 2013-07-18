@@ -103,6 +103,12 @@ public interface IFigure {
 	void setDescription(String description);
 	
 	/**
+	 * Rotate figure
+	 * @return true if figure is rotated
+	 */
+	boolean rotateFigure(double angle, Graphics g);
+	
+	/**
 	 * Draw figure with specified coordinates
 	 * @param x - figure start x coordinate
 	 * @param y - figure start y coordinate

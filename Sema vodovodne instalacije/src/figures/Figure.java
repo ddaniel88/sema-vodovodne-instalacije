@@ -1,7 +1,9 @@
 package figures;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
+import java.awt.geom.AffineTransform;
 
 public abstract class Figure implements IFigure {
 	protected float x, y, width, height;
@@ -151,4 +153,18 @@ public abstract class Figure implements IFigure {
 	
 	@Override
 	public abstract boolean draw(Graphics g);
+	
+	@Override
+	public boolean rotateFigure(double angle, Graphics g) {
+		// TODO Auto-generated method stub
+		Graphics2D graphics = (Graphics2D) g;
+		
+		AffineTransform saveXform = graphics.getTransform();
+		AffineTransform rotation = new AffineTransform();
+		rotation.rotate(Math.PI/8.0);
+		graphics.transform(rotation);
+		
+		graphics.setTransform(saveXform); 
+		return false;
+	}
 }
