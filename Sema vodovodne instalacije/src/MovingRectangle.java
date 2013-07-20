@@ -12,11 +12,14 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
+
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import enums.ScaleEnum;
 import figures.E_Spn;
@@ -31,6 +34,9 @@ public class MovingRectangle extends JFrame {
 	private static ArrayList<Figure> figure;
 	private static Graphics2D ourGraphics;
 	private static Figure tmpFigure;
+	
+	
+	
 	
 	// Klik na neki elemeent iz menija
 	public static class MenuActionListener implements ActionListener {
@@ -111,6 +117,8 @@ public class MovingRectangle extends JFrame {
 	}
 
 	public static void main(String[] args) {
+
+		
 		JFrame frame = new JFrame();
 
 		SwingMenu s = new SwingMenu();
@@ -228,10 +236,15 @@ public class MovingRectangle extends JFrame {
 		public void mousePressed(MouseEvent e) {
 			x = e.getX();
 			y = e.getY();
-
+			 
 			for (Figure fig : figure) {
 				if (fig.isHit(e)) {
 					tmpFigure = fig;
+					if (e.getClickCount() == 2) {
+			            //JOptionPane.showMessageDialog(null, "Double clicked!");
+						String desription = JOptionPane.showInputDialog(null, "Enter description", "Description", JOptionPane.INFORMATION_MESSAGE);
+						tmpFigure.setDescription(desription);
+			        }
 				}
 			}
 		}
@@ -240,7 +253,7 @@ public class MovingRectangle extends JFrame {
 		public void mouseDragged(MouseEvent e) {
 			int dx = e.getX() - x;
 			int dy = e.getY() - y;
-
+		
 
 			if (tmpFigure != null) {
 				tmpFigure.moveFigureFor(dx, dy, endCanvas());
@@ -275,7 +288,7 @@ public class MovingRectangle extends JFrame {
 						fig.scaleFigure(ScaleEnum.ZOOM_IN.getCode(),
 										new Point(canvas.getWidth(),
 												  canvas.getHeight())); */
-						fig.rotateFigure(0, ourGraphics);
+						fig.rotateFigure(Math.PI/8.0, ourGraphics);
 					}
 					else if (e.getWheelRotation() > 0) {
 						fig.scaleFigure(ScaleEnum.ZOOM_OUT.getCode(),

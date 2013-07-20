@@ -158,9 +158,12 @@ public abstract class Figure implements IFigure {
 	public boolean rotateFigure(double angle, Graphics g) {
 		Graphics2D graphics = (Graphics2D) g;
 		
-		AffineTransform rotation = new AffineTransform();
-		rotation.rotate(Math.PI/8.0);
-		graphics.transform(rotation);
+	/*	AffineTransform rotation = new AffineTransform();
+		AffineTransform rotation2  = rotation.getRotateInstance(angle);
+		rotation.rotate(angle);
+		graphics.transform(rotation); */
+		
+		graphics.rotate(angle);
 		
 		
 		
