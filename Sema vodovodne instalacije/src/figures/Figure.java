@@ -3,7 +3,6 @@ package figures;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
-import java.awt.geom.AffineTransform;
 
 public abstract class Figure implements IFigure {
 	protected float x, y, width, height;

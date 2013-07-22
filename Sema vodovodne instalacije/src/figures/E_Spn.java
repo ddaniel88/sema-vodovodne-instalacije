@@ -2,7 +2,6 @@ package figures;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
 
 public final class E_Spn extends Figure {
 	public E_Spn() {
