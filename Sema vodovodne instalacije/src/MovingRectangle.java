@@ -25,6 +25,8 @@ import enums.ScaleEnum;
 import figures.E_Spn;
 import figures.F_S;
 import figures.Figure;
+import figures.Mma_Onp;
+import figures.Mmk_Ln;
 import figures.Point;
 
 public class MovingRectangle extends JFrame {
@@ -254,10 +256,8 @@ public class MovingRectangle extends JFrame {
 		
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
 			 if (e.getButton() == MouseEvent.BUTTON3) {
-				 espn = new E_Spn(e.getX(), e.getY(), 100, 50);
+				 espn = new Mma_Onp(e.getX(), e.getY(), 150, 50);
 					espn.setDescription("Prva figura");
 					figure.add(espn);
 		    }
