@@ -34,7 +34,7 @@ public class MovingRectangle extends JFrame {
 	private static ArrayList<Figure> figure;
 	private static Graphics2D ourGraphics;
 	private static Figure tmpFigure;
-	
+	private static String type;
 	
 	
 	
@@ -46,6 +46,7 @@ public class MovingRectangle extends JFrame {
 
 			switch (e.getActionCommand()) {
 			case "001":
+				type = "001";
 				espn = new E_Spn(200, 200, 100, 50);
 				espn.setDescription("Prva figura");
 				figure.add(espn);
@@ -87,16 +88,35 @@ public class MovingRectangle extends JFrame {
 			JMenuItem fileItem2 = new JMenuItem("002");
 			fileItem2.addActionListener(new MenuActionListener());
 			JMenuItem fileItem3 = new JMenuItem("003");
-
 			fileItem3.addActionListener(new MenuActionListener());
+			JMenuItem fileItem4 = new JMenuItem("004");
+			fileItem4.addActionListener(new MenuActionListener());
+			JMenuItem fileItem5 = new JMenuItem("005");
+			fileItem5.addActionListener(new MenuActionListener());
+			JMenuItem fileItem6 = new JMenuItem("006");
+			fileItem6.addActionListener(new MenuActionListener());
+			JMenuItem fileItem7 = new JMenuItem("007");
+			fileItem7.addActionListener(new MenuActionListener());
+			JMenuItem fileItem8 = new JMenuItem("008");
+			fileItem8.addActionListener(new MenuActionListener());
+			JMenuItem fileItem9 = new JMenuItem("009");
+			fileItem9.addActionListener(new MenuActionListener());
+			
 			JMenuItem editItem1 = new JMenuItem("Rotate");
 			editItem1.addActionListener(new MenuActionListener());
 			JMenuItem editItem2 = new JMenuItem("Translae");
 			JMenuItem editItem3 = new JMenuItem("Zoom");
+			
 			filemenu.add(fileItem1);
 			filemenu.add(fileItem2);
 			filemenu.add(fileItem3);
-
+			filemenu.add(fileItem4);
+			filemenu.add(fileItem5);
+			filemenu.add(fileItem6);
+			filemenu.add(fileItem7);
+			filemenu.add(fileItem8);
+			filemenu.add(fileItem9);
+			
 			editmenu.add(editItem1);
 			editmenu.add(editItem2);
 			editmenu.add(editItem3);
@@ -231,9 +251,22 @@ public class MovingRectangle extends JFrame {
 	public static class MovingAdapter extends MouseAdapter {
 		private int x;
 		private int y;
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+			 if (e.getButton() == MouseEvent.BUTTON3) {
+				 espn = new E_Spn(e.getX(), e.getY(), 100, 50);
+					espn.setDescription("Prva figura");
+					figure.add(espn);
+		    }
+		}
 
 		@Override
 		public void mousePressed(MouseEvent e) {
+			
+			
 			x = e.getX();
 			y = e.getY();
 			 
@@ -284,11 +317,11 @@ public class MovingRectangle extends JFrame {
 			for (Figure fig : figure) {
 				if (fig.isHit(e)) {
 					if (e.getWheelRotation() < 0) {
-						/*
+						
 						fig.scaleFigure(ScaleEnum.ZOOM_IN.getCode(),
 										new Point(canvas.getWidth(),
-												  canvas.getHeight())); */
-						fig.rotateFigure(Math.PI/8.0, ourGraphics);
+												  canvas.getHeight())); 
+						//fig.rotateFigure(Math.PI/8.0, ourGraphics);
 					}
 					else if (e.getWheelRotation() > 0) {
 						fig.scaleFigure(ScaleEnum.ZOOM_OUT.getCode(),
