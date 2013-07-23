@@ -7,23 +7,23 @@ import java.awt.geom.Arc2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
-public final class Mma_Onp extends Figure {
-	public Mma_Onp() {
+public final class Mmb_On extends Figure {
+	public Mmb_On() {
 		super();
 	}
 	
-	public Mma_Onp(float x, float y, float width, float height) {
+	public Mmb_On(float x, float y, float width, float height) {
 		super(x, y, width, height);
 	}
 
 	@Override
 	public boolean draw(float x, float y, float width, float height, Graphics g) {
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		
 		Graphics2D graphics = (Graphics2D) g;
-
-		super.x = x;
-		super.y = y;
-		super.width = width;
-		super.height = height;
 		
 		float radius = height * 2 / 3;
 		float offset = height / 3;
@@ -41,12 +41,15 @@ public final class Mma_Onp extends Figure {
 		graphics.draw(new Line2D.Double(x + radius / 2, y + radius, x + width - radius / 2, y + radius));
 		
 		// vertical line on middle
-		graphics.draw(new Line2D.Double(x + width / 2, y, x + width / 2, y + offset + radius / 2));
+		graphics.draw(new Line2D.Double(x + width / 2, y + offset / 2, x + width / 2, y + offset + radius / 2));
 		
-		// horizontal line on middle
-		graphics.draw(new Line2D.Double(x + width / 2 - offset, y, x + width / 2 + offset, y));
-
-		return true;
+		radius /= 2;
+		offset /= 2;
+		
+		// arc on middle
+		graphics.draw(new Arc2D.Double(x + width / 2 - offset, y - offset, radius, radius, 180, 180, Arc2D.OPEN));
+		
+		return false;
 	}
 
 	@Override
@@ -69,22 +72,16 @@ public final class Mma_Onp extends Figure {
 		graphics.draw(new Line2D.Double(x + radius / 2, y + radius, x + width - radius / 2, y + radius));
 		
 		// vertical line on middle
-		graphics.draw(new Line2D.Double(x + width / 2, y, x + width / 2, y + offset + radius / 2));
+		graphics.draw(new Line2D.Double(x + width / 2, y + offset / 2, x + width / 2, y + offset + radius / 2));
 		
-		// horizontal line on middle
-		graphics.draw(new Line2D.Double(x + width / 2 - offset, y, x + width / 2 + offset, y));
+		radius /= 2;
+		offset /= 2;
+		
+		// arc on middle
+		graphics.draw(new Arc2D.Double(x + width / 2 - offset, y - offset, radius, radius, 180, 180, Arc2D.OPEN));
 		
 		return true;
 	}
-
+	
+	
 }
-
-
-
-
-
-
-
-
-
-

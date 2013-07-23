@@ -24,7 +24,11 @@ import enums.ScaleEnum;
 import figures.E_Spn;
 import figures.F_S;
 import figures.Figure;
+import figures.Mma_Onp;
+import figures.Mmb_On;
+import figures.Mmk_Ln;
 import figures.Mmr_Rn;
+import figures.P_Zn;
 import figures.Point;
 
 public class MovingRectangle extends JFrame {
@@ -227,27 +231,36 @@ public class MovingRectangle extends JFrame {
 		public void mouseClicked(MouseEvent e) {
 			 if (e.getButton() == MouseEvent.BUTTON3) {
 				 
-				 switch (type) {
-					case "001":
-						espn = new E_Spn(e.getX(), e.getY(), 100, 50);
-						espn.setDescription("Prva figura");
-						figure.add(espn);
-					//	JOptionPane.showMessageDialog(null, frame.get);
-						break;
-					case "002":
-						sspn = new E_Spn(e.getX(), e.getY(), 40, 10);
-						sspn.setDescription("Mala figura");
-						figure.add(sspn);
-						break;
-					case "003":
-						fs = new Mmr_Rn(e.getX(), e.getY(), 40, 20);
-						fs.setDescription("Treca figura");
-						figure.add(fs);
-						break;
-
-					default:
-						break;
-					}
+				 fs = new Mmk_Ln(e.getX(), e.getY(), 150, 50);
+				fs.setDescription("hoho");
+				figure.add(fs);
+				 
+//				 switch (type) {
+//					case "001":
+//						espn = new E_Spn(e.getX(), e.getY(), 100, 50);
+//						espn.setDescription("Prva figura");
+//						figure.add(espn);
+//					//	JOptionPane.showMessageDialog(null, frame.get);
+//						break;
+//					case "002":
+//						sspn = new E_Spn(e.getX(), e.getY(), 40, 10);
+//						sspn.setDescription("Mala figura");
+//						figure.add(sspn);
+//						break;
+//					case "003":
+//						fs = new Mmr_Rn(e.getX(), e.getY(), 40, 20);
+//						fs.setDescription("Treca figura");
+//						figure.add(fs);
+//						break;
+//					case "004":
+//						fs = new Mma_Onp(e.getX(), e.getY(), 150, 50);
+//						fs.setDescription("hoho");
+//						figure.add(fs);
+//						break;
+//
+//					default:
+//						break;
+//					}
 				 
 		    }
 		}
