@@ -13,7 +13,6 @@ import java.awt.event.MouseWheelListener;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -25,8 +24,7 @@ import enums.ScaleEnum;
 import figures.E_Spn;
 import figures.F_S;
 import figures.Figure;
-import figures.Mma_Onp;
-import figures.Mmk_Ln;
+import figures.Mmr_Rn;
 import figures.Point;
 
 public class MovingRectangle extends JFrame {
@@ -36,8 +34,8 @@ public class MovingRectangle extends JFrame {
 	private static ArrayList<Figure> figure;
 	private static Graphics2D ourGraphics;
 	private static Figure tmpFigure;
-	private static String type;
-	
+	private static String type="";
+	private static JFrame frame;
 	
 	
 	// Klik na neki elemeent iz menija
@@ -49,24 +47,12 @@ public class MovingRectangle extends JFrame {
 			switch (e.getActionCommand()) {
 			case "001":
 				type = "001";
-				espn = new E_Spn(200, 200, 100, 50);
-				espn.setDescription("Prva figura");
-				figure.add(espn);
 				break;
 			case "002":
-				sspn = new E_Spn(10, 10, 40, 10);
-				sspn.setDescription("Mala figura");
-				figure.add(sspn);
+				type ="002";
 				break;
 			case "003":
-				fs = new F_S(100, 50, 40, 20);
-				fs.setDescription("Treca figura");
-				figure.add(fs);
-				break;
-			case "Rotate":
-				fs = new F_S(100, 50, 40, 20);
-				fs.setDescription("Treca figura");
-				figure.add(fs);
+				type ="003";
 				break;
 
 			default:
@@ -104,10 +90,10 @@ public class MovingRectangle extends JFrame {
 			JMenuItem fileItem9 = new JMenuItem("009");
 			fileItem9.addActionListener(new MenuActionListener());
 			
-			JMenuItem editItem1 = new JMenuItem("Rotate");
+			JMenuItem editItem1 = new JMenuItem("Zoom In");
 			editItem1.addActionListener(new MenuActionListener());
-			JMenuItem editItem2 = new JMenuItem("Translae");
-			JMenuItem editItem3 = new JMenuItem("Zoom");
+			JMenuItem editItem2 = new JMenuItem("Zoom Out");
+			editItem2.addActionListener(new MenuActionListener());
 			
 			filemenu.add(fileItem1);
 			filemenu.add(fileItem2);
@@ -121,7 +107,6 @@ public class MovingRectangle extends JFrame {
 			
 			editmenu.add(editItem1);
 			editmenu.add(editItem2);
-			editmenu.add(editItem3);
 			menubar.add(filemenu);
 			menubar.add(editmenu);
 
@@ -141,7 +126,7 @@ public class MovingRectangle extends JFrame {
 	public static void main(String[] args) {
 
 		
-		JFrame frame = new JFrame();
+		frame = new JFrame();
 
 		SwingMenu s = new SwingMenu();
 		frame.setJMenuBar(s.SwingMenu());
@@ -175,22 +160,6 @@ public class MovingRectangle extends JFrame {
 			addMouseListener(ma);
 			addMouseWheelListener(ma);
 
-			// zell = new ZEllipse(150, 70, 80, 80);
-
-			/******** DRAW CUSTOM FIGURES ********/
-		/*	espn = new E_Spn(200, 200, 100, 50);
-			espn.setDescription("Prva figura");
-			figure.add(espn);
-
-			sspn = new E_Spn(10, 10, 40, 10);
-			sspn.setDescription("Mala figura");
-			figure.add(sspn);
-			
-			espn2 = new E_Spn(100, 50, 40, 20);
-			espn2.setDescription("Treca figura");
-			figure.add(espn2);
-			*/
-			/******** END OF DRAW CUSTOM FIGURES ********/
 
 			setOpaque(true);
 			setDoubleBuffered(true);
@@ -257,9 +226,29 @@ public class MovingRectangle extends JFrame {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			 if (e.getButton() == MouseEvent.BUTTON3) {
-				 espn = new Mma_Onp(e.getX(), e.getY(), 150, 50);
-					espn.setDescription("Prva figura");
-					figure.add(espn);
+				 
+				 switch (type) {
+					case "001":
+						espn = new E_Spn(e.getX(), e.getY(), 100, 50);
+						espn.setDescription("Prva figura");
+						figure.add(espn);
+					//	JOptionPane.showMessageDialog(null, frame.get);
+						break;
+					case "002":
+						sspn = new E_Spn(e.getX(), e.getY(), 40, 10);
+						sspn.setDescription("Mala figura");
+						figure.add(sspn);
+						break;
+					case "003":
+						fs = new Mmr_Rn(e.getX(), e.getY(), 40, 20);
+						fs.setDescription("Treca figura");
+						figure.add(fs);
+						break;
+
+					default:
+						break;
+					}
+				 
 		    }
 		}
 
