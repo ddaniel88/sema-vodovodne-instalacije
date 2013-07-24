@@ -198,6 +198,7 @@ public class MovingRectangle extends JFrame {
 		      break;
 		    case AdjustmentEvent.TRACK:
 		      System.out.println("The knob on the scrollbar was dragged");
+		      
 		      break;
 		    }
 		    int value = evt.getValue();
