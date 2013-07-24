@@ -19,26 +19,12 @@ public final class Mmq_Ln extends Figure {
 					    float height,
 					    Graphics g)
 	{
-		Graphics2D graphics = (Graphics2D) g;
-
 		super.x = x;
 		super.y = y;
 		super.width = width;
 		super.height = height;
 		
-		// )^(
-				graphics.drawArc((int) (x - height / 2), (int) y,
-								 (int) height, (int) height,
-								 90, -180+25);												// )
-
-				graphics.drawArc((int) x, (int) (y + height / 4),
-								 (int) width, (int) height, 58, 64);						// ^
-				
-				graphics.drawArc((int) (x + width - height/2), (int) y,
-								 (int) (height), (int) height,
-								 90, 180-25);												// (
-
-		return true;
+		return draw(g);
 	}
 	
 	@Override

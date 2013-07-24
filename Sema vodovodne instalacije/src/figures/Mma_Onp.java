@@ -18,35 +18,12 @@ public final class Mma_Onp extends Figure {
 
 	@Override
 	public boolean draw(float x, float y, float width, float height, Graphics g) {
-		Graphics2D graphics = (Graphics2D) g;
-
 		super.x = x;
 		super.y = y;
 		super.width = width;
 		super.height = height;
 		
-		float radius = height * 2 / 3;
-		float offset = height / 3;
-		
-		Rectangle2D rectangleForArc = new Rectangle();
-		// left arc
-		rectangleForArc.setRect(x - offset, y + offset, radius, radius);
-		graphics.draw(new Arc2D.Double(rectangleForArc, 270, 180, Arc2D.OPEN));
-		
-		// right arc
-		rectangleForArc.setRect(x + width - offset, y + offset, radius, radius);
-		graphics.draw(new Arc2D.Double(rectangleForArc, 90, 180, Arc2D.OPEN));
-		
-		// line between arcs
-		graphics.draw(new Line2D.Double(x + radius / 2, y + radius, x + width - radius / 2, y + radius));
-		
-		// vertical line on middle
-		graphics.draw(new Line2D.Double(x + width / 2, y, x + width / 2, y + offset + radius / 2));
-		
-		// horizontal line on middle
-		graphics.draw(new Line2D.Double(x + width / 2 - offset, y, x + width / 2 + offset, y));
-
-		return true;
+		return draw(g);
 	}
 
 	@Override

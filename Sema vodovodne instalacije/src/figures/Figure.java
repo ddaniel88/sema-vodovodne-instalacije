@@ -30,6 +30,14 @@ public abstract class Figure implements IFigure {
 	}
 
 	@Override
+	public void setPosition(double x, double y, double width, double height) {
+		this.x = (float)x;
+		this.y = (float)y;
+		this.width = (float)width;
+		this.height = (float)height;
+	}
+	
+	@Override
 	public boolean moveFigure(float x, float y, Point endCanvas) {
 		if (x >= 0 && y >= 0 &&
 				x + width <= endCanvas.getX() &&

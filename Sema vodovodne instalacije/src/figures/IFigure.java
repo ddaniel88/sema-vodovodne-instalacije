@@ -16,6 +16,8 @@ public interface IFigure {
 	 */
 	Point getStartPosition();
 	
+	void setPosition(double x, double y, double width, double height);
+	
 	/**
 	 * Move figure to new start point position
 	 * @param x - new X start position

@@ -19,22 +19,12 @@ public final class E_Spn extends Figure {
 					    float height,
 					    Graphics g)
 	{
-		Graphics2D graphics = (Graphics2D) g;
-
 		super.x = x;
 		super.y = y;
 		super.width = width;
 		super.height = height;
 		
-		// |-(
-		graphics.drawLine((int) x, (int) y, (int) x, (int) (y + height));		// |
-		graphics.drawLine((int) x, (int) (y + height / 2),
-				(int) (x + width - height/2), (int) (y + height / 2));			//  -
-		graphics.drawArc((int) (x + width - height/2), (int) y,
-						 (int) (height), (int) height,
-						 90, 180);												//   (
-
-		return true;
+		return draw(g);
 	}
 	
 	@Override

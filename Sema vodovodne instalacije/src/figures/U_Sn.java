@@ -19,30 +19,12 @@ public final class U_Sn extends Figure {
 					    float height,
 					    Graphics g)
 	{
-		Graphics2D graphics = (Graphics2D) g;
-
 		super.x = x;
 		super.y = y;
 		super.width = width;
 		super.height = height;
 		
-		// )=(
-		graphics.drawArc((int) (x - height / 2), (int) y,
-						 (int) height, (int) height,
-						 -90, 180);												// )
-		graphics.drawLine((int) (x + height / 2),
-						  (int) (y + height / 2 - height / 8),
-						  (int) (x + width - height / 2),
-						  (int) (int) (y + height / 2 - height / 8));			// -
-		graphics.drawLine((int) (x + height / 2),
-						  (int) (y + height / 2 + height / 8),
-						  (int) (x + width - height / 2),
-						  (int) (y + height / 2 + height / 8));					// -
-		graphics.drawArc((int) (x + width - height/2), (int) y,
-						 (int) (height), (int) height,
-						 90, 180);												// (
-
-		return true;
+		return draw(g);
 	}
 	
 	@Override

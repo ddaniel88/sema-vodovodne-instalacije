@@ -27,6 +27,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+
+import enums.FigureTypes;
 import enums.ScaleEnum;
 import figures.E_Spn;
 import figures.F_S;
@@ -55,39 +57,40 @@ public class MovingRectangle extends JFrame {
 
 			String figura;
 
-			switch (e.getActionCommand()) {
-			case "001":
-				type = "001";
-				break;
-			case "002":
-				type ="002";
-				break;
-			case "003":
-				type ="003";
-				break;
-			case "004":
-				type ="004";
-				break;
-			case "005":
-				type = "005";
-				break;
-			case "006":
-				type ="006";
-				break;
-			case "007":
-				type ="007";
-				break;
-			case "008":
-				type ="008";
-				break;
-			case "009":
-				type ="009";
-				break;
-
-			default:
-				figura = "Invalid figure";
-				break;
-			}
+			type = e.getActionCommand();
+//			switch (e.getActionCommand()) {
+//			case "001":
+//				type = "001";
+//				break;
+//			case "002":
+//				type ="002";
+//				break;
+//			case "003":
+//				type ="003";
+//				break;
+//			case "004":
+//				type ="004";
+//				break;
+//			case "005":
+//				type = "005";
+//				break;
+//			case "006":
+//				type ="006";
+//				break;
+//			case "007":
+//				type ="007";
+//				break;
+//			case "008":
+//				type ="008";
+//				break;
+//			case "009":
+//				type ="009";
+//				break;
+//
+//			default:
+//				figura = "Invalid figure";
+//				break;
+//			}
 		}
 	}
 
@@ -100,39 +103,18 @@ public class MovingRectangle extends JFrame {
 			filemenu.add(new JSeparator());
 			JMenu editmenu = new JMenu("Edit");
 			editmenu.add(new JSeparator());
-			JMenuItem fileItem1 = new JMenuItem("001");
-			fileItem1.addActionListener(new MenuActionListener());
-			JMenuItem fileItem2 = new JMenuItem("002");
-			fileItem2.addActionListener(new MenuActionListener());
-			JMenuItem fileItem3 = new JMenuItem("003");
-			fileItem3.addActionListener(new MenuActionListener());
-			JMenuItem fileItem4 = new JMenuItem("004");
-			fileItem4.addActionListener(new MenuActionListener());
-			JMenuItem fileItem5 = new JMenuItem("005");
-			fileItem5.addActionListener(new MenuActionListener());
-			JMenuItem fileItem6 = new JMenuItem("006");
-			fileItem6.addActionListener(new MenuActionListener());
-			JMenuItem fileItem7 = new JMenuItem("007");
-			fileItem7.addActionListener(new MenuActionListener());
-			JMenuItem fileItem8 = new JMenuItem("008");
-			fileItem8.addActionListener(new MenuActionListener());
-			JMenuItem fileItem9 = new JMenuItem("009");
-			fileItem9.addActionListener(new MenuActionListener());
+			
+			// adding figures to menu
+			for (FigureTypes figure : FigureTypes.values()) {
+				JMenuItem fileItem = new JMenuItem(figure.getCode());
+				fileItem.addActionListener(new MenuActionListener());
+				filemenu.add(fileItem);
+			}
 			
 			JMenuItem editItem1 = new JMenuItem("Zoom In");
 			editItem1.addActionListener(new MenuActionListener());
 			JMenuItem editItem2 = new JMenuItem("Zoom Out");
 			editItem2.addActionListener(new MenuActionListener());
-			
-			filemenu.add(fileItem1);
-			filemenu.add(fileItem2);
-			filemenu.add(fileItem3);
-			filemenu.add(fileItem4);
-			filemenu.add(fileItem5);
-			filemenu.add(fileItem6);
-			filemenu.add(fileItem7);
-			filemenu.add(fileItem8);
-			filemenu.add(fileItem9);
 			
 			editmenu.add(editItem1);
 			editmenu.add(editItem2);
@@ -316,46 +298,28 @@ public class MovingRectangle extends JFrame {
 		
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			 if (e.getButton() == MouseEvent.BUTTON3) {
-				 
-//				 fs = new Mmk_Ln(e.getX(), e.getY(), 150, 50);
-//				fs.setDescription("hoho");
-//				figure.add(fs);
-				 
-			 switch (type) {
-				case "001":
-						espn = new E_Spn(e.getX(), e.getY(), 100, 50);
-						espn.setDescription("Prva figura");
-						figure.add(espn);
-					//	JOptionPane.showMessageDialog(null, frame.get);
-						break;
-					case "002":
-						sspn = new E_Spn(e.getX(), e.getY(), 40, 10);
-						sspn.setDescription("Mala figura");
-						figure.add(sspn);
-						break;
-					case "003":
-						fs = new Mmr_Rn(e.getX(), e.getY(), 40, 20);
-						fs.setDescription("Treca figura");
-						figure.add(fs);
-						break;
-					case "004":
-						fs = new Mma_Onp(e.getX(), e.getY(), 150, 50);
-						fs.setDescription("hoho");
-						figure.add(fs);
-						break;
-
-					default:
-						break;
-					}
-				 
-		    }
+			if (type.isEmpty()) {
+				return;
+			}
+			
+			if (e.getButton() == MouseEvent.BUTTON3) {
+				try {
+					Class<?> figureObject = Class.forName(type);
+					Figure fig = (Figure) figureObject.newInstance();
+					fig.setPosition(e.getX(), e.getY(), 150, 50);
+					figure.add(fig);
+				} catch (ClassNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (InstantiationException e1) {
+					e1.printStackTrace();
+				} catch (IllegalAccessException e1) {
+					e1.printStackTrace();
+				}
+			}
 		}
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			
-			
 			x = e.getX();
 			y = e.getY();
 			 
