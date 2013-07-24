@@ -1,9 +1,11 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -19,6 +21,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import enums.ScaleEnum;
 import figures.E_Spn;
@@ -57,6 +61,24 @@ public class MovingRectangle extends JFrame {
 				break;
 			case "003":
 				type ="003";
+				break;
+			case "004":
+				type ="004";
+				break;
+			case "005":
+				type = "005";
+				break;
+			case "006":
+				type ="006";
+				break;
+			case "007":
+				type ="007";
+				break;
+			case "008":
+				type ="008";
+				break;
+			case "009":
+				type ="009";
 				break;
 
 			default:
@@ -131,29 +153,50 @@ public class MovingRectangle extends JFrame {
 
 		
 		frame = new JFrame();
-
+		frame.setLayout(new BorderLayout());
+		frame.setVisible(true); 
+	    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	    
 		SwingMenu s = new SwingMenu();
 		frame.setJMenuBar(s.SwingMenu());
 
-		// Set default close operation for JFrame
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		canvas = new TransformingCanvas();
+	/*	canvas = new TransformingCanvas();
 
 		frame.setLayout(new BorderLayout());
-		frame.getContentPane().add(canvas, BorderLayout.CENTER);
+		JScrollPane jsp = new JScrollPane(canvas);
+		frame.getContentPane().add(jsp, BorderLayout.CENTER);
 		frame.setSize(500, 500);
 
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
+		*/
+		
+		canvas = new TransformingCanvas(); 
+        JScrollPane scrollPane = new JScrollPane(canvas);  
+        frame.getContentPane().add(scrollPane, BorderLayout.CENTER);  
+        
+        frame.setSize(400,400);  
+        
+       
 	}
 
-	public static class TransformingCanvas extends JComponent {
+	public static class TransformingCanvas extends JPanel {
 		private double translateX;
 		private double translateY;
 		private double scale;
+		int maxWidth;  
+		int totalHeight;  
+	       
+		
+		 public Dimension getPreferredSize() {  
+		        return new Dimension(maxWidth, totalHeight);  
+		    } 
 
 		TransformingCanvas() {
+			
+			 maxWidth    = 500;  
+		     totalHeight = 500;  
+			
 			translateX = 0;
 			translateY = 0;
 			scale = 1;
@@ -231,36 +274,36 @@ public class MovingRectangle extends JFrame {
 		public void mouseClicked(MouseEvent e) {
 			 if (e.getButton() == MouseEvent.BUTTON3) {
 				 
-				 fs = new Mmk_Ln(e.getX(), e.getY(), 150, 50);
-				fs.setDescription("hoho");
-				figure.add(fs);
+//				 fs = new Mmk_Ln(e.getX(), e.getY(), 150, 50);
+//				fs.setDescription("hoho");
+//				figure.add(fs);
 				 
-//				 switch (type) {
-//					case "001":
-//						espn = new E_Spn(e.getX(), e.getY(), 100, 50);
-//						espn.setDescription("Prva figura");
-//						figure.add(espn);
-//					//	JOptionPane.showMessageDialog(null, frame.get);
-//						break;
-//					case "002":
-//						sspn = new E_Spn(e.getX(), e.getY(), 40, 10);
-//						sspn.setDescription("Mala figura");
-//						figure.add(sspn);
-//						break;
-//					case "003":
-//						fs = new Mmr_Rn(e.getX(), e.getY(), 40, 20);
-//						fs.setDescription("Treca figura");
-//						figure.add(fs);
-//						break;
-//					case "004":
-//						fs = new Mma_Onp(e.getX(), e.getY(), 150, 50);
-//						fs.setDescription("hoho");
-//						figure.add(fs);
-//						break;
-//
-//					default:
-//						break;
-//					}
+			 switch (type) {
+				case "001":
+						espn = new E_Spn(e.getX(), e.getY(), 100, 50);
+						espn.setDescription("Prva figura");
+						figure.add(espn);
+					//	JOptionPane.showMessageDialog(null, frame.get);
+						break;
+					case "002":
+						sspn = new E_Spn(e.getX(), e.getY(), 40, 10);
+						sspn.setDescription("Mala figura");
+						figure.add(sspn);
+						break;
+					case "003":
+						fs = new Mmr_Rn(e.getX(), e.getY(), 40, 20);
+						fs.setDescription("Treca figura");
+						figure.add(fs);
+						break;
+					case "004":
+						fs = new Mma_Onp(e.getX(), e.getY(), 150, 50);
+						fs.setDescription("hoho");
+						figure.add(fs);
+						break;
+
+					default:
+						break;
+					}
 				 
 		    }
 		}
