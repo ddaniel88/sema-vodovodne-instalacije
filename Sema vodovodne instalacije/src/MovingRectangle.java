@@ -5,6 +5,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
@@ -49,19 +50,47 @@ public class MovingRectangle extends JFrame {
 	private static Figure tmpFigure;
 	private static String type="";
 	private static JFrame frame;
-	
+	private static Dimension area;
 	
 	// Klik na neki elemeent iz menija
 	public static class MenuActionListener implements ActionListener {
+		
+		private void ZoomIn()
+		{
+			AffineTransform saveXform = ourGraphics.getTransform();
+			for (Figure fig : figure) {
+				
+				fig.scaleFigure(ScaleEnum.ZOOM_IN.getCode(),
+								new Point(canvas.getWidth(),
+										  canvas.getHeight())); 
+			}
+			canvas.repaint();
+			ourGraphics.setTransform(saveXform); 
+		}
+		
+		private void ZoomOut()
+		{
+			AffineTransform saveXform = ourGraphics.getTransform();
+			for (Figure fig : figure) {
+				
+				fig.scaleFigure(ScaleEnum.ZOOM_OUT.getCode(),
+								new Point(canvas.getWidth(),
+										  canvas.getHeight())); 
+			}
+			canvas.repaint();
+			ourGraphics.setTransform(saveXform); 
+		}
+		
 		public void actionPerformed(ActionEvent e) {
 
-			String figura;
-
 			type = e.getActionCommand();
-//			switch (e.getActionCommand()) {
-//			case "001":
-//				type = "001";
-//				break;
+			switch (e.getActionCommand()) {
+			case "Zoom In":
+					ZoomIn();
+				break;
+			case "Zoom Out":
+					ZoomOut();
+				break;
 //			case "002":
 //				type ="002";
 //				break;
@@ -88,9 +117,8 @@ public class MovingRectangle extends JFrame {
 //				break;
 //
 //			default:
-//				figura = "Invalid figure";
 //				break;
-//			}
+			}
 		}
 	}
 
@@ -128,15 +156,12 @@ public class MovingRectangle extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 
-			System.out.println("aaa");
-
 		}
 
 	}
 
 	public static void main(String[] args) {
 
-		
 		frame = new JFrame();
 		frame.setLayout(new BorderLayout());
 		frame.setVisible(true); 
@@ -144,90 +169,35 @@ public class MovingRectangle extends JFrame {
 	    
 		SwingMenu s = new SwingMenu();
 		frame.setJMenuBar(s.SwingMenu());
-
-	/*	canvas = new TransformingCanvas();
-
-		frame.setLayout(new BorderLayout());
-		JScrollPane jsp = new JScrollPane(canvas);
-		frame.getContentPane().add(jsp, BorderLayout.CENTER);
-		frame.setSize(500, 500);
-
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setVisible(true);
-		*/
 		
 		canvas = new TransformingCanvas(); 
         JScrollPane scrollPane = new JScrollPane(canvas);  
+        scrollPane.setPreferredSize(new Dimension(400,400));
+        scrollPane.setOpaque(true);
         frame.getContentPane().add(scrollPane, BorderLayout.CENTER);  
         
-        frame.setSize(400,400);  
+       // frame.setSize(400,400);  
         
-     // Listen for value changes in the scroll pane's scrollbars
-        AdjustmentListener listener = new MyAdjustmentListener();
-        scrollPane.getHorizontalScrollBar().addAdjustmentListener(listener);
-        scrollPane.getVerticalScrollBar().addAdjustmentListener(listener);
+        frame.pack();
+        
        
 	}
 	
-	
-	public static class MyAdjustmentListener implements AdjustmentListener {
-		  public void adjustmentValueChanged(AdjustmentEvent evt) {
-		    Adjustable source = evt.getAdjustable();
-		    if (evt.getValueIsAdjusting()) {
-		      return;
-		    }
-		    int orient = source.getOrientation();
-		    if (orient == Adjustable.HORIZONTAL) {
-		      System.out.println("from horizontal scrollbar"); 
-		    } else {
-		      System.out.println("from vertical scrollbar");
-		    }
-		    int type = evt.getAdjustmentType();
-		    switch (type) {
-		    case AdjustmentEvent.UNIT_INCREMENT:
-		      System.out.println("Scrollbar was increased by one unit");
-		      break;
-		    case AdjustmentEvent.UNIT_DECREMENT:
-		      System.out.println("Scrollbar was decreased by one unit");
-		      break;
-		    case AdjustmentEvent.BLOCK_INCREMENT:
-		      System.out.println("Scrollbar was increased by one block");
-		      break;
-		    case AdjustmentEvent.BLOCK_DECREMENT:
-		      System.out.println("Scrollbar was decreased by one block");
-		      break;
-		    case AdjustmentEvent.TRACK:
-		      System.out.println("The knob on the scrollbar was dragged");
-		      
-		      break;
-		    }
-		    int value = evt.getValue();
-		  }
-
-		}
-	
-
 	public static class TransformingCanvas extends JPanel {
 		private double translateX;
 		private double translateY;
 		private double scale;
 		int maxWidth;  
 		int totalHeight;  
-	       
 		
-		 public Dimension getPreferredSize() {  
-		        return new Dimension(maxWidth, totalHeight);  
-		    } 
-
 		TransformingCanvas() {
-			
-			 maxWidth    = 500;  
-		     totalHeight = 500;  
+			super(new BorderLayout());
+			area = new Dimension(0,0);
 			
 			translateX = 0;
 			translateY = 0;
 			scale = 1;
-			figure = new ArrayList<>();
+			figure = new ArrayList<Figure>();
 
 			MovingAdapter ma = new MovingAdapter();
 			addMouseMotionListener(ma);
@@ -305,10 +275,39 @@ public class MovingRectangle extends JFrame {
 			
 			if (e.getButton() == MouseEvent.BUTTON3) {
 				try {
+					int width = 150;
+					int height= 50;
+					
 					Class<?> figureObject = Class.forName(type);
 					Figure fig = (Figure) figureObject.newInstance();
-					fig.setPosition(e.getX(), e.getY(), 150, 50);
+					fig.setPosition(e.getX(), e.getY(), width, height);
 					figure.add(fig);
+					
+					int x = e.getX() - width/2;
+		            int y = e.getY() - height/2;
+		            if (x < 0) x = 0;
+		            if (y < 0) y = 0;
+		            Rectangle rect = new Rectangle(x, y, width, height);
+		           
+		            canvas.scrollRectToVisible(rect);
+		            
+		            int this_width = (x + width + 2);
+		            if (this_width > area.width) {
+		                area.width = this_width; 
+		            }
+		            int this_height = (y + height + 2);
+		            if (this_height > area.height) {
+		                area.height = this_height; 
+		            }
+		            
+		            canvas.setPreferredSize(area);
+		            canvas.getWidth();
+		            canvas.getHeight();
+		            //Let the scroll pane know to update itself
+		            //and its scrollbars.
+		            canvas.revalidate();
+		            canvas.repaint();
+			            
 				} catch (ClassNotFoundException e1) {
 					e1.printStackTrace();
 				} catch (InstantiationException e1) {
@@ -365,30 +364,30 @@ public class MovingRectangle extends JFrame {
 			canvas.repaint();
 		}
 
-		public void mouseWheelMoved(MouseWheelEvent e) {
+//		public void mouseWheelMoved(MouseWheelEvent e) {
+//
+//			AffineTransform saveXform = ourGraphics.getTransform();
+//			for (Figure fig : figure) {
+//				//if (fig.isHit(e)) {
+//					if (e.getWheelRotation() < 0) {
+//						
+//						fig.scaleFigure(ScaleEnum.ZOOM_IN.getCode(),
+//										new Point(canvas.getWidth(),
+//												  canvas.getHeight())); 
+//						//fig.rotateFigure(Math.PI/8.0, ourGraphics);
+//					}
+//					else if (e.getWheelRotation() > 0) {
+//						fig.scaleFigure(ScaleEnum.ZOOM_OUT.getCode(),
+//										new Point(canvas.getWidth(),
+//												  canvas.getHeight()));
+//					}
+//					//break;
+//				//}
+//			}
 
-			AffineTransform saveXform = ourGraphics.getTransform();
-			for (Figure fig : figure) {
-				if (fig.isHit(e)) {
-					if (e.getWheelRotation() < 0) {
-						
-						fig.scaleFigure(ScaleEnum.ZOOM_IN.getCode(),
-										new Point(canvas.getWidth(),
-												  canvas.getHeight())); 
-						//fig.rotateFigure(Math.PI/8.0, ourGraphics);
-					}
-					else if (e.getWheelRotation() > 0) {
-						fig.scaleFigure(ScaleEnum.ZOOM_OUT.getCode(),
-										new Point(canvas.getWidth(),
-												  canvas.getHeight()));
-					}
-					break;
-				}
-			}
-
-			canvas.repaint();
-			ourGraphics.setTransform(saveXform); 
-		}
+//			canvas.repaint();
+//			ourGraphics.setTransform(saveXform); 
+//		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
