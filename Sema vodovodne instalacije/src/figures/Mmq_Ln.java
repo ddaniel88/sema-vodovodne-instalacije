@@ -1,5 +1,7 @@
 package figures;
 
+import helper.DrawHelper;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -31,17 +33,27 @@ public final class Mmq_Ln extends Figure {
 	public boolean draw(Graphics g) {
 		Graphics2D graphics = (Graphics2D) g;
 		
-		// )^(
-		graphics.drawArc((int) (x - height / 2), (int) y,
-						 (int) height, (int) height,
-						 90, -180+25);												// )
-
-		graphics.drawArc((int) x, (int) (y + height / 4),
-						 (int) width, (int) height, 58, 64);						// ^
+		double radius_2 = height / 2;
+		double radius_4 = radius_2 / 2;
+		double yMiddle = radius_2 - Math.sqrt(radius_2 * radius_2 - radius_4 * radius_4);
 		
-		graphics.drawArc((int) (x + width - height/2), (int) y,
-						 (int) (height), (int) height,
-						 90, 180-25);												// (
+		// left arc
+		Point startPoint = new Point(x + radius_4, y + height);
+		Point middlePoint = new Point(x + radius_4, y + yMiddle);
+		Point endPoint = new Point(x, y);
+		graphics.draw(DrawHelper.makeArc(startPoint, middlePoint, endPoint));
+		
+		// right arc
+		startPoint = new Point(x + width, y);
+		middlePoint = new Point(x + width - radius_4, y + yMiddle);
+		endPoint = new Point(x + width - radius_4, y + height);
+		graphics.draw(DrawHelper.makeArc(startPoint, middlePoint, endPoint));
+		
+		// middle arc
+		startPoint = new Point(x + width - radius_2, y + radius_2);
+		middlePoint = new Point(x + width / 2, y + radius_4);
+		endPoint = new Point(x + radius_2, y + radius_2);
+		graphics.draw(DrawHelper.makeArc(startPoint, middlePoint, endPoint));
 
 		return true;
 	}
