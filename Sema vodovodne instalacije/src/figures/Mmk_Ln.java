@@ -74,7 +74,7 @@ public final class Mmk_Ln extends Figure {
 		this.p6 = new Point(p, y + offset / 2);
 		this.p7 = new Point(x, y_intersect);
 		
-		this.cp1 = new Point(p - 10, q+10);
+		this.cp1 = new Point(x+10, q+10);
 		
 		//desni polukrug
 		p = p + width - radius;
@@ -94,7 +94,7 @@ public final class Mmk_Ln extends Figure {
 		this.p13 = new Point(x + offset * 2, y - offset / 2 + radius_2);
 		
 		
-		this.cp2 = new Point(p+30, q+10);
+		this.cp2 = new Point(x+width-10, q+10);
 	}
 
 	@Override
