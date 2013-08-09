@@ -84,7 +84,9 @@ public class MovingRectangle extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 
 			type = e.getActionCommand();
-			switch (e.getActionCommand()) {
+			if(type == "Zoom In")ZoomIn();
+			if(type == "Zoom Out")ZoomOut();
+			/*switch (type) {
 			case "Zoom In":
 					ZoomIn();
 				break;
@@ -118,7 +120,7 @@ public class MovingRectangle extends JFrame {
 //
 //			default:
 //				break;
-			}
+			}*/
 		}
 	}
 
@@ -183,6 +185,8 @@ public class MovingRectangle extends JFrame {
        
 	}
 	
+	
+
 	public static class TransformingCanvas extends JPanel {
 		private double translateX;
 		private double translateY;

@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 public abstract class Figure implements IFigure {
 	protected float x, y, width, height;
 	protected String description;
+	private Boolean selected = false;
 	
 	public Figure() {
 		
@@ -162,18 +163,36 @@ public abstract class Figure implements IFigure {
 	public abstract boolean draw(Graphics g);
 	
 	@Override
-	public boolean rotateFigure(double angle, Graphics g) {
-		Graphics2D graphics = (Graphics2D) g;
-		
-	/*	AffineTransform rotation = new AffineTransform();
-		AffineTransform rotation2  = rotation.getRotateInstance(angle);
-		rotation.rotate(angle);
-		graphics.transform(rotation); */
-		
-		graphics.rotate(angle);
-		
-		
-		
-		return true;
+	public abstract boolean rotateFigure(double angle, Graphics2D g);
+//	public boolean rotateFigure(double angle, Graphics g) {
+//		Graphics2D graphics = (Graphics2D) g;
+//		
+//	/*	AffineTransform rotation = new AffineTransform();
+//		AffineTransform rotation2  = rotation.getRotateInstance(angle);
+//		rotation.rotate(angle);
+//		graphics.transform(rotation); */
+//		
+//		graphics.rotate(angle);
+//		
+//		
+//		
+//		return true;
+//	}
+
+	public float getX() {
+		return x;
 	}
+
+	public float getY() {
+		return y;
+	}
+
+	public Boolean getSelected() {
+		return selected;
+	}
+
+	public void setSelected(Boolean selected) {
+		this.selected = selected;
+	}
+
 }

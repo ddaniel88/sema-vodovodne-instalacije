@@ -1,6 +1,7 @@
 package figures;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 
 public interface IFigure {
@@ -108,7 +109,7 @@ public interface IFigure {
 	 * Rotate figure
 	 * @return true if figure is rotated
 	 */
-	boolean rotateFigure(double angle, Graphics g);
+	boolean rotateFigure(double angle, Graphics2D g);
 	
 	/**
 	 * Draw figure with specified coordinates

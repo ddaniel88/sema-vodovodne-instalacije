@@ -1,5 +1,7 @@
 package figures;
 
+import java.awt.geom.Point2D;
+
 public final class Point {
 	private float x;
 	private float y;
@@ -17,6 +19,11 @@ public final class Point {
 	public Point(double x, double y) {
 		this.x = (float)x;
 		this.y = (float)y;
+	}
+	
+	public Point(Point2D.Float p) {
+		this.x = p.x;
+		this.y = p.y;
 	}
 	
 	public float getX() {
@@ -43,5 +50,11 @@ public final class Point {
 	public void movePointTo(float x, float y) {
 		this.x = x;
 		this.y = y;
+	}
+	
+	public Point2D.Float getPoint2D(){
+		Point2D.Float toReturn = new Point2D.Float(x,y);
+		
+		return toReturn;
 	}
 }
