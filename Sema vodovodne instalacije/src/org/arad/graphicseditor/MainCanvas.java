@@ -109,7 +109,7 @@ public class MainCanvas extends JPanel {
 
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				System.out.println("mouseMoved");
+//				System.out.println("mouseMoved");
 				float x = (float)(e.getX()/scale);
 				float y = (float)(e.getY()/scale);
 				for (Figure fig : figures) {
