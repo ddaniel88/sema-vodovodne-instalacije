@@ -5,6 +5,7 @@ import helper.IntersectionPoints;
 import helper.QuadraticEquationResult;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 
 public final class Mmk_Ln extends Figure {
 	public Mmk_Ln() {
@@ -41,6 +42,8 @@ public final class Mmk_Ln extends Figure {
 		Point startPoint, middlePoint, endPoint;
 		double y_intersect;
 		double x_intersect;
+		
+		graphics.draw(new Rectangle2D.Double(x, y, width, height));
 		
 		// for LEFT ARC
 		// Y coordinate of intersect circle and line
