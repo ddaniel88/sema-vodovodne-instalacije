@@ -1,12 +1,11 @@
 package figures;
 
 import helper.DrawHelper;
-import helper.IntersectionPoints;
-import helper.QuadraticEquationResult;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Ellipse2D;
@@ -15,56 +14,34 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
-public final class N_Ls extends Figure {
+public final class T_Op extends Figure {
 	
-	private Point p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15;
+	private Point p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12;
 	private Point cp1, cp2;
 	
-	public N_Ls() {
+	
+	public T_Op() {
 		super();
 	}
-
-	public N_Ls(float x, float y, float width, float height) {
+	
+	public T_Op(float x, float y, float width, float height) {
 		super(x, y, width, height);
-		
-		
-		float offset = height/6;
-		float radius = height/2;
-		double sin_cos45 = Math.sqrt(2) / 2;
 		
 		this.p1 = new Point(x ,y);
 		this.p2 = new Point(x + width,y);
 		this.p3 = new Point(x + width,y + height);
 		this.p4 = new Point(x,y + height);
+		this.p5 = new Point(x,y + height*2/3);
+		this.p6 = new Point(x+width, y + height*2/3);
+		this.p7 = new Point(x + width/2, y + height*2/3);
+		this.p8 = new Point(x + width/2, y);
+		this.p9 = new Point(x, y + height/3);
+		this.p10 = new Point(x + width, y + height/3);
+		this.p11 = new Point(x + width/2-height/3, y);
+		this.p12 = new Point(x + width/2+height/3, y);
 		
-		
-		//ostale taèke
-		
-		
-		//gornja linija
-		this.p5 = new Point(x+width/2-offset, y);
-		this.p6 = new Point(x+width/2, y);
-		this.p7 = new Point(x + width/2 + offset, y);
-				
-		//trougao
-
-		this.p8 = new Point(x+width/2, y + height);
-		this.p9= new Point(x+width/2-offset, y + height);
-		this.p10 = new Point(x + width/2 + offset, y + height);
-		
-		this.p11 = new Point(x + width/2, y + height/2);
-		
-		
-		//centar polukruga
-		this.p15 = new Point((x + width/2 + height/2) -radius*sin_cos45 , y +radius*sin_cos45); //??
-
-		//desna linija
-		this.p12 = new Point(x + width/2 + height/2, y +height/2 - offset);
-		this.p14 = new Point(x + width/2 + height/2, y +height/2);
-		this.p13= new Point(x + width/2 + height/2, y +height/2 + offset);
-		
-		this.cp1 = new Point(x - 10, y + height/2);
-		this.cp2 = new Point(x + width + 10, y + height/2);
+		this.cp1 = new Point(x - 10, y + height*2/3);
+		this.cp2 = new Point(x + width + 10, y + height*2/3);
 	}
 
 	@Override
@@ -73,30 +50,59 @@ public final class N_Ls extends Figure {
 		super.y = y;
 		super.width = width;
 		super.height = height;
-
+		
 		return draw(g);
 	}
 
+//	@Override
+//	public boolean draw(Graphics g) {
+//		Graphics2D graphics = (Graphics2D) g;
+//		
+//		float radius = height * 2 / 3;
+//		float offset = height / 3;
+//		
+//		Rectangle2D rectangleForArc = new Rectangle();
+//		// left arc
+//		rectangleForArc.setRect(x - offset, y + offset, radius, radius);
+//		graphics.draw(new Arc2D.Double(rectangleForArc, 270, 180, Arc2D.OPEN));
+//		
+//		// right arc
+//		rectangleForArc.setRect(x + width - offset, y + offset, radius, radius);
+//		graphics.draw(new Arc2D.Double(rectangleForArc, 90, 180, Arc2D.OPEN));
+//		
+//		// line between arcs
+//		graphics.draw(new Line2D.Double(x + radius / 2, y + radius, x + width - radius / 2, y + radius));
+//		
+//		// vertical line on middle
+//		graphics.draw(new Line2D.Double(x + width / 2, y, x + width / 2, y + offset + radius / 2));
+//		
+//		// horizontal line on middle
+//		graphics.draw(new Line2D.Double(x + width / 2 - offset, y, x + width / 2 + offset, y));
+//		
+//		return true;
+//	}
+	
 	@Override
 	public boolean draw(Graphics g) {
+		// TODO Auto-generated method stub
 		Graphics2D graphics = (Graphics2D) g;
+		
+		float radius = height * 2 / 3;
+		float offset = height / 3;
+		
 		Color currentColor = graphics.getColor();
 
-		Line2D.Float l1 = new Line2D.Float(p5.getX(),p5.getY(),p7.getX(),p7.getY());
-		Line2D.Float l2 = new Line2D.Float(p6.getX(),p6.getY(),p8.getX(),p8.getY());
-		Line2D.Float l3 = new Line2D.Float(p9.getX(),p9.getY(),p11.getX(),p11.getY());
-		Line2D.Float l4 = new Line2D.Float(p11.getX(),p11.getY(),p10.getX(),p10.getY());
-		Line2D.Float l5 = new Line2D.Float(p12.getX(),p12.getY(),p13.getX(),p13.getY());
-		Line2D.Float l6 = new Line2D.Float(p9.getX(),p9.getY(),p10.getX(),p10.getY());
-		Arc2D arc1 = DrawHelper.makeArc(p6, p15, p14);
+		Line2D.Float l4 = new Line2D.Float(p9.getX(),p9.getY(),p4.getX(),p4.getY());
+		Line2D.Float l1 = new Line2D.Float(p5.getX(),p5.getY(),p6.getX(),p6.getY());
+		Line2D.Float l2 = new Line2D.Float(p7.getX(),p7.getY(),p8.getX(),p8.getY());
+		Line2D.Float l3 = new Line2D.Float(p11.getX(),p11.getY(),p12.getX(),p12.getY());
+		Line2D.Float l5 = new Line2D.Float(p10.getX(),p10.getY(),p3.getX(),p3.getY());
 		
 		graphics.draw(l1);
 		graphics.draw(l2);
 		graphics.draw(l3);
 		graphics.draw(l4);
 		graphics.draw(l5);
-		graphics.draw(l6);
-		graphics.draw(arc1);
 		
 		Ellipse2D.Float ee1 = new Ellipse2D.Float(cp1.getX() - 5, cp1.getY() - 5, 10.0F, 10.0F);
 		Ellipse2D.Float ee2 = new Ellipse2D.Float(cp2.getX() - 5, cp2.getY() - 5, 10.0F, 10.0F);
@@ -109,9 +115,10 @@ public final class N_Ls extends Figure {
 		graphics.fill(ee2);
 		
 		graphics.setColor(currentColor);
+		
 		return true;
 	}
-
+	
 	@Override
 	public boolean moveFigureFor(float dx, float dy, Point endCanvas) {
 
@@ -127,9 +134,6 @@ public final class N_Ls extends Figure {
 		this.p10.movePointFor(dx, dy);
 		this.p11.movePointFor(dx, dy);
 		this.p12.movePointFor(dx, dy);
-		this.p13.movePointFor(dx, dy);
-		this.p14.movePointFor(dx, dy);
-		this.p15.movePointFor(dx, dy);
 		
 		GeneralPath path = new GeneralPath();
 		path.append(new Line2D.Float(p1.getX(),p1.getY(),p2.getX(),p2.getY()), false);
@@ -165,9 +169,6 @@ public final class N_Ls extends Figure {
 		Point2D.Float p10 = new Point2D.Float();
 		Point2D.Float p11 = new Point2D.Float();
 		Point2D.Float p12 = new Point2D.Float();
-		Point2D.Float p13 = new Point2D.Float();
-		Point2D.Float p14 = new Point2D.Float();
-		Point2D.Float p15 = new Point2D.Float();
 		Point2D.Float cp1 = new Point2D.Float();
 		Point2D.Float cp2 = new Point2D.Float();
 		
@@ -183,9 +184,6 @@ public final class N_Ls extends Figure {
 		rotateAffineTransform.transform(this.p10.getPoint2D(), p10);
 		rotateAffineTransform.transform(this.p11.getPoint2D(), p11);
 		rotateAffineTransform.transform(this.p12.getPoint2D(), p12);
-		rotateAffineTransform.transform(this.p13.getPoint2D(), p13);
-		rotateAffineTransform.transform(this.p14.getPoint2D(), p14);
-		rotateAffineTransform.transform(this.p15.getPoint2D(), p15);
 		rotateAffineTransform.transform(this.cp1.getPoint2D(), cp1);
 		rotateAffineTransform.transform(this.cp2.getPoint2D(), cp2);
 		
@@ -201,9 +199,6 @@ public final class N_Ls extends Figure {
 		this.p10= new Point(p10);
 		this.p11 = new Point(p11);
 		this.p12= new Point(p12);
-		this.p13= new Point(p13);
-		this.p14= new Point(p14);
-		this.p15= new Point(p15);
 		this.cp1 = new Point(cp1);
 		this.cp2 = new Point(cp2);
 		
@@ -222,4 +217,15 @@ public final class N_Ls extends Figure {
 		return true;
 	}
 
+
 }
+
+
+
+
+
+
+
+
+
+

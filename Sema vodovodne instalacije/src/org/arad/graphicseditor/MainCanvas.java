@@ -22,7 +22,9 @@ import javax.swing.JPopupMenu;
 
 import figures.E_Spn;
 import figures.F_S;
+import figures.Ff_Sp;
 import figures.Ffk_Lp;
+import figures.Ffr_Rp;
 import figures.Figure;
 import figures.Mma_Onp;
 import figures.Mmb_On;
@@ -34,7 +36,10 @@ import figures.O_Zc;
 import figures.P_Zn;
 import figures.Point;
 import figures.Q_Lp;
+import figures.T_Op;
+import figures.Tt_Kp;
 import figures.U_Sn;
+import figures.X_Zp;
 
 public class MainCanvas extends JPanel {
 
@@ -77,6 +82,11 @@ public class MainCanvas extends JPanel {
 	private JMenuItem jmenuItemQ_LP = null;
 	private JMenuItem jmenuItemN_LS = null;
 	private JMenuItem jmenuItemFFK_LP = null;
+	private JMenuItem jmenuItemT_OP = null;
+	private JMenuItem jmenuItemX_ZP = null;
+	private JMenuItem jmenuItemTT_KP = null;
+	private JMenuItem jmenuItemFFR_RP = null;
+	private JMenuItem jmenuItemFF_SP = null;
 	
 	private JPopupMenu figureContextMenu = null;
 	private JMenuItem jmenuItemRotatePlus30 = null;
@@ -294,8 +304,14 @@ public class MainCanvas extends JPanel {
 			mainContextMenu.add(getJmenuItemP_ZN());
 			mainContextMenu.add(getJmenuItemU_SN());
 			mainContextMenu.add(getJmenuItemO_ZC());
+			mainContextMenu.add(getJmenuItemQ_LP());
 			mainContextMenu.add(getJmenuItemN_LS());
 			mainContextMenu.add(getJmenuItemFFK_LP());
+			mainContextMenu.add(getJmenuItemT_OP());
+			mainContextMenu.add(getJmenuItemX_ZP());
+			mainContextMenu.add(getJmenuItemTT_KP());
+			mainContextMenu.add(getJmenuItemFFR_RP());
+			mainContextMenu.add(getJmenuItemFF_SP());
 		}
 		return mainContextMenu;
 	}
@@ -546,6 +562,101 @@ public class MainCanvas extends JPanel {
 			});
 		}
 		return jmenuItemFFK_LP;
+	}
+	
+	public JMenuItem getJmenuItemT_OP() {
+		if (jmenuItemT_OP == null) {
+			jmenuItemT_OP= new JMenuItem("T_OP");
+			jmenuItemT_OP.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					int width = 150;
+					int height = 50;
+
+					Figure figure = new T_Op(xCursorPosition, yCursorPosition,
+							width, height);
+					figures.add(figure);
+					repaint();
+				}
+			});
+		}
+		return jmenuItemT_OP;
+	}
+	
+	public JMenuItem getJmenuItemX_ZP() {
+		if (jmenuItemX_ZP == null) {
+			jmenuItemX_ZP= new JMenuItem("X_ZP");
+			jmenuItemX_ZP.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					int width = 150;
+					int height = 50;
+
+					Figure figure = new X_Zp(xCursorPosition, yCursorPosition,
+							width, height);
+					figures.add(figure);
+					repaint();
+				}
+			});
+		}
+		return jmenuItemX_ZP;
+	}
+	
+	public JMenuItem getJmenuItemTT_KP() {
+		if (jmenuItemTT_KP == null) {
+			jmenuItemTT_KP= new JMenuItem("TT_KP");
+			jmenuItemTT_KP.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					int width = 150;
+					int height =50;
+
+					Figure figure = new Tt_Kp(xCursorPosition, yCursorPosition,
+							width, height);
+					figures.add(figure);
+					repaint();
+				}
+			});
+		}
+		return jmenuItemTT_KP;
+	}
+	
+	public JMenuItem getJmenuItemFFR_RP() {
+		if (jmenuItemFFR_RP == null) {
+			jmenuItemFFR_RP= new JMenuItem("FFR_RP");
+			jmenuItemFFR_RP.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					int width = 150;
+					int height =50;
+
+					Figure figure = new Ffr_Rp(xCursorPosition, yCursorPosition,
+							width, height);
+					figures.add(figure);
+					repaint();
+				}
+			});
+		}
+		return jmenuItemFFR_RP;
+	}
+	
+	public JMenuItem getJmenuItemFF_SP() {
+		if (jmenuItemFF_SP == null) {
+			jmenuItemFF_SP= new JMenuItem("FF_SP");
+			jmenuItemFF_SP.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					int width = 150;
+					int height =50;
+
+					Figure figure = new Ff_Sp(xCursorPosition, yCursorPosition,
+							width, height);
+					figures.add(figure);
+					repaint();
+				}
+			});
+		}
+		return jmenuItemFF_SP;
 	}
 
 	public JPopupMenu getFigureContextMenu() {

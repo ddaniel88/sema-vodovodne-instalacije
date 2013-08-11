@@ -41,6 +41,8 @@ public final class Mmb_On extends Figure {
 		
 		this.cp1 = new Point(x - 10, y + height*2/3);
 		this.cp2 = new Point(x + width + 10, y + height*2/3);
+		
+		
 	}
 
 	@Override

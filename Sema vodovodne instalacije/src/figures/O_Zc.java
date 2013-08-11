@@ -28,6 +28,7 @@ public final class O_Zc extends Figure {
 		super(x, y, width, height);
 		
 		float radius = height / 6;
+		double sin_cos45 = Math.sqrt(2) / 2;
 		
 		this.p1 = new Point(x ,y);
 		this.p2 = new Point(x + width,y);
@@ -37,10 +38,10 @@ public final class O_Zc extends Figure {
 		this.p5 = new Point(x, y + radius);
 		this.p6 = new Point(x , y + height-radius);
 		this.p7 = new Point(x + radius, y);
-		this.p8 = new Point(x + radius/2,  y + radius/2); //?
+		this.p8 = new Point(x + radius*sin_cos45,  y + radius*sin_cos45); //?
 		
 		this.p9 = new Point(x + radius, y + height);
-		this.p10 = new Point(x + radius/2, y + height- radius/2); //?
+		this.p10 = new Point(x + radius*sin_cos45, y + height- radius*sin_cos45); //?
 		this.p11 = new Point(x + radius, y+height/2);
 		
 		this.p12 = new Point(x + width, y+height/2);
@@ -93,7 +94,7 @@ public final class O_Zc extends Figure {
 		Color currentColor = graphics.getColor();
 
 		Arc2D arc1 = DrawHelper.makeArc(p5, p8, p7);
-		Arc2D arc2 = DrawHelper.makeArc(p9, p10, p6);
+		Arc2D arc2 = DrawHelper.makeArc(p6, p10, p9);
 		Line2D.Float l1 = new Line2D.Float(p5.getX(),p5.getY(),p6.getX(),p6.getY());
 		Line2D.Float l2 = new Line2D.Float(p11.getX(),p11.getY(),p12.getX(),p12.getY());
 		

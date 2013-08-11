@@ -182,8 +182,8 @@ public final class Mma_Onp extends Figure {
 		rotateAffineTransform.transform(this.p8.getPoint2D(), p8);
 		rotateAffineTransform.transform(this.p9.getPoint2D(), p9);
 		rotateAffineTransform.transform(this.p10.getPoint2D(), p10);
-		rotateAffineTransform.transform(this.p11.getPoint2D(), p12);
-		rotateAffineTransform.transform(this.p12.getPoint2D(), p11);
+		rotateAffineTransform.transform(this.p11.getPoint2D(), p11);
+		rotateAffineTransform.transform(this.p12.getPoint2D(), p12);
 		rotateAffineTransform.transform(this.cp1.getPoint2D(), cp1);
 		rotateAffineTransform.transform(this.cp2.getPoint2D(), cp2);
 		
