@@ -20,12 +20,15 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
+import figures.A;
+import figures.B;
 import figures.E_Spn;
 import figures.F_S;
 import figures.Ff_Sp;
 import figures.Ffk_Lp;
 import figures.Ffr_Rp;
 import figures.Figure;
+import figures.MQ;
 import figures.Mma_Onp;
 import figures.Mmb_On;
 import figures.Mmk_Ln;
@@ -38,6 +41,7 @@ import figures.Point;
 import figures.Q_Lp;
 import figures.T_Op;
 import figures.Tt_Kp;
+import figures.U;
 import figures.U_Sn;
 import figures.X_Zp;
 
@@ -87,6 +91,10 @@ public class MainCanvas extends JPanel {
 	private JMenuItem jmenuItemTT_KP = null;
 	private JMenuItem jmenuItemFFR_RP = null;
 	private JMenuItem jmenuItemFF_SP = null;
+	private JMenuItem jmenuItemA = null;
+	private JMenuItem jmenuItemB = null;
+	private JMenuItem jmenuItemU = null;
+	private JMenuItem jmenuItemMQ = null;
 	
 	private JPopupMenu figureContextMenu = null;
 	private JMenuItem jmenuItemRotatePlus30 = null;
@@ -312,6 +320,10 @@ public class MainCanvas extends JPanel {
 			mainContextMenu.add(getJmenuItemTT_KP());
 			mainContextMenu.add(getJmenuItemFFR_RP());
 			mainContextMenu.add(getJmenuItemFF_SP());
+			mainContextMenu.add(getJmenuItemA());
+			mainContextMenu.add(getJmenuItemB());
+			mainContextMenu.add(getJmenuItemU());
+			mainContextMenu.add(getJmenuItemMQ());
 		}
 		return mainContextMenu;
 	}
@@ -657,6 +669,82 @@ public class MainCanvas extends JPanel {
 			});
 		}
 		return jmenuItemFF_SP;
+	}
+	
+	public JMenuItem getJmenuItemA() {
+		if (jmenuItemA== null) {
+			jmenuItemA= new JMenuItem("A");
+			jmenuItemA.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					int width = 150;
+					int height =50;
+
+					Figure figure = new A(xCursorPosition, yCursorPosition,
+							width, height);
+					figures.add(figure);
+					repaint();
+				}
+			});
+		}
+		return jmenuItemA;
+	}
+	
+	public JMenuItem getJmenuItemB() {
+		if (jmenuItemB== null) {
+			jmenuItemB= new JMenuItem("B");
+			jmenuItemB.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					int width = 150;
+					int height =50;
+
+					Figure figure = new B(xCursorPosition, yCursorPosition,
+							width, height);
+					figures.add(figure);
+					repaint();
+				}
+			});
+		}
+		return jmenuItemB;
+	}
+	
+	public JMenuItem getJmenuItemU() {
+		if (jmenuItemU== null) {
+			jmenuItemU= new JMenuItem("U");
+			jmenuItemU.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					int width = 150;
+					int height =50;
+
+					Figure figure = new U(xCursorPosition, yCursorPosition,
+							width, height);
+					figures.add(figure);
+					repaint();
+				}
+			});
+		}
+		return jmenuItemU;
+	}
+	
+	public JMenuItem getJmenuItemMQ() {
+		if (jmenuItemMQ== null) {
+			jmenuItemMQ= new JMenuItem("MQ");
+			jmenuItemMQ.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					int width = 150;
+					int height =50;
+
+					Figure figure = new MQ(xCursorPosition, yCursorPosition,
+							width, height);
+					figures.add(figure);
+					repaint();
+				}
+			});
+		}
+		return jmenuItemMQ;
 	}
 
 	public JPopupMenu getFigureContextMenu() {
