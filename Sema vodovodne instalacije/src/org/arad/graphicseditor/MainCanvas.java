@@ -29,6 +29,7 @@ import figures.Ffk_Lp;
 import figures.Ffr_Rp;
 import figures.Figure;
 import figures.J;
+import figures.K;
 import figures.MQ;
 import figures.Mma_Onp;
 import figures.Mmb_On;
@@ -97,6 +98,7 @@ public class MainCanvas extends JPanel {
 	private JMenuItem jmenuItemU = null;
 	private JMenuItem jmenuItemMQ = null;
 	private JMenuItem jmenuItemJ= null;
+	private JMenuItem jmenuItemK= null;
 	
 	private JPopupMenu figureContextMenu = null;
 	private JMenuItem jmenuItemRotatePlus30 = null;
@@ -327,6 +329,7 @@ public class MainCanvas extends JPanel {
 			mainContextMenu.add(getJmenuItemU());
 			mainContextMenu.add(getJmenuItemMQ());
 			mainContextMenu.add(getJmenuItemJ());
+			mainContextMenu.add(getJmenuItemK());
 		}
 		return mainContextMenu;
 	}
@@ -767,6 +770,25 @@ public class MainCanvas extends JPanel {
 			});
 		}
 		return jmenuItemJ;
+	}
+	
+	public JMenuItem getJmenuItemK() {
+		if (jmenuItemK== null) {
+			jmenuItemK= new JMenuItem("K");
+			jmenuItemK.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					int width = 150;
+					int height =50;
+
+					Figure figure = new K(xCursorPosition, yCursorPosition,
+							width, height);
+					figures.add(figure);
+					repaint();
+				}
+			});
+		}
+		return jmenuItemK;
 	}
 
 	public JPopupMenu getFigureContextMenu() {
