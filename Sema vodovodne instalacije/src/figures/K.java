@@ -1,6 +1,8 @@
 package figures;
 
 import helper.DrawHelper;
+import helper.IntersectionPoints;
+import helper.QuadraticEquationResult;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -25,28 +27,125 @@ public final class K extends Figure {
 	public K(float x, float y, float width, float height) {
 		super(x, y, width, height);
 
-		float radius = height;
-		float radius2 = height * 3 / 4;
-		double sin_cos45 = Math.sqrt(2) / 2;
-
-		double sin_30 = 0.5;
-		double cos_30 = Math.sqrt(3) / 2;
-
-		double sin_15 = 0.25881904510;
-		double cos_15 = 0.96592582628;
-
+		double radius = 1.5 * height; // 2 * (3/4)
+		double radius_2 = radius / 2;
+		
 		this.p1 = new Point(x, y);
 		this.p2 = new Point(x + width, y);
 		this.p3 = new Point(x + width, y + height);
 		this.p4 = new Point(x, y + height);
-
-		this.p5 = new Point(x + width, y + height);
-		this.p6 = new Point(x + width / 2 + radius * sin_15, y + height);
-		this.p7 = new Point(x + width / 2 - radius, y + radius * cos_30);
-
-		this.p8 = new Point(x, y + height);
-		this.p9 = new Point(x + radius2 * sin_30, y + height - radius2 * cos_30);
-		this.p10 = new Point(x + width * 3 / 4, y + height);
+		
+		// levi polukrug
+		double pl = x + 0.25 * height;
+		double ql = y + 0.25 * height;
+		
+		double left_intersect; // J taèka
+		QuadraticEquationResult verticalIntersect =
+				IntersectionPoints.getVerticalResultFromPQR(pl, ql, radius_2, x);
+		if (verticalIntersect.getX1() >= y && verticalIntersect.getX1() <= y + height) {
+			left_intersect = verticalIntersect.getX1();
+		}
+		else {
+			left_intersect = verticalIntersect.getX2();
+		}
+		
+		this.p5 = new Point(x, left_intersect); // J taèka
+		this.p6 = new Point(x + 0.25 * height, y + height); // F taèka
+		
+		double up_left_intersect;
+		QuadraticEquationResult horizontalIntersect =
+				IntersectionPoints.getHorizontalResultFromPQR(pl, ql, radius_2, y + height);
+		if (horizontalIntersect.getX1() >= x && horizontalIntersect.getX1() <= x + width) {
+			up_left_intersect = horizontalIntersect.getX1();
+		}
+		else {
+			up_left_intersect = horizontalIntersect.getX2();
+		}
+		
+		this.p7 = new Point(up_left_intersect, y); // I taèka
+		// levi polukrug - kraj
+		
+		// desni polukrug
+		double radiusR = width * 4;
+		double radiusR_2 = width * 2;
+		
+		// centar desnog luka
+		double pr = x + width;
+		double qr = y + height - 2 * width;
+		
+		//presek dve kružnice...
+		double a = pl;
+		double b = ql;
+		double c = pr;
+		double d = qr;
+		
+		// rastojanje izmeðu centra kružnica (lukova)
+		double D = Math.sqrt((c - a) * (c - a) + (d - b) * (d - b));
+		double delta = 0.25 *
+						  Math.sqrt((D + radius_2 + radiusR_2) *
+									(D + radius_2 - radiusR_2) *
+									(D - radius_2 + radiusR_2) *
+									(-D + radius_2 + radiusR_2));
+		
+		double x1 = 0.5 * (a + c) + ((c - a) * ((radius_2 * radius_2 - radiusR_2 * radiusR_2)) / (2 * D * D)) +
+					(2 * (b - d) * delta) / (D * D);
+		double x2 = 0.5 * (a + c) + ((c - a) * ((radius_2 * radius_2 - radiusR_2 * radiusR_2)) / (2 * D * D)) -
+				(2 * (b - d) * delta) / (D * D);
+		
+		double y1 = 0.5 * (b + d) + ((d - b) * ((radius_2 * radius_2 - radiusR_2 * radiusR_2)) / (2 * D * D)) -
+				(2 * (a - c) * delta) / (D * D);
+		double y2 = 0.5 * (b + d) + ((d - b) * ((radius_2 * radius_2 - radiusR_2 * radiusR_2)) / (2 * D * D)) +
+				(2 * (a - c) * delta) / (D * D);
+		
+//		double tmp1 = (Math.pow(radius_2, 2) - Math.pow(radiusR_2, 2)) / (2 * Math.pow(D, 2));
+//		double tmp2 = (2 * delta) / Math.pow(D, 2);
+//		double tmpx = (a + c) / 2 + (c - a) * tmp1;
+//		double tmpy = (b + d) / 2 + (d - b) * tmp2;
+//		double x1 = tmpx + (b - d) / tmp2;
+//		double x2 = tmpx - (b - d) / tmp2;
+//		double y1 = tmpy - (a - c) / tmp2;
+//		double y2 = tmpy + (a - c) / tmp2;
+		
+		// taèka preseka 2 kružnice - T taèka
+		if (x1 >= x && x1 <= x + width && y1 >= y && y1 <= y + height) {
+			this.p8 = new Point(x1, y1);
+		}
+		else {
+			this.p8 = new Point(x2, y2);
+		}
+		
+//		// drugi naèin
+//		double de2 = (pr - pl) * (pr - pl) + (qr - ql) * (qr - ql); 
+//		double K_ = 0.25 * Math.sqrt(((radius_2 + radiusR_2) * (radius_2 + radiusR_2) - de2) *
+//				(de2 - (radius_2 - radiusR_2) * (radius_2 - radiusR_2)));
+//		
+//		x1 = 0.5 * (pr + pl) + 0.5 * (pr - pl) * (radius_2 * radius_2 - radiusR_2 * radiusR_2) / de2 + 2 * (qr - ql) * K_ / de2;
+//		x2 = 0.5 * (pr + pl) + 0.5 * (pr - pl) * (radius_2 * radius_2 - radiusR_2 * radiusR_2) / de2 - 2 * (qr - ql) * K_ / de2;
+//		
+//		y1 = 0.5 * (qr + ql) + 0.5 * (qr - ql) * (radius_2 * radius_2 - radiusR_2 * radiusR_2) / de2 - 2 * (pr - pl) * K_ / de2;
+//		y2 = 0.5 * (qr + ql) + 0.5 * (qr - ql) * (radius_2 * radius_2 - radiusR_2 * radiusR_2) / de2 + 2 * (pr - pl) * K_ / de2;
+//		
+//		if (x1 >= x && x1 <= x + width && y1 >= y && y1 <= y + height) {
+//			this.p8 = new Point(x1, y1);
+//		}
+//		else {
+//			this.p8 = new Point(x2, y2);
+//		}
+		
+		double middle_intersect;
+		QuadraticEquationResult rightVerticalIntersect =
+				IntersectionPoints.getVerticalResultFromPQR(pr, qr, radiusR_2, x);
+		if (rightVerticalIntersect.getX1() >= y && rightVerticalIntersect.getX1() <= y + height) {
+			middle_intersect = rightVerticalIntersect.getX1();
+		}
+		else {
+			middle_intersect = rightVerticalIntersect.getX2();
+		}
+		
+		this.p9 = new Point(x + width / 2, y + height - (middle_intersect - y));
+		this.p10 = new Point(x + width, y + height);
+		
+		// desni polukrug - kraj
 
 		this.cp1 = new Point(x - 10, y + height * 2 / 3);
 		this.cp2 = new Point(x + width + 10, y + height * 2 / 3);
@@ -67,14 +166,11 @@ public final class K extends Figure {
 		// TODO Auto-generated method stub
 		Graphics2D graphics = (Graphics2D) g;
 
-		float radius = height * 2 / 3;
-		float offset = height / 3;
-
 		Color currentColor = graphics.getColor();
 
-		Arc2D arc1 = DrawHelper.makeArc(p7, p6, p5);
-		Arc2D arc2 = DrawHelper.makeArc(p8, p7, p9);
-
+		Arc2D arc1 = DrawHelper.makeArc(p5, p6, p7);
+		Arc2D arc2 = DrawHelper.makeArc(p8, p9, p10);
+		
 		graphics.draw(arc1);
 		graphics.draw(arc2);
 

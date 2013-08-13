@@ -57,4 +57,10 @@ public final class Point {
 		
 		return toReturn;
 	}
+	
+	public Point2D.Double  getPoint2D_D() {
+		Point2D.Double toReturn = new Point2D.Double(x,y);
+		
+		return toReturn;
+	}
 }
