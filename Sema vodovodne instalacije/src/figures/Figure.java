@@ -66,7 +66,7 @@ public abstract class Figure implements IFigure {
 	}
 	
 	@Override
-	public boolean moveFigureFor(float x, float y, Point endCanvas) {
+	public abstract boolean moveFigureFor(float x, float y, Point endCanvas); /*{
 		float newX = this.x + x;
 		float newY = this.y + y;
 		if (newX > 0 &&
@@ -80,7 +80,7 @@ public abstract class Figure implements IFigure {
 		}
 
 		return false;
-	}
+	}*/
 
 	@Override
 	public boolean scaleFigure(float mX, float mY, Point endCanvas) {

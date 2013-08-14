@@ -28,6 +28,8 @@ import figures.Ff_Sp;
 import figures.Ffk_Lp;
 import figures.Ffr_Rp;
 import figures.Figure;
+import figures.Hidrant;
+import figures.Hvatac_Mulja;
 import figures.J;
 import figures.K;
 import figures.MQ;
@@ -36,15 +38,23 @@ import figures.Mmb_On;
 import figures.Mmk_Ln;
 import figures.Mmq_Ln;
 import figures.Mmr_Rn;
+import figures.Muljni_Ispust;
 import figures.N_Ls;
+import figures.Nepovratni_Ventil_Desni;
+import figures.Nepovratni_Ventil_Levi;
 import figures.O_Zc;
 import figures.P_Zn;
 import figures.Point;
 import figures.Q_Lp;
+import figures.Regulator_Pritiska;
 import figures.T_Op;
 import figures.Tt_Kp;
 import figures.U;
 import figures.U_Sn;
+import figures.Vazdusni_Ventil;
+import figures.Ventil;
+import figures.Ventil_Ispusni;
+import figures.Vodomer;
 import figures.X_Zp;
 
 public class MainCanvas extends JPanel {
@@ -97,8 +107,18 @@ public class MainCanvas extends JPanel {
 	private JMenuItem jmenuItemB = null;
 	private JMenuItem jmenuItemU = null;
 	private JMenuItem jmenuItemMQ = null;
-	private JMenuItem jmenuItemJ= null;
-	private JMenuItem jmenuItemK= null;
+	private JMenuItem jmenuItemJ = null;
+	private JMenuItem jmenuItemK = null;
+	private JMenuItem jmenuItemVodomer = null;
+	private JMenuItem jmenuItemNepovratni_Ventil_Desni = null;
+	private JMenuItem jmenuItemNepovratni_Ventil_Levi = null;
+	private JMenuItem jmenuItemVentil = null;
+	private JMenuItem jmenuItemVentil_Ispusni = null;
+	private JMenuItem jmenuItemVazdusni_Ventil = null;
+	private JMenuItem jmenuItemMuljni_Ispust = null;
+	private JMenuItem jmenuItemRegulator_Pritiska = null;
+	private JMenuItem jmenuItemHidrant = null;
+	private JMenuItem jmenuItemHvatac_Mulja = null;
 	
 	private JPopupMenu figureContextMenu = null;
 	private JMenuItem jmenuItemRotatePlus30 = null;
@@ -330,6 +350,16 @@ public class MainCanvas extends JPanel {
 			mainContextMenu.add(getJmenuItemMQ());
 			mainContextMenu.add(getJmenuItemJ());
 			mainContextMenu.add(getJmenuItemK());
+			mainContextMenu.add(getJmenuItemVodomer());
+			mainContextMenu.add(getJmenuItemNepovratni_Ventil_Desni());
+			mainContextMenu.add(getJmenuItemNepovratni_Ventil_Levi());
+			mainContextMenu.add(getJmenuItemVentil());
+			mainContextMenu.add(getJmenuItemVentil_Ispusni());
+			mainContextMenu.add(getJmenuItemVazdusni_Ventil());
+			mainContextMenu.add(getJmenuItemMuljni_Ispust());
+			mainContextMenu.add(getJmenuItemRegulator_Pritiska());
+			mainContextMenu.add(getJmenuItemHidrant());
+			mainContextMenu.add(getJmenuItemHvatac_Mulja());
 		}
 		return mainContextMenu;
 	}
@@ -790,7 +820,197 @@ public class MainCanvas extends JPanel {
 		}
 		return jmenuItemK;
 	}
+	
+	public JMenuItem getJmenuItemVodomer() {
+		if (jmenuItemVodomer== null) {
+			jmenuItemVodomer= new JMenuItem("Vodomer");
+			jmenuItemVodomer.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					int width = 150;
+					int height =50;
 
+					Figure figure = new Vodomer(xCursorPosition, yCursorPosition,
+							width, height);
+					figures.add(figure);
+					repaint();
+				}
+			});
+		}
+		return jmenuItemVodomer;
+	}
+	
+	public JMenuItem getJmenuItemNepovratni_Ventil_Desni() {
+		if (jmenuItemNepovratni_Ventil_Desni == null) {
+			jmenuItemNepovratni_Ventil_Desni = new JMenuItem("Nepovratni ventil D");
+			jmenuItemNepovratni_Ventil_Desni.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					int width = 150;
+					int height =50;
+
+					Figure figure = new Nepovratni_Ventil_Desni(xCursorPosition, yCursorPosition,
+							width, height);
+					figures.add(figure);
+					repaint();
+				}
+			});
+		}
+		return jmenuItemNepovratni_Ventil_Desni;
+	}
+	
+	public JMenuItem getJmenuItemNepovratni_Ventil_Levi() {
+		if (jmenuItemNepovratni_Ventil_Levi == null) {
+			jmenuItemNepovratni_Ventil_Levi = new JMenuItem("Nepovratni ventil L");
+			jmenuItemNepovratni_Ventil_Levi.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					int width = 150;
+					int height =50;
+
+					Figure figure = new Nepovratni_Ventil_Levi(xCursorPosition, yCursorPosition,
+							width, height);
+					figures.add(figure);
+					repaint();
+				}
+			});
+		}
+		return jmenuItemNepovratni_Ventil_Levi;
+	}//getJmenuItemVentil_Ispusni
+	
+	public JMenuItem getJmenuItemVentil() {
+		if (jmenuItemVentil == null) {
+			jmenuItemVentil = new JMenuItem("Ventil");
+			jmenuItemVentil.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					int width = 150;
+					int height =50;
+
+					Figure figure = new Ventil(xCursorPosition, yCursorPosition,
+							width, height);
+					figures.add(figure);
+					repaint();
+				}
+			});
+		}
+		return jmenuItemVentil;
+	}
+	
+	public JMenuItem getJmenuItemVentil_Ispusni() {
+		if (jmenuItemVentil_Ispusni == null) {
+			jmenuItemVentil_Ispusni = new JMenuItem("Ventil sa ispustom");
+			jmenuItemVentil_Ispusni.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					int width = 150;
+					int height =50;
+
+					Figure figure = new Ventil_Ispusni(xCursorPosition, yCursorPosition,
+							width, height);
+					figures.add(figure);
+					repaint();
+				}
+			});
+		}
+		return jmenuItemVentil_Ispusni;
+	}
+
+	public JMenuItem getJmenuItemVazdusni_Ventil() {
+		if (jmenuItemVazdusni_Ventil == null) {
+			jmenuItemVazdusni_Ventil = new JMenuItem("Vazdusni ventil");
+			jmenuItemVazdusni_Ventil.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					int width = 50;
+					int height = 100;
+
+					Figure figure = new Vazdusni_Ventil(xCursorPosition, yCursorPosition,
+							width, height);
+					figures.add(figure);
+					repaint();
+				}
+			});
+		}
+		return jmenuItemVazdusni_Ventil;
+	}
+	
+	public JMenuItem getJmenuItemMuljni_Ispust() {
+		if (jmenuItemMuljni_Ispust == null) {
+			jmenuItemMuljni_Ispust = new JMenuItem("Muljni ispust");
+			jmenuItemMuljni_Ispust.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					int width = 50;
+					int height = 100;
+
+					Figure figure = new Muljni_Ispust(xCursorPosition, yCursorPosition,
+							width, height);
+					figures.add(figure);
+					repaint();
+				}
+			});
+		}
+		return jmenuItemMuljni_Ispust;
+	}
+	
+	public JMenuItem getJmenuItemRegulator_Pritiska() {
+		if (jmenuItemRegulator_Pritiska == null) {
+			jmenuItemRegulator_Pritiska = new JMenuItem("Regulator pritiska");
+			jmenuItemRegulator_Pritiska.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					int width = 50;
+					int height = 150;
+
+					Figure figure = new Regulator_Pritiska(xCursorPosition, yCursorPosition,
+							width, height);
+					figures.add(figure);
+					repaint();
+				}
+			});
+		}
+		return jmenuItemRegulator_Pritiska;
+	}
+	
+	public JMenuItem getJmenuItemHidrant() {
+		if (jmenuItemHidrant == null) {
+			jmenuItemHidrant = new JMenuItem("Hidrant");
+			jmenuItemHidrant.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					int width = 50;
+					int height = 100;
+
+					Figure figure = new Hidrant(xCursorPosition, yCursorPosition,
+							width, height);
+					figures.add(figure);
+					repaint();
+				}
+			});
+		}
+		return jmenuItemHidrant;
+	}
+
+	public JMenuItem getJmenuItemHvatac_Mulja() {
+		if (jmenuItemHvatac_Mulja == null) {
+			jmenuItemHvatac_Mulja = new JMenuItem("Hvatac mulja");
+			jmenuItemHvatac_Mulja.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					int width = 150;
+					int height =50;
+
+					Figure figure = new Hvatac_Mulja(xCursorPosition, yCursorPosition,
+							width, height);
+					figures.add(figure);
+					repaint();
+				}
+			});
+		}
+		return jmenuItemHvatac_Mulja;
+	}
+	
 	public JPopupMenu getFigureContextMenu() {
 		if (figureContextMenu == null){
 			figureContextMenu = new JPopupMenu();
