@@ -36,8 +36,8 @@ public final class U_Sn extends Figure {
 		this.p9 = new Point(x + height/2,y + height/2 + height/8);
 		this.p10 = new Point(x + width - height/2, y + height/2 + height/8);
 		
-		this.cp1 = new Point(x-10, y + height/2);
-		this.cp2 = new Point(x + width+10, y + height/2);
+		this.cp1 = new Point(x, y + height/2);
+		this.cp2 = new Point(x + width, y + height/2);
 	}
 
 	@Override

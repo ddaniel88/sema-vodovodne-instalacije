@@ -42,26 +42,26 @@ public final class N_Ls extends Figure {
 		
 		
 		//gornja linija
-		this.p5 = new Point(x+width/2-offset, y);
-		this.p6 = new Point(x+width/2, y);
-		this.p7 = new Point(x + width/2 + offset, y);
+		this.p5 = new Point(x, y);
+		this.p6 = new Point(x+offset, y);
+		this.p7 = new Point(x + 2*offset, y);
 				
 		//trougao
 
-		this.p8 = new Point(x+width/2, y + height);
-		this.p9= new Point(x+width/2-offset, y + height);
-		this.p10 = new Point(x + width/2 + offset, y + height);
+		this.p8 = new Point(x+offset, y + height);
+		this.p9= new Point(x, y + height);
+		this.p10 = new Point(x + 2*offset, y + height);
 		
-		this.p11 = new Point(x + width/2, y + height/2);
+		this.p11 = new Point(x + offset, y + height/2);
 		
 		
 		//centar polukruga
-		this.p15 = new Point((x + width/2 + height/2) -radius*sin_cos45 , y +radius*sin_cos45); //??
+		this.p15 = new Point((x + offset+ height/2) -radius*sin_cos45 , y +radius*sin_cos45); //??
 
 		//desna linija
-		this.p12 = new Point(x + width/2 + height/2, y +height/2 - offset);
-		this.p14 = new Point(x + width/2 + height/2, y +height/2);
-		this.p13= new Point(x + width/2 + height/2, y +height/2 + offset);
+		this.p12 = new Point(x + width, y +height/2 - offset);
+		this.p14 = new Point(x + width, y +height/2);
+		this.p13= new Point(x + width, y +height/2 + offset);
 		
 		this.cp1 = new Point(x - 10, y + height/2);
 		this.cp2 = new Point(x + width + 10, y + height/2);

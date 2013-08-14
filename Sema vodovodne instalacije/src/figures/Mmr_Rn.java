@@ -28,6 +28,8 @@ public final class Mmr_Rn extends Figure {
 		float radius_2 = height / 2;
 		double sin_cos45 = Math.sqrt(2) / 2;
 		double offset = sin_cos45 * radius_2;
+		float radius = height/5;
+	
 		
 		this.p1 = new Point(x ,y);
 		this.p2 = new Point(x + width,y);
@@ -36,8 +38,8 @@ public final class Mmr_Rn extends Figure {
 		this.p5 = new Point(x + offset * 1.08,y + offset / 2);
 		this.p6 = new Point(x + offset * 1.08,y + height - offset / 2);
 		this.p7 = new Point(x + width - height / 3,  y + height / 2);
-		this.p8 = new Point(x + width, y+height/6);
-		this.p9 = new Point(x + width, y+ 2*height/3 + height/6);
+		this.p8 = new Point(x + width, y+radius);
+		this.p9 = new Point(x + width, y+ 2*height/3 + radius);
 		this.p10 = new Point(x + height/2,y+ height/2);
 		
 		this.cp1 = new Point(x - 10, y + height/2);

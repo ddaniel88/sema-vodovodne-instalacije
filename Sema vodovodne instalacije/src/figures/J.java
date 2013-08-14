@@ -50,9 +50,6 @@ public final class J extends Figure {
 		this.p8 = new Point(x, y + height);
 		this.p9 = new Point(x + radius2*sin_30, y + height - radius2*cos_30);
 		this.p10 = new Point(x + width*3/4,y + height);
-		/*this.p10 = new Point(x + width, y + height/3);
-		this.p11 = new Point(x + width/3-height/3, y);
-		this.p12 = new Point(x + width/3+height/3, y); */
 		
 		this.cp1 = new Point(x - 10, y + height*2/3);
 		this.cp2 = new Point(x + width + 10, y + height*2/3);

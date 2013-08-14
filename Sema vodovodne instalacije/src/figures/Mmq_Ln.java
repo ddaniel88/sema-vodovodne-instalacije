@@ -15,7 +15,7 @@ import java.awt.geom.Rectangle2D;
 
 public final class Mmq_Ln extends Figure {
 	
-	private Point p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11;
+	private Point p1, p2, p3, p4, p5, p6, p7, p8, p9;
 	private Point cp1, cp2;
 	
 	public Mmq_Ln() {
@@ -25,7 +25,11 @@ public final class Mmq_Ln extends Figure {
 	public Mmq_Ln(float x, float y, float width, float height) {
 		super(x, y, width, height);
 		
-
+		double sin_cos45 = Math.sqrt(2) / 2;
+		
+		double sin_30 = 0.5;
+		double cos_30 = Math.sqrt(3)/2;
+		
 		this.p1 = new Point(x ,y);
 		this.p2 = new Point(x + width,y);
 		this.p3 = new Point(x + width,y + height);
@@ -33,25 +37,23 @@ public final class Mmq_Ln extends Figure {
 		
 		//ostale taèke
 		
-		double radius_2 = height / 2;
-		double radius_4 = radius_2 / 2;
-		double yMiddle = radius_2 - Math.sqrt(radius_2 * radius_2 - radius_4 * radius_4);
+		double radius_2 = 2*height;
+		double radius_4 = height/2;
+		
 		
 		// left arc
-		this.p5= new Point(x + radius_4, y + height);
-		this.p6= new Point(x + radius_4, y + yMiddle);
+		this.p5= new Point(x + width/2 - (3*height/2) * sin_cos45, y + 2*height - (3*height/2) * sin_cos45);
+		this.p6= new Point(x + width/2 - radius_2*sin_30, y + 2*height - radius_2*cos_30);
 		
 		// right arc
-		this.p7 = new Point(x + width - radius_4, y + yMiddle);
-		this.p8 = new Point(x + width - radius_4, y + height);
+		this.p7 = new Point(x + width/2 + radius_2*sin_30,  y + 2*height - radius_2*cos_30);
+		this.p8 = new Point(x + width/2 + (3*height/2) * sin_cos45, y + 2*height - (3*height/2) * sin_cos45);
 		
 		// middle arc
-		this.p9 = new Point(x + width - radius_2, y + radius_2);
-		this.p10 = new Point(x + width / 2, y + radius_4);
-		this.p11 = new Point(x + radius_2, y + radius_2);
+		this.p9= new Point(x + width / 2, y );
 		
-		this.cp1 = new Point(x - 10, y + height*2/3);
-		this.cp2 = new Point(x + width + 10, y + height*2/3);
+		this.cp1 = new Point(x + width/2 - radius_2 * sin_cos45, y + radius_2 - radius_2*sin_cos45);
+		this.cp2 = new Point(x + width/2 + radius_2 * sin_cos45, y + radius_2 - radius_2*sin_cos45);
 		
 	}
 
@@ -77,7 +79,7 @@ public final class Mmq_Ln extends Figure {
 
 		Arc2D arc1 = DrawHelper.makeArc(p5, p6, p1);
 		Arc2D arc2 = DrawHelper.makeArc(p2, p7, p8);
-		Arc2D arc3 = DrawHelper.makeArc(p9, p10, p11);
+		Arc2D arc3 = DrawHelper.makeArc(p6, p9, p7);
 		
 		graphics.draw(arc1);
 		graphics.draw(arc2);
@@ -109,8 +111,6 @@ public final class Mmq_Ln extends Figure {
 		this.p7.movePointFor(dx, dy);
 		this.p8.movePointFor(dx, dy);
 		this.p9.movePointFor(dx, dy);
-		this.p10.movePointFor(dx, dy);
-		this.p11.movePointFor(dx, dy);
 		
 		GeneralPath path = new GeneralPath();
 		path.append(new Line2D.Float(p1.getX(),p1.getY(),p2.getX(),p2.getY()), false);
@@ -157,8 +157,6 @@ public final class Mmq_Ln extends Figure {
 		rotateAffineTransform.transform(this.p7.getPoint2D(), p7);
 		rotateAffineTransform.transform(this.p8.getPoint2D(), p8);
 		rotateAffineTransform.transform(this.p9.getPoint2D(), p9);
-		rotateAffineTransform.transform(this.p10.getPoint2D(), p10);
-		rotateAffineTransform.transform(this.p11.getPoint2D(), p11);
 		rotateAffineTransform.transform(this.cp1.getPoint2D(), cp1);
 		rotateAffineTransform.transform(this.cp2.getPoint2D(), cp2);
 		
@@ -171,8 +169,6 @@ public final class Mmq_Ln extends Figure {
 		this.p7 = new Point(p7);
 		this.p8 = new Point(p8);
 		this.p9 = new Point(p9);
-		this.p10= new Point(p10);
-		this.p11 = new Point(p11);
 		this.cp1 = new Point(cp1);
 		this.cp2 = new Point(cp2);
 		

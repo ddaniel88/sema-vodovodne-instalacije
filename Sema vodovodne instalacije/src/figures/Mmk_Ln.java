@@ -27,74 +27,42 @@ public final class Mmk_Ln extends Figure {
 	public Mmk_Ln(float x, float y, float width, float height) {
 		super(x, y, width, height);
 		
+		double sin_cos45 = Math.sqrt(2) / 2;
+		
+		double sin_30 = 0.5;
+		double cos_30 = Math.sqrt(3)/2;
+		
+		double sin_23 = 0.34202014332566873304409961468226;
+		double cos_23= 	0.93969262078590838405410927732473;
+		
+		double sin_13=  0.2249510543438649980511072083428;
+		double cos_13= 	0.97437006478523522853969448008827;
+		
 		this.p1 = new Point(x ,y);
 		this.p2 = new Point(x + width,y);
 		this.p3 = new Point(x + width,y + height);
 		this.p4 = new Point(x,y + height);
 		
-		
 		//ostale taèke
 		
-		float radius = height;
-		float radius_2 = height / 2;
-
-		double sin_cos45 = Math.sqrt(2) / 2;
-		double offset = sin_cos45 * radius_2;
-		
-		double p = x + radius_2 - offset / 2;
-		double q = y + radius_2 + offset / 2;
-		
-		Point startPoint, middlePoint, endPoint;
-		double y_intersect;
-		double x_intersect;
-		
-		// for LEFT ARC
-		// Y coordinate of intersect circle and line
-		QuadraticEquationResult verticalIntersect =
-				IntersectionPoints.getVerticalResultFromPQR(p, q, radius_2, x);
-		if (verticalIntersect.getX1() >= y && verticalIntersect.getX1() <= y + height) {
-			y_intersect = verticalIntersect.getX1();
-		}
-		else {
-			y_intersect = verticalIntersect.getX2();
-		}
-		
-		QuadraticEquationResult horizontalIntersect =
-				IntersectionPoints.getHorizontalResultFromPQR(p, q, radius_2, y + height);
-		if (horizontalIntersect.getX1() >= x && horizontalIntersect.getX1() <= x + width) {
-			x_intersect = horizontalIntersect.getX1();
-		}
-		else {
-			x_intersect = horizontalIntersect.getX2();
-		}
-		
-		//levi polukrug
-		
-		this.p5 = new Point(x_intersect, y + height);
-		this.p6 = new Point(p, y + offset / 2);
-		this.p7 = new Point(x, y_intersect);
-		
-		this.cp1 = new Point(x+10, q+10);
-		
-		//desni polukrug
-		p = p + width - radius;
-		
-		this.p8 = new Point(x + width, y_intersect);
-		this.p9= new Point(p, y + offset);
-		this.p10 = new Point(x + width - (x_intersect - x), y + height);
+		double radius_2 = height;
+		double radius_4 = height/3;
 		
 		
-		//srednji polukrug
-		this.p11 = new Point(x + width - radius_2 - offset / 2, y - offset / 2 + radius_2);
-
-		// middle point is on top center
-		this.p12 = new Point(x + width / 2, y);
-
-		// end point is on left arc
-		this.p13 = new Point(x + offset * 2, y - offset / 2 + radius_2);
+		// left arc
+		this.p5= new Point(x + width/2 - (5*height/3) * sin_30, y + 2*height - (5*height/3) * cos_30);
+		this.p6= new Point(x + width/2 - radius_2*sin_23, y + 2*height - radius_2*cos_23);
+		this.p7 = new Point(x + width/2 - (7*height/3) * sin_30,  y + 2*height - (7*height/3)*cos_30);
 		
+		// right arc
+		this.p8 = new Point(x + width/2 + (5*height/3) * sin_30, y + 2*height - (5*height/3) * cos_30);
+		this.p9 = new Point(x + width/2 + radius_2*sin_23, y + 2*height - radius_2*cos_23);
+		this.p10 = new Point(x + width/2 + (7*height/3) * sin_30,  y + 2*height - (7*height/3)*cos_30);
+		// middle arc
+		this.p11= new Point(x + width / 2, y);
 		
-		this.cp2 = new Point(x+width-10, q+10);
+		this.cp1 = new Point(x + width/2 - radius_2 * sin_30, y + radius_2 - radius_2*cos_30);
+		this.cp2 = new Point(x + width/2 + radius_2 * sin_30, y + radius_2 - radius_2*cos_30);
 	}
 
 	@Override
@@ -109,12 +77,13 @@ public final class Mmk_Ln extends Figure {
 
 	@Override
 	public boolean draw(Graphics g) {
+		
 		Graphics2D graphics = (Graphics2D) g;
 		Color currentColor = graphics.getColor();
 
 		Arc2D arc1 = DrawHelper.makeArc(p5, p6, p7);
 		Arc2D arc2 = DrawHelper.makeArc(p8, p9, p10);
-		Arc2D arc3 = DrawHelper.makeArc(p11, p12, p13);
+		Arc2D arc3 = DrawHelper.makeArc(p6, p11, p9);
 		
 		graphics.draw(arc1);
 		graphics.draw(arc2);
@@ -146,10 +115,9 @@ public final class Mmk_Ln extends Figure {
 		this.p7.movePointFor(dx, dy);
 		this.p8.movePointFor(dx, dy);
 		this.p9.movePointFor(dx, dy);
+
 		this.p10.movePointFor(dx, dy);
 		this.p11.movePointFor(dx, dy);
-		this.p12.movePointFor(dx, dy);
-		this.p13.movePointFor(dx, dy);
 		
 		GeneralPath path = new GeneralPath();
 		path.append(new Line2D.Float(p1.getX(),p1.getY(),p2.getX(),p2.getY()), false);
@@ -182,10 +150,9 @@ public final class Mmk_Ln extends Figure {
 		Point2D.Float p7 = new Point2D.Float();
 		Point2D.Float p8 = new Point2D.Float();
 		Point2D.Float p9 = new Point2D.Float();
+
 		Point2D.Float p10 = new Point2D.Float();
 		Point2D.Float p11 = new Point2D.Float();
-		Point2D.Float p12 = new Point2D.Float();
-		Point2D.Float p13 = new Point2D.Float();
 		Point2D.Float cp1 = new Point2D.Float();
 		Point2D.Float cp2 = new Point2D.Float();
 		
@@ -198,10 +165,9 @@ public final class Mmk_Ln extends Figure {
 		rotateAffineTransform.transform(this.p7.getPoint2D(), p7);
 		rotateAffineTransform.transform(this.p8.getPoint2D(), p8);
 		rotateAffineTransform.transform(this.p9.getPoint2D(), p9);
+
 		rotateAffineTransform.transform(this.p10.getPoint2D(), p10);
 		rotateAffineTransform.transform(this.p11.getPoint2D(), p11);
-		rotateAffineTransform.transform(this.p12.getPoint2D(), p12);
-		rotateAffineTransform.transform(this.p13.getPoint2D(), p13);
 		rotateAffineTransform.transform(this.cp1.getPoint2D(), cp1);
 		rotateAffineTransform.transform(this.cp2.getPoint2D(), cp2);
 		
@@ -214,10 +180,9 @@ public final class Mmk_Ln extends Figure {
 		this.p7 = new Point(p7);
 		this.p8 = new Point(p8);
 		this.p9 = new Point(p9);
-		this.p10= new Point(p10);
+
+		this.p10 = new Point(p10);
 		this.p11 = new Point(p11);
-		this.p12= new Point(p12);
-		this.p13= new Point(p13);
 		this.cp1 = new Point(cp1);
 		this.cp2 = new Point(cp2);
 		

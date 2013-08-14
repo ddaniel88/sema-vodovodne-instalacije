@@ -18,7 +18,7 @@ import java.awt.geom.Rectangle2D;
 public final class P_Zn extends Figure {
 	
 	private Point p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12;
-	private Point cp1, cp2;
+	private Point  cp2;
 	
 	public P_Zn() {
 		super();
@@ -43,7 +43,6 @@ public final class P_Zn extends Figure {
 		
 		this.p12 = new Point(x + width, y+height/2);
 		
-		this.cp1 = new Point(x - 10, y + height/2);
 		this.cp2 = new Point(x + width + 10, y + height/2);
 	}
 
@@ -121,14 +120,12 @@ public final class P_Zn extends Figure {
 		
 		graphics.setStroke(old);
 		
-		Ellipse2D.Float ee1 = new Ellipse2D.Float(cp1.getX() - 5, cp1.getY() - 5, 10.0F, 10.0F);
 		Ellipse2D.Float ee2 = new Ellipse2D.Float(cp2.getX() - 5, cp2.getY() - 5, 10.0F, 10.0F);
 		
 		if (this.getSelected())
 			graphics.setColor(Color.RED);
 		else
 			graphics.setColor(Color.GRAY);
-		graphics.fill(ee1);
 		graphics.fill(ee2);
 		
 		graphics.setColor(currentColor);
@@ -158,7 +155,6 @@ public final class P_Zn extends Figure {
 		path.append(new Line2D.Float(p3.getX(),p3.getY(),p4.getX(),p4.getY()), false);
 		path.closePath();
 		
-		this.cp1.movePointFor(dx, dy);
 		this.cp2.movePointFor(dx, dy);
 
 		Rectangle2D bound = path.getBounds2D();
@@ -201,7 +197,6 @@ public final class P_Zn extends Figure {
 		rotateAffineTransform.transform(this.p10.getPoint2D(), p10);
 		rotateAffineTransform.transform(this.p11.getPoint2D(), p11);
 		rotateAffineTransform.transform(this.p12.getPoint2D(), p12);
-		rotateAffineTransform.transform(this.cp1.getPoint2D(), cp1);
 		rotateAffineTransform.transform(this.cp2.getPoint2D(), cp2);
 		
 		this.p1 = new Point(p1);
@@ -216,7 +211,6 @@ public final class P_Zn extends Figure {
 		this.p10= new Point(p10);
 		this.p11= new Point(p11);
 		this.p12= new Point(p12);
-		this.cp1 = new Point(cp1);
 		this.cp2 = new Point(cp2);
 		
 		GeneralPath path = new GeneralPath();
