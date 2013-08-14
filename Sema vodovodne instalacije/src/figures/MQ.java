@@ -35,14 +35,15 @@ public final class MQ extends Figure {
 		this.p4 = new Point(x,y + height);
 		
 		
-		this.p5 = new Point(x + width/2 + radius,y);
-		this.p6 = new Point(x + width/2, y + radius);
-		this.p7 = new Point(x + width - radius2*sin_cos45, y + height);
-		this.p8 = new Point(x + width - 2*radius, y + height);
-		this.p9 = new Point(x +width/2-radius,y);
+		this.p5 = new Point(x +  2* radius,y);
+		this.p6 = new Point(x + radius, y + radius);
+		this.p7  = new Point( x + width- radius2*sin_cos45,  y  +  radius2 * sin_cos45);
+		this.p8 = new Point(x + width - radius, y + height);
 		
-		this.cp1 = new Point(x-10, y + height/2);
-		this.cp2 = new Point(x + width+10, y + height/2);
+		this.p9 = new Point(x ,y);
+		
+		this.cp1 = new Point(x + radius , y - 10);
+		this.cp2 = new Point(x + width+10, y + height);
 	}
 
 	@Override
@@ -90,7 +91,7 @@ public final class MQ extends Figure {
 		Color currentColor = graphics.getColor();
 
 		Arc2D arc1 = DrawHelper.makeArc(p9, p6, p5);
-		Arc2D arc2 = DrawHelper.makeArc(p6, p7, p8);
+		Arc2D arc2 = DrawHelper.makeArc(p6, p7, p3);
 		
 		graphics.draw(arc1);
 		graphics.draw(arc2);

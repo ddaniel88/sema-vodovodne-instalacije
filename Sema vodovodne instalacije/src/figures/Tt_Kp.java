@@ -27,26 +27,28 @@ public final class Tt_Kp extends Figure {
 	public Tt_Kp(float x, float y, float width, float height) {
 		super(x, y, width, height);
 		
+		float offset = height/6;
+		
 		this.p1 = new Point(x ,y);
 		this.p2 = new Point(x + width,y);
 		this.p3 = new Point(x + width,y + height);
 		this.p4 = new Point(x,y + height);
 		
-		this.p5 = new Point(x,y + height/2+ height/3);
-		this.p6 = new Point(x, y + height/2 - height/3);
+		this.p5 = new Point(x,y + height/2+ offset);
+		this.p6 = new Point(x, y + height/2 - offset);
 		this.p7 = new Point(x, y + height/2);
 		
 		this.p8 = new Point(x + width, y+height/2);
-		this.p9 = new Point(x + width, y + height/2 - height/3);
-		this.p10 = new Point(x + width, y + height/2 + height/3);
+		this.p9 = new Point(x + width, y + height/2 - offset);
+		this.p10 = new Point(x + width, y + height/2 + offset);
 		
-		this.p11 = new Point(x + width/2, y - height/6);
-		this.p12 = new Point(x + width/2-height/3, y- height/6);
-		this.p13 = new Point(x + width/2+height/3, y- height/6);
+		this.p11 = new Point(x + width/2, y );
+		this.p12 = new Point(x + width/2-offset, y);
+		this.p13 = new Point(x + width/2+offset, y);
 		
-		this.p14 = new Point(x + width/2, y+height + height/6);
-		this.p15 = new Point(x + width/2-height/3, y+height + height/6);
-		this.p16 = new Point(x + width/2+height/3, y+height + height/6);
+		this.p14 = new Point(x + width/2, y+height);
+		this.p15 = new Point(x + width/2-offset, y+height );
+		this.p16 = new Point(x + width/2+offset, y+height );
 		
 		this.cp1 = new Point(x - 10, y + height/2);
 		this.cp2 = new Point(x + width + 10, y + height/2);

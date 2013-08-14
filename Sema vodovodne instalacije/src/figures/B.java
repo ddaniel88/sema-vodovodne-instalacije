@@ -17,7 +17,7 @@ import java.awt.geom.Rectangle2D;
 public final class B extends Figure {
 	
 	private Point p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12;
-	private Point cp1, cp2;
+	private Point cp1, cp2, cp3;
 	
 	public B() {
 		super();
@@ -25,6 +25,8 @@ public final class B extends Figure {
 	
 	public B(float x, float y, float width, float height) {
 		super(x, y, width, height);
+		
+		float radius = height/5;
 		
 		this.p1 = new Point(x ,y);
 		this.p2 = new Point(x + width,y);
@@ -34,15 +36,15 @@ public final class B extends Figure {
 		this.p5 = new Point(x+height/3,y + height*2/3);
 		this.p6 = new Point(x + width, y + height*2/3);
 		this.p7 = new Point(x + width/3, y + height*2/3);
-		this.p8 = new Point(x + width/3, y);
+		this.p8 = new Point(x + width/3, y + radius );
 		this.p9 = new Point(x, y + height/3);
 		this.p10 = new Point(x + width, y + height/3);
-		this.p11 = new Point(x + width/3-height/5, y-height/5);
-		this.p12 = new Point(x + width/3+height/5, y-height/5);
+		this.p11 = new Point(x + width/3-radius, y);
+		this.p12 = new Point(x + width/3+radius, y);
 		
 		this.cp1 = new Point(x - 10, y + height*2/3);
 		this.cp2 = new Point(x + width + 10, y + height*2/3);
-		
+		this.cp3 = new Point(x + width/3, y -10);
 		
 	}
 
@@ -111,14 +113,14 @@ public final class B extends Figure {
 		
 		Ellipse2D.Float ee1 = new Ellipse2D.Float(cp1.getX() - 5, cp1.getY() - 5, 10.0F, 10.0F);
 		Ellipse2D.Float ee2 = new Ellipse2D.Float(cp2.getX() - 5, cp2.getY() - 5, 10.0F, 10.0F);
-		
+		Ellipse2D.Float ee3 = new Ellipse2D.Float(cp3.getX() - 5, cp3.getY() - 5, 10.0F, 10.0F);
 		if (this.getSelected())
 			graphics.setColor(Color.RED);
 		else
 			graphics.setColor(Color.GRAY);
 		graphics.fill(ee1);
 		graphics.fill(ee2);
-		
+		graphics.fill(ee3);
 		graphics.setColor(currentColor);
 		
 		return true;
@@ -148,7 +150,8 @@ public final class B extends Figure {
 		
 		this.cp1.movePointFor(dx, dy);
 		this.cp2.movePointFor(dx, dy);
-
+		this.cp3.movePointFor(dx, dy);
+		
 		Rectangle2D bound = path.getBounds2D();
 		this.x = (float)bound.getX();
 		this.y = (float)bound.getY();
@@ -176,6 +179,7 @@ public final class B extends Figure {
 		Point2D.Float p12 = new Point2D.Float();
 		Point2D.Float cp1 = new Point2D.Float();
 		Point2D.Float cp2 = new Point2D.Float();
+		Point2D.Float cp3 = new Point2D.Float();
 		
 		rotateAffineTransform.transform(this.p1.getPoint2D(), p1);
 		rotateAffineTransform.transform(this.p2.getPoint2D(), p2);
@@ -191,6 +195,7 @@ public final class B extends Figure {
 		rotateAffineTransform.transform(this.p12.getPoint2D(), p12);
 		rotateAffineTransform.transform(this.cp1.getPoint2D(), cp1);
 		rotateAffineTransform.transform(this.cp2.getPoint2D(), cp2);
+		rotateAffineTransform.transform(this.cp3.getPoint2D(), cp3);
 		
 		this.p1 = new Point(p1);
 		this.p2 = new Point(p2);
@@ -206,6 +211,7 @@ public final class B extends Figure {
 		this.p12= new Point(p12);
 		this.cp1 = new Point(cp1);
 		this.cp2 = new Point(cp2);
+		this.cp3 = new Point(cp3);
 		
 		GeneralPath path = new GeneralPath();
 		path.append(new Line2D.Float(this.p1.getX(),this.p1.getY(),this.p2.getX(),this.p2.getY()), false);

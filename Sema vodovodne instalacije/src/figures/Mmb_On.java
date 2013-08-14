@@ -27,23 +27,25 @@ public final class Mmb_On extends Figure {
 		super(x, y, width, height);
 		
 		float radius = height/5;
+		float radius_2 = height/4;
 		
 		this.p1 = new Point(x ,y);
 		this.p2 = new Point(x + width,y);
 		this.p3 = new Point(x + width,y + height);
 		this.p4 = new Point(x,y + height);
-		this.p5 = new Point(x+height/3,y + height*2/3);
-		this.p6 = new Point(x + width-height/3, y + height*2/3);
-		this.p7 = new Point(x + width/2, y + height*2/3);
 		
-		this.p8 = new Point(x + width/2, y + radius);
-		this.p9 = new Point(x, y + height/3);
-		this.p10 = new Point(x + width, y + height/3);
+		this.p5 = new Point(x+ radius_2,y + 3*height/4);
+		this.p6 = new Point(x + width-radius_2, y + 3*height/4);
+		this.p7 = new Point(x + width/2, y + 3*height/4);
+		
+		this.p8 = new Point(x + width/2, y + radius_2);
+		this.p9 = new Point(x, y + height/2);
+		this.p10 = new Point(x + width, y + height/2);
 		this.p11 = new Point(x + width/2-radius, y);
 		this.p12 = new Point(x + width/2+radius, y);
 		
-		this.cp1 = new Point(x - 10, y + height*2/3);
-		this.cp2 = new Point(x + width + 10, y + height*2/3);
+		this.cp1 = new Point(x - 10, y  + 3*height/4);
+		this.cp2 = new Point(x + width + 10, y + 3*height/4);
 		
 		
 	}

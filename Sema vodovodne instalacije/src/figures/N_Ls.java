@@ -63,7 +63,7 @@ public final class N_Ls extends Figure {
 		this.p14 = new Point(x + width, y +height/2);
 		this.p13= new Point(x + width, y +height/2 + offset);
 		
-		this.cp1 = new Point(x - 10, y + height/2);
+		this.cp1 = new Point(x + offset, y - 10);
 		this.cp2 = new Point(x + width + 10, y + height/2);
 	}
 

@@ -32,12 +32,6 @@ public final class Mmk_Ln extends Figure {
 		double sin_30 = 0.5;
 		double cos_30 = Math.sqrt(3)/2;
 		
-		double sin_23 = 0.34202014332566873304409961468226;
-		double cos_23= 	0.93969262078590838405410927732473;
-		
-		double sin_13=  0.2249510543438649980511072083428;
-		double cos_13= 	0.97437006478523522853969448008827;
-		
 		this.p1 = new Point(x ,y);
 		this.p2 = new Point(x + width,y);
 		this.p3 = new Point(x + width,y + height);
@@ -45,24 +39,24 @@ public final class Mmk_Ln extends Figure {
 		
 		//ostale taèke
 		
-		double radius_2 = height;
-		double radius_4 = height/3;
+		double radius_2 = 3*height/2;
+		double radius_4 = height/2;
 		
 		
 		// left arc
-		this.p5= new Point(x + width/2 - (5*height/3) * sin_30, y + 2*height - (5*height/3) * cos_30);
-		this.p6= new Point(x + width/2 - radius_2*sin_23, y + 2*height - radius_2*cos_23);
-		this.p7 = new Point(x + width/2 - (7*height/3) * sin_30,  y + 2*height - (7*height/3)*cos_30);
+		this.p5= new Point(x + width/2 - height * sin_cos45, y + radius_2 - height*sin_cos45);
+		this.p6= new Point(x + width/2 - radius_2 * sin_30, y + radius_2 - radius_2*cos_30);
+		this.p7 = new Point(x + width/2 - 2*height*sin_cos45,  y + radius_2 - radius_2*sin_cos45);
 		
 		// right arc
-		this.p8 = new Point(x + width/2 + (5*height/3) * sin_30, y + 2*height - (5*height/3) * cos_30);
-		this.p9 = new Point(x + width/2 + radius_2*sin_23, y + 2*height - radius_2*cos_23);
-		this.p10 = new Point(x + width/2 + (7*height/3) * sin_30,  y + 2*height - (7*height/3)*cos_30);
+		this.p8 = new Point(x + width/2 + height * sin_cos45, y + radius_2 - height*sin_cos45);
+		this.p9 = new Point(x + width/2 + radius_2 * sin_30, y + radius_2 - radius_2*cos_30);
+		this.p10 = new Point(x + width/2 + 2*height*sin_cos45,  y + radius_2 - radius_2*sin_cos45);
 		// middle arc
 		this.p11= new Point(x + width / 2, y);
 		
-		this.cp1 = new Point(x + width/2 - radius_2 * sin_30, y + radius_2 - radius_2*cos_30);
-		this.cp2 = new Point(x + width/2 + radius_2 * sin_30, y + radius_2 - radius_2*cos_30);
+		this.cp1 = new Point(x + width/2 - radius_2 * sin_cos45, y + radius_2 - radius_2*sin_cos45);
+		this.cp2 = new Point(x + width/2 + radius_2 * sin_cos45, y + radius_2 - radius_2*sin_cos45);
 	}
 
 	@Override

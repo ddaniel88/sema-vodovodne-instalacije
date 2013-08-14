@@ -399,7 +399,7 @@ public class MainCanvas extends JPanel {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					int width = 100;
-					int height = 60;
+					int height = 66;
 
 					Figure figure = new Mmb_On(xCursorPosition,
 							yCursorPosition, width, height);
@@ -418,7 +418,7 @@ public class MainCanvas extends JPanel {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					int width = 100;
-					int height = 33;
+					int height = 40;
 
 					Figure figure = new Mmk_Ln(xCursorPosition,
 							yCursorPosition, width, height);
@@ -588,8 +588,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemT_OP.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 150;
-					int height = 50;
+					int width = 100;
+					int height = 66;
 
 					Figure figure = new T_Op(xCursorPosition, yCursorPosition,
 							width, height);
@@ -607,8 +607,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemX_ZP.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 150;
-					int height = 50;
+					int width = 100;
+					int height = 33;
 
 					Figure figure = new X_Zp(xCursorPosition, yCursorPosition,
 							width, height);
@@ -626,9 +626,9 @@ public class MainCanvas extends JPanel {
 			jmenuItemTT_KP.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 150;
-					int height =50;
-
+					int width = 100;
+					int height = 100;
+ 
 					Figure figure = new Tt_Kp(xCursorPosition, yCursorPosition,
 							width, height);
 					figures.add(figure);
@@ -645,8 +645,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemFFR_RP.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 150;
-					int height =50;
+					int width = 100;
+					int height = 33;
 
 					Figure figure = new Ffr_Rp(xCursorPosition, yCursorPosition,
 							width, height);
@@ -664,8 +664,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemFF_SP.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 150;
-					int height =50;
+					int width = 100;
+					int height =33;
 
 					Figure figure = new Ff_Sp(xCursorPosition, yCursorPosition,
 							width, height);
@@ -683,7 +683,7 @@ public class MainCanvas extends JPanel {
 			jmenuItemA.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 150;
+					int width = 100;
 					int height =50;
 
 					Figure figure = new A(xCursorPosition, yCursorPosition,
@@ -702,8 +702,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemB.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 150;
-					int height =50;
+					int width = 100;
+					int height = 50;
 
 					Figure figure = new B(xCursorPosition, yCursorPosition,
 							width, height);
@@ -721,8 +721,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemU.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 150;
-					int height =50;
+					int width = 100;
+					int height =33;
 
 					Figure figure = new U(xCursorPosition, yCursorPosition,
 							width, height);
@@ -740,7 +740,7 @@ public class MainCanvas extends JPanel {
 			jmenuItemMQ.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 150;
+					int width = 70;
 					int height =50;
 
 					Figure figure = new MQ(xCursorPosition, yCursorPosition,
