@@ -102,13 +102,11 @@ public final class B extends Figure {
 		Arc2D arc1 = DrawHelper.makeArc(p9, p5, p4);
 		Line2D.Float l1 = new Line2D.Float(p5.getX(),p5.getY(),p6.getX(),p6.getY());
 		Line2D.Float l2 = new Line2D.Float(p7.getX(),p7.getY(),p8.getX(),p8.getY());
-		Line2D.Float l3 = new Line2D.Float(p10.getX(),p10.getY(),p3.getX(),p3.getY());
 		Arc2D arc3 = DrawHelper.makeArc(p11, p8, p12);
 		
 		graphics.draw(l1);
 		graphics.draw(l2);
 		graphics.draw(arc1);
-		graphics.draw(l3);
 		graphics.draw(arc3);
 		
 		Ellipse2D.Float ee1 = new Ellipse2D.Float(cp1.getX() - 5, cp1.getY() - 5, 10.0F, 10.0F);

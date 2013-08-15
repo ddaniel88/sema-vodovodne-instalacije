@@ -103,7 +103,7 @@ public final class J extends Figure {
 		
 		Color currentColor = graphics.getColor();
 
-		Line2D.Float l1 = new Line2D.Float(p5.getX(),p5.getY(),p10.getX(),p10.getY());
+		Line2D.Float l1 = new Line2D.Float(p5.getX(),p5.getY(),p3.getX(),p3.getY());
 		Arc2D arc1 = DrawHelper.makeArc(p7, p6, p5);
 		Arc2D arc2 = DrawHelper.makeArc(p8, p7, p9);
 		

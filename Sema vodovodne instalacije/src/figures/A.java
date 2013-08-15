@@ -91,8 +91,6 @@ public final class A extends Figure {
 		// TODO Auto-generated method stub
 		Graphics2D graphics = (Graphics2D) g;
 		
-		float radius = height * 2 / 3;
-		float offset = height / 3;
 		
 		Color currentColor = graphics.getColor();
 
@@ -100,13 +98,11 @@ public final class A extends Figure {
 		Line2D.Float l1 = new Line2D.Float(p5.getX(),p5.getY(),p6.getX(),p6.getY());
 		Line2D.Float l2 = new Line2D.Float(p7.getX(),p7.getY(),p8.getX(),p8.getY());
 		Line2D.Float l3 = new Line2D.Float(p11.getX(),p11.getY(),p12.getX(),p12.getY());
-		Line2D.Float l4 = new Line2D.Float(p10.getX(),p10.getY(),p3.getX(),p3.getY());
 		
 		graphics.draw(l1);
 		graphics.draw(l2);
 		graphics.draw(l3);
 		graphics.draw(arc1);
-		graphics.draw(l4);
 		
 		Ellipse2D.Float ee1 = new Ellipse2D.Float(cp1.getX() - 5, cp1.getY() - 5, 10.0F, 10.0F);
 		Ellipse2D.Float ee2 = new Ellipse2D.Float(cp2.getX() - 5, cp2.getY() - 5, 10.0F, 10.0F);
