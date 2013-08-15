@@ -370,8 +370,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemE_SPN.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 100;
-					int height = 33;
+					int width = enums.FigureDimensions.X_LARGE.getDimension();
+					int height = enums.FigureDimensions.SMALL.getDimension();
 
 					Figure figure = new E_Spn(xCursorPosition, yCursorPosition,
 							width, height);
@@ -390,8 +390,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemF_S.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 100;
-					int height = 33;
+					int width = enums.FigureDimensions.X_LARGE.getDimension();
+					int height = enums.FigureDimensions.SMALL.getDimension();
 
 					Figure figure = new F_S(xCursorPosition, yCursorPosition,
 							width, height);
@@ -409,8 +409,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemMMA_ONP.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 100;
-					int height = 50;
+					int width = enums.FigureDimensions.X_LARGE.getDimension();
+					int height = enums.FigureDimensions.MEDIUM.getDimension();
 
 					Figure figure = new Mma_Onp(xCursorPosition,
 							yCursorPosition, width, height);
@@ -428,8 +428,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemMMB_ON.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 100;
-					int height = 66;
+					int width = enums.FigureDimensions.X_LARGE.getDimension();
+					int height = enums.FigureDimensions.LARGE.getDimension();
 
 					Figure figure = new Mmb_On(xCursorPosition,
 							yCursorPosition, width, height);
@@ -447,8 +447,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemMMK_LN.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 100;
-					int height = 40;
+					int width = enums.FigureDimensions.X_LARGE.getDimension();
+					int height = enums.FigureDimensions.MEDIUM_SMALL.getDimension();
 
 					Figure figure = new Mmk_Ln(xCursorPosition,
 							yCursorPosition, width, height);
@@ -466,8 +466,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemMMQ_LN.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 100;
-					int height = 33;
+					int width = enums.FigureDimensions.X_LARGE.getDimension();
+					int height = enums.FigureDimensions.SMALL.getDimension();
 
 					Figure figure = new Mmq_Ln(xCursorPosition,
 							yCursorPosition, width, height);
@@ -485,8 +485,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemMMR_RN.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 100;
-					int height = 33;
+					int width = enums.FigureDimensions.X_LARGE.getDimension();
+					int height = enums.FigureDimensions.SMALL.getDimension();
 
 					Figure figure = new Mmr_Rn(xCursorPosition,
 							yCursorPosition, width, height);
@@ -504,8 +504,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemP_ZN.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 100;
-					int height = 33;
+					int width = enums.FigureDimensions.X_LARGE.getDimension();
+					int height = enums.FigureDimensions.SMALL.getDimension();
 
 					Figure figure = new P_Zn(xCursorPosition, yCursorPosition,
 							width, height);
@@ -523,8 +523,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemU_SN.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 100;
-					int height = 33;
+					int width = enums.FigureDimensions.X_LARGE.getDimension();
+					int height = enums.FigureDimensions.SMALL.getDimension();
 
 					Figure figure = new U_Sn(xCursorPosition, yCursorPosition,
 							width, height);
@@ -542,8 +542,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemO_ZC.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 100;
-					int height = 33;
+					int width = enums.FigureDimensions.X_LARGE.getDimension();
+					int height = enums.FigureDimensions.SMALL.getDimension();
 
 					Figure figure = new O_Zc(xCursorPosition, yCursorPosition,
 							width, height);
@@ -561,8 +561,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemQ_LP.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 100;
-					int height = 33;
+					int width = enums.FigureDimensions.X_LARGE.getDimension();
+					int height = enums.FigureDimensions.SMALL.getDimension();
 
 					Figure figure = new Q_Lp(xCursorPosition, yCursorPosition,
 							width, height);
@@ -580,8 +580,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemN_LS.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 66;
-					int height = 66;
+					int width = enums.FigureDimensions.LARGE.getDimension();
+					int height = enums.FigureDimensions.LARGE.getDimension();
 
 					Figure figure = new N_Ls(xCursorPosition, yCursorPosition,
 							width, height);
@@ -618,8 +618,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemT_OP.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 100;
-					int height = 66;
+					int width = enums.FigureDimensions.X_LARGE.getDimension();
+					int height = enums.FigureDimensions.LARGE.getDimension();
 
 					Figure figure = new T_Op(xCursorPosition, yCursorPosition,
 							width, height);
@@ -637,8 +637,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemX_ZP.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 100;
-					int height = 33;
+					int width = enums.FigureDimensions.X_LARGE.getDimension();
+					int height = enums.FigureDimensions.SMALL.getDimension();
 
 					Figure figure = new X_Zp(xCursorPosition, yCursorPosition,
 							width, height);
@@ -656,8 +656,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemTT_KP.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 100;
-					int height = 100;
+					int width = enums.FigureDimensions.X_LARGE.getDimension();
+					int height = enums.FigureDimensions.X_LARGE.getDimension();
  
 					Figure figure = new Tt_Kp(xCursorPosition, yCursorPosition,
 							width, height);
@@ -675,8 +675,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemFFR_RP.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 100;
-					int height = 33;
+					int width = enums.FigureDimensions.X_LARGE.getDimension();
+					int height = enums.FigureDimensions.SMALL.getDimension();
 
 					Figure figure = new Ffr_Rp(xCursorPosition, yCursorPosition,
 							width, height);
@@ -694,8 +694,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemFF_SP.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 100;
-					int height =33;
+					int width = enums.FigureDimensions.X_LARGE.getDimension();
+					int height = enums.FigureDimensions.SMALL.getDimension();
 
 					Figure figure = new Ff_Sp(xCursorPosition, yCursorPosition,
 							width, height);
@@ -713,8 +713,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemA.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 100;
-					int height =50;
+					int width = enums.FigureDimensions.X_LARGE.getDimension();
+					int height = enums.FigureDimensions.MEDIUM.getDimension();
 
 					Figure figure = new A(xCursorPosition, yCursorPosition,
 							width, height);
@@ -732,8 +732,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemB.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 100;
-					int height = 50;
+					int width = enums.FigureDimensions.X_LARGE.getDimension();
+					int height = enums.FigureDimensions.MEDIUM.getDimension();
 
 					Figure figure = new B(xCursorPosition, yCursorPosition,
 							width, height);
@@ -751,8 +751,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemU.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 100;
-					int height =33;
+					int width = enums.FigureDimensions.X_LARGE.getDimension();
+					int height = enums.FigureDimensions.SMALL.getDimension();
 
 					Figure figure = new U(xCursorPosition, yCursorPosition,
 							width, height);
@@ -770,8 +770,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemMQ.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 50;
-					int height = 50;
+					int width = enums.FigureDimensions.MEDIUM.getDimension();
+					int height = enums.FigureDimensions.MEDIUM.getDimension();
 
 					Figure figure = new MQ(xCursorPosition, yCursorPosition,
 							width, height);
@@ -827,8 +827,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemVodomer.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 150;
-					int height =50;
+					int width = enums.FigureDimensions.XX_LARGE.getDimension();
+					int height =enums.FigureDimensions.SMALL.getDimension();
 
 					Figure figure = new Vodomer(xCursorPosition, yCursorPosition,
 							width, height);
@@ -846,8 +846,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemNepovratni_Ventil_Desni.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 150;
-					int height =50;
+					int width = enums.FigureDimensions.XX_LARGE.getDimension();
+					int height = enums.FigureDimensions.SMALL.getDimension();
 
 					Figure figure = new Nepovratni_Ventil_Desni(xCursorPosition, yCursorPosition,
 							width, height);
@@ -865,8 +865,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemNepovratni_Ventil_Levi.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 150;
-					int height =50;
+					int width = enums.FigureDimensions.XX_LARGE.getDimension();
+					int height = enums.FigureDimensions.SMALL.getDimension();
 
 					Figure figure = new Nepovratni_Ventil_Levi(xCursorPosition, yCursorPosition,
 							width, height);
@@ -884,8 +884,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemVentil.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 150;
-					int height =50;
+					int width = enums.FigureDimensions.XX_LARGE.getDimension();
+					int height = enums.FigureDimensions.SMALL.getDimension();
 
 					Figure figure = new Ventil(xCursorPosition, yCursorPosition,
 							width, height);
@@ -903,8 +903,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemVentil_Ispusni.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 150;
-					int height =50;
+					int width = enums.FigureDimensions.XX_LARGE.getDimension();
+					int height = enums.FigureDimensions.SMALL.getDimension();
 
 					Figure figure = new Ventil_Ispusni(xCursorPosition, yCursorPosition,
 							width, height);
@@ -922,8 +922,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemVazdusni_Ventil.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 50;
-					int height = 100;
+					int width = enums.FigureDimensions.SMALL.getDimension();
+					int height = enums.FigureDimensions.LARGE.getDimension();
 
 					Figure figure = new Vazdusni_Ventil(xCursorPosition, yCursorPosition,
 							width, height);
@@ -941,8 +941,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemMuljni_Ispust.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 50;
-					int height = 100;
+					int width = enums.FigureDimensions.SMALL.getDimension();
+					int height = enums.FigureDimensions.LARGE.getDimension();
 
 					Figure figure = new Muljni_Ispust(xCursorPosition, yCursorPosition,
 							width, height);
@@ -960,8 +960,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemRegulator_Pritiska.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 50;
-					int height = 150;
+					int width = enums.FigureDimensions.SMALL.getDimension();
+					int height = enums.FigureDimensions.X_LARGE.getDimension();
 
 					Figure figure = new Regulator_Pritiska(xCursorPosition, yCursorPosition,
 							width, height);
@@ -979,8 +979,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemHidrant.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 50;
-					int height = 100;
+					int width = enums.FigureDimensions.SMALL.getDimension();
+					int height = enums.FigureDimensions.LARGE.getDimension();
 
 					Figure figure = new Hidrant(xCursorPosition, yCursorPosition,
 							width, height);
@@ -998,8 +998,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemHvatac_Mulja.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 150;
-					int height =50;
+					int width = enums.FigureDimensions.XX_LARGE.getDimension();
+					int height = enums.FigureDimensions.SMALL.getDimension();
 
 					Figure figure = new Hvatac_Mulja(xCursorPosition, yCursorPosition,
 							width, height);

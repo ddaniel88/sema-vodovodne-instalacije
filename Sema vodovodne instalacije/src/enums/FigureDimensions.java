@@ -1,16 +1,20 @@
 package enums;
 
 public enum FigureDimensions {
-	ZOOM_IN(1.1f),
-	ZOOM_OUT(0.9f);
+	SMALL(33),
+	MEDIUM_SMALL(40),
+	MEDIUM(50),
+	LARGE(66),
+	X_LARGE(100),
+	XX_LARGE(132);
 
-	private float code;
+	private int code;
 
-	private FigureDimensions(float c) {
+	private FigureDimensions(int c) {
 		code = c;
 	}
 
-	public float getCode() {
+	public int getDimension() {
 		return code;
 	}
 }
