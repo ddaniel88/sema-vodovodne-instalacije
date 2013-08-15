@@ -770,8 +770,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemMQ.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 70;
-					int height =50;
+					int width = 50;
+					int height = 50;
 
 					Figure figure = new MQ(xCursorPosition, yCursorPosition,
 							width, height);

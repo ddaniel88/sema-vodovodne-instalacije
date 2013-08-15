@@ -15,7 +15,7 @@ import java.awt.geom.Rectangle2D;
 
 public final class MQ extends Figure {
 	
-	private Point p1, p2, p3, p4, p5, p6, p7, p8, p9;
+	private Point p1, p2, p3, p4, p5, p6, p7;
 	private Point cp1, cp2;
 	
 	public MQ() {
@@ -25,25 +25,32 @@ public final class MQ extends Figure {
 	public MQ(float x, float y, float width, float height) {
 		super(x, y, width, height);
 		
-		float radius = height/3;
-		float radius2 = height;
 		double sin_cos45 = Math.sqrt(2) / 2;
+		double radiusM = width / 3;
+		double radiusM_2 = radiusM / 2;
+		double radiusV_2 = height;
+		double dxy = radiusV_2 * sin_cos45 - radiusV_2 * sin_cos45 / (radiusM + radiusM_2);
 		
 		this.p1 = new Point(x ,y);
 		this.p2 = new Point(x + width,y);
 		this.p3 = new Point(x + width,y + height);
 		this.p4 = new Point(x,y + height);
 		
+		this.p5 = new Point(x + radiusM, y);
+		this.p6 = new Point(x + radiusM_2, y + radiusM_2);
+		this.p7 = new Point(x + width - dxy, y + dxy);
 		
-		this.p5 = new Point(x +  2* radius,y);
-		this.p6 = new Point(x + radius, y + radius);
-		this.p7  = new Point( x + width- radius2*sin_cos45,  y  +  radius2 * sin_cos45);
-		this.p8 = new Point(x + width - radius, y + height);
+//		this.p5 = new Point(x, y)
 		
-		this.p9 = new Point(x ,y);
+//		this.p5 = new Point(x +  2* radius,y);
+//		this.p6 = new Point(x + radius, y + radius);
+//		this.p7  = new Point( x + width- radius2*sin_cos45,  y  +  radius2 * sin_cos45);
+//		this.p8 = new Point(x + width - radius, y + height);
+//		
+//		this.p9 = new Point(x ,y);
 		
-		this.cp1 = new Point(x + radius , y - 10);
-		this.cp2 = new Point(x + width+10, y + height);
+		this.cp1 = new Point(x + radiusM_2 , y - 10);
+		this.cp2 = new Point(x + width + 10, y + height);
 	}
 
 	@Override
@@ -90,7 +97,7 @@ public final class MQ extends Figure {
 		
 		Color currentColor = graphics.getColor();
 
-		Arc2D arc1 = DrawHelper.makeArc(p9, p6, p5);
+		Arc2D arc1 = DrawHelper.makeArc(p1, p6, p5);
 		Arc2D arc2 = DrawHelper.makeArc(p6, p7, p3);
 		
 		graphics.draw(arc1);
@@ -121,8 +128,6 @@ public final class MQ extends Figure {
 		this.p5.movePointFor(dx, dy);
 		this.p6.movePointFor(dx, dy);
 		this.p7.movePointFor(dx, dy);
-		this.p8.movePointFor(dx, dy);
-		this.p9.movePointFor(dx, dy);
 		
 		GeneralPath path = new GeneralPath();
 		path.append(new Line2D.Float(p1.getX(),p1.getY(),p2.getX(),p2.getY()), false);
@@ -153,8 +158,6 @@ public final class MQ extends Figure {
 		Point2D.Float p5 = new Point2D.Float();
 		Point2D.Float p6 = new Point2D.Float();
 		Point2D.Float p7 = new Point2D.Float();
-		Point2D.Float p8 = new Point2D.Float();
-		Point2D.Float p9 = new Point2D.Float();
 		Point2D.Float cp1 = new Point2D.Float();
 		Point2D.Float cp2 = new Point2D.Float();
 		
@@ -165,8 +168,6 @@ public final class MQ extends Figure {
 		rotateAffineTransform.transform(this.p5.getPoint2D(), p5);
 		rotateAffineTransform.transform(this.p6.getPoint2D(), p6);
 		rotateAffineTransform.transform(this.p7.getPoint2D(), p7);
-		rotateAffineTransform.transform(this.p8.getPoint2D(), p8);
-		rotateAffineTransform.transform(this.p9.getPoint2D(), p9);
 		rotateAffineTransform.transform(this.cp1.getPoint2D(), cp1);
 		rotateAffineTransform.transform(this.cp2.getPoint2D(), cp2);
 		
@@ -177,8 +178,6 @@ public final class MQ extends Figure {
 		this.p5 = new Point(p5);
 		this.p6 = new Point(p6);
 		this.p7 = new Point(p7);
-		this.p8 = new Point(p8);
-		this.p9 = new Point(p9);
 		this.cp1 = new Point(cp1);
 		this.cp2 = new Point(cp2);
 		
