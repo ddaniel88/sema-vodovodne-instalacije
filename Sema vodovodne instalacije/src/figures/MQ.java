@@ -26,10 +26,11 @@ public final class MQ extends Figure {
 		super(x, y, width, height);
 		
 		double sin_cos45 = Math.sqrt(2) / 2;
-		double radiusM = width / 3;
-		double radiusM_2 = radiusM / 2;
+		double radiusM_2 = width / 3;
+		double radiusM = radiusM_2 * 2;
 		double radiusV_2 = height;
-		double dxy = radiusV_2 * sin_cos45 - radiusV_2 * sin_cos45 / (radiusM + radiusM_2);
+		double correction = radiusM_2 / 2 - sin_cos45;
+		double dxy = radiusV_2 * sin_cos45 - radiusV_2 * sin_cos45 / correction;
 		
 		this.p1 = new Point(x ,y);
 		this.p2 = new Point(x + width,y);
@@ -39,15 +40,6 @@ public final class MQ extends Figure {
 		this.p5 = new Point(x + radiusM, y);
 		this.p6 = new Point(x + radiusM_2, y + radiusM_2);
 		this.p7 = new Point(x + width - dxy, y + dxy);
-		
-//		this.p5 = new Point(x, y)
-		
-//		this.p5 = new Point(x +  2* radius,y);
-//		this.p6 = new Point(x + radius, y + radius);
-//		this.p7  = new Point( x + width- radius2*sin_cos45,  y  +  radius2 * sin_cos45);
-//		this.p8 = new Point(x + width - radius, y + height);
-//		
-//		this.p9 = new Point(x ,y);
 		
 		this.cp1 = new Point(x + radiusM_2 , y - 10);
 		this.cp2 = new Point(x + width + 10, y + height);
@@ -68,29 +60,6 @@ public final class MQ extends Figure {
 		return draw(g);
 	}
 	
-//	@Override
-//	public boolean draw(Graphics g) {
-//		Graphics2D graphics = (Graphics2D) g;
-//		
-//		// )=(
-//		graphics.drawArc((int) (x - height / 2), (int) y,
-//						 (int) height, (int) height,
-//						 -90, 180);												// )
-//		graphics.drawLine((int) (x + height / 2),
-//						  (int) (y + height / 2 - height / 8),
-//						  (int) (x + width - height / 2),
-//						  (int) (int) (y + height / 2 - height / 8));			// -
-//		graphics.drawLine((int) (x + height / 2),
-//						  (int) (y + height / 2 + height / 8),
-//						  (int) (x + width - height / 2),
-//						  (int) (y + height / 2 + height / 8));					// -
-//		graphics.drawArc((int) (x + width - height/2), (int) y,
-//						 (int) (height), (int) height,
-//						 90, 180);												// (
-//
-//		return true;
-//	}
-
 	public boolean draw(Graphics g) {
 		
 		Graphics2D graphics = (Graphics2D) g;
@@ -120,7 +89,6 @@ public final class MQ extends Figure {
 	
 	@Override
 	public boolean moveFigureFor(float dx, float dy, Point endCanvas) {
-
 		this.p1.movePointFor(dx, dy);
 		this.p2.movePointFor(dx, dy);
 		this.p3.movePointFor(dx, dy);
