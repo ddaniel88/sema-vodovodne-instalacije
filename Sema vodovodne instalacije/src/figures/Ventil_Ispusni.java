@@ -21,7 +21,8 @@ public final class Ventil_Ispusni extends Figure {
 	public Ventil_Ispusni(float x, float y, float width, float height) {
 		super(x, y, width, height);
 		
-		double height_2 = height / 2;
+		double height_2r = height / 2;
+		double height_2 = height / 4;
 		double width_4 = width / 4;
 		double width_34 = 0.75 * width;
 		
@@ -36,13 +37,13 @@ public final class Ventil_Ispusni extends Figure {
 		this.p8 = new Point(x + width, y + height_2);
 		this.p9 = new Point(x + width_4, y);
 		this.p10 = new Point(x + width_34, y);
-		this.p11 = new Point(x + width_34, y + height);
-		this.p12 = new Point(x + width_4, y + height);
+		this.p11 = new Point(x + width_34, y + height_2r);
+		this.p12 = new Point(x + width_4, y + height_2r);
 		
-		this.p13 = new Point(x + width_34 - width / 8, y + 0.75 * height);
-		this.p14 = new Point(x + width_34 - width / 8, y + 0.75 * height + height);
-		this.p15 = new Point(x + width_34 - width / 8 - width / 16, y + 0.5 * height + height);
-		this.p16 = new Point(x + width_34 - width / 8 + width / 16, y + 0.5 * height + height);
+		this.p13 = new Point(x + width_34 - width / 8, y + 0.75 * height_2r);
+		this.p14 = new Point(x + width_34 - width / 8, y + height);
+		this.p15 = new Point(x + width_34 - width / 8 - width / 16, y + 0.75 * height_2r + height_2r);
+		this.p16 = new Point(x + width_34 - width / 8 + width / 16, y + 0.75 * height_2r + height_2r);
 		
 		this.cp1 = new Point(x - 10, y + height_2);
 		this.cp2 = new Point(x + width + 10, y + height_2);

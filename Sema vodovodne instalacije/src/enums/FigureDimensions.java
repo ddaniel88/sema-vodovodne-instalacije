@@ -6,7 +6,7 @@ public enum FigureDimensions {
 	MEDIUM(50),
 	LARGE(66),
 	X_LARGE(100),
-	XX_LARGE(132);
+	XX_LARGE(132); // 4 × SSMALL
 
 	private int dimension;
 

@@ -904,7 +904,7 @@ public class MainCanvas extends JPanel {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					int width = enums.FigureDimensions.XX_LARGE.getDimension();
-					int height = enums.FigureDimensions.SMALL.getDimension();
+					int height = enums.FigureDimensions.LARGE.getDimension();
 
 					Figure figure = new Ventil_Ispusni(xCursorPosition, yCursorPosition,
 							width, height);
