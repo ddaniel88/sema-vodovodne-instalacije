@@ -8,13 +8,13 @@ public enum FigureDimensions {
 	X_LARGE(100),
 	XX_LARGE(132);
 
-	private int code;
+	private int dimension;
 
-	private FigureDimensions(int c) {
-		code = c;
+	private FigureDimensions(int d) {
+		dimension = d;
 	}
 
 	public int getDimension() {
-		return code;
+		return dimension;
 	}
 }
