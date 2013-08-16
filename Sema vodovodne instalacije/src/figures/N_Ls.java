@@ -59,12 +59,12 @@ public final class N_Ls extends Figure {
 		this.p15 = new Point((x + offset+ height/2) -radius*sin_cos45 , y +radius*sin_cos45); //??
 
 		//desna linija
-		this.p12 = new Point(x + width, y +height/2 - offset);
-		this.p14 = new Point(x + width, y +height/2);
-		this.p13= new Point(x + width, y +height/2 + offset);
+		this.p12 = new Point(x + width, y +2*height/3 - offset);
+		this.p14 = new Point(x + width, y +2*height/3);
+		this.p13= new Point(x + width, y +2*height/3 + offset);
 		
 		this.cp1 = new Point(x + offset, y - 10);
-		this.cp2 = new Point(x + width + 10, y + height/2);
+		this.cp2 = new Point(x + width + 10, y + 2*height/3);
 	}
 
 	@Override

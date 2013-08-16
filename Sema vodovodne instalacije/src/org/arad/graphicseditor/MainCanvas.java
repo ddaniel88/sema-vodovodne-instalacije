@@ -599,8 +599,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemFFK_LP.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 150;
-					int height = 50;
+					int width = 100;
+					int height = 33;
 
 					Figure figure = new Ffk_Lp(xCursorPosition, yCursorPosition,
 							width, height);
@@ -789,8 +789,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemJ.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 150;
-					int height =50;
+					int width = enums.FigureDimensions.X_LARGE.getDimension();
+					int height = enums.FigureDimensions.MEDIUM.getDimension();
 
 					Figure figure = new J(xCursorPosition, yCursorPosition,
 							width, height);
@@ -808,8 +808,8 @@ public class MainCanvas extends JPanel {
 			jmenuItemK.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int width = 150;
-					int height =50;
+					int width = enums.FigureDimensions.X_LARGE.getDimension();
+					int height = enums.FigureDimensions.MEDIUM.getDimension();
 
 					Figure figure = new K(xCursorPosition, yCursorPosition,
 							width, height);

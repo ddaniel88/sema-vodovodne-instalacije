@@ -27,32 +27,35 @@ public final class J extends Figure {
 	public J(float x, float y, float width, float height) {
 		super(x, y, width, height);
 		
-		float radius = height;
-		float radius2 = height*3/4;
-		double sin_cos45 = Math.sqrt(2) / 2;
-		
-		double sin_30 = 0.5;
-		double cos_30 = Math.sqrt(3)/2;
+		float radius = 2*height;
+		float radius2 = height/3;
 		
 		double sin_15 = 0.25881904510; 
 		double cos_15 = 0.96592582628; 
+		
+		double sin_30 = Math.sin(Math.PI/6);
+		double cos_30 = Math.cos(Math.PI/6); 
+		double tan_30 = Math.tan(Math.PI/6);
 		
 		this.p1 = new Point(x ,y);
 		this.p2 = new Point(x + width,y);
 		this.p3 = new Point(x + width,y + height);
 		this.p4 = new Point(x,y + height);
 		
-		this.p5 = new Point(x + width/2, y + height);
-		this.p6 = new Point(x + width/2 - radius*sin_15, y +height);
-		this.p7 = new Point(x + width/2 - radius, y + radius*cos_30);
+		//veliki luk
+		this.p5 = new Point(x + 3*width/4, y + height);
+		this.p6 = new Point(x + 3*width/4 - radius*sin_15, y - radius/2 + radius*cos_15);
+		this.p7 = new Point(x + 3*width/4- radius*sin_30, y - radius/2 + radius*cos_30);
 	
+		//levi polukrug
+		this.p8 = new Point(x + (height/5)*tan_30 - height/12, y + 4*height/5 + height/12);
+		this.p9 = new Point(x + (4*height/5)*tan_30 - height/12, y + height/5 + height/12);
 		
-		this.p8 = new Point(x, y + height);
-		this.p9 = new Point(x + radius2*sin_30, y + height - radius2*cos_30);
+		
 		this.p10 = new Point(x + width*3/4,y + height);
 		
-		this.cp1 = new Point(x - 10, y + height*2/3);
-		this.cp2 = new Point(x + width + 10, y + height*2/3);
+		this.cp1= new Point(x + 3*width/4- radius*sin_30 - radius2*cos_30, y - radius/2 + radius*cos_30 - radius2*sin_30);
+		this.cp2 = new Point(x + width + 10, y + height);
 	}
 
 	@Override

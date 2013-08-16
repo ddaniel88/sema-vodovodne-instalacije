@@ -25,7 +25,11 @@ public final class Ffk_Lp extends Figure {
 	public Ffk_Lp(float x, float y, float width, float height) {
 		super(x, y, width, height);
 		
-
+		double sin_30 = Math.sin(Math.PI/6);
+		double cos_30 = Math.cos(Math.PI/6); 
+		double tan_30 = Math.tan(Math.PI/6);
+	
+		
 		this.p1 = new Point(x ,y);
 		this.p2 = new Point(x + width,y);
 		this.p3 = new Point(x + width,y + height);
@@ -33,55 +37,50 @@ public final class Ffk_Lp extends Figure {
 		
 		//ostale taèke
 		
-		double radius_2 = height / 2;
-		double radius_4 = radius_2 / 2;
-		double yMiddle = radius_2 - Math.sqrt(radius_2 * radius_2 - radius_4 * radius_4);
+		double radius_2 = 2*height;
+		double radius_4 = height/2;
+		
 		
 		// left arc
-		this.p5= new Point(x + radius_4, y + height);
-		this.p6= new Point(x + radius_4, y + yMiddle);
+		this.p5= new Point(x + width/2 - height *tan_30, y + height);
+		this.p6= new Point(x + width/2 - 3*height/2*tan_30, y + height/2);
+		this.p7= new Point(x + width/2 - radius_2*tan_30, y);
 		
 		// right arc
-		this.p7 = new Point(x + width - radius_4, y + yMiddle);
-		this.p8 = new Point(x + width - radius_4, y + height);
-		
+		this.p8= new Point(x + width/2 + height *tan_30, y + height);
+		this.p9= new Point(x + width/2 + 3*height/2*tan_30, y + height/2);
+		this.p10= new Point(x + width/2 + radius_2*tan_30, y);
 		// middle arc
-		this.p9 = new Point(x + width - radius_2, y + radius_2);
-		this.p10 = new Point(x + width / 2, y + radius_4);
-		this.p11 = new Point(x + radius_2, y + radius_2);
+		this.p11= new Point(x + width / 2, y+ height/5);
 		
-		this.cp1 = new Point(x - 10, y + height*2/3);
-		this.cp2 = new Point(x + width + 10, y + height*2/3);
-		
+		this.cp1 = new Point(x + width/2 - radius_2 * sin_30 -10, y + radius_2 - radius_2*cos_30 + 10);
+		this.cp2 = new Point(x + width/2 + radius_2 * sin_30 + 10, y + radius_2 - radius_2*cos_30 + 10);
 	}
 
 	@Override
-	public boolean draw(float x,
-					    float y,
-					    float width,
-					    float height,
-					    Graphics g)
-	{
+	public boolean draw(float x, float y, float width, float height, Graphics g) {
 		super.x = x;
 		super.y = y;
 		super.width = width;
 		super.height = height;
-		
+
 		return draw(g);
 	}
-	
+
 	@Override
 	public boolean draw(Graphics g) {
 		Graphics2D graphics = (Graphics2D) g;
 		Color currentColor = graphics.getColor();
 
-		Line2D.Float l1 = new Line2D.Float(p5.getX(),p5.getY(),p1.getX(),p1.getY());
-		Line2D.Float l2 = new Line2D.Float(p2.getX(),p2.getY(),p8.getX(),p8.getY());
-		Arc2D arc1 = DrawHelper.makeArc(p9, p10, p11);
+
+		Line2D.Float l1 = new Line2D.Float(p7.getX(),p7.getY(),p5.getX(),p5.getY());
+		Line2D.Float l2 = new Line2D.Float(p8.getX(),p8.getY(),p10.getX(),p10.getY());
+		
+		Arc2D arc3 = DrawHelper.makeArc(p6, p11, p9);
 		
 		graphics.draw(l1);
 		graphics.draw(l2);
-		graphics.draw(arc1);
+		graphics.draw(arc3);
 		
 		Ellipse2D.Float ee1 = new Ellipse2D.Float(cp1.getX() - 5, cp1.getY() - 5, 10.0F, 10.0F);
 		Ellipse2D.Float ee2 = new Ellipse2D.Float(cp2.getX() - 5, cp2.getY() - 5, 10.0F, 10.0F);
@@ -158,6 +157,7 @@ public final class Ffk_Lp extends Figure {
 		rotateAffineTransform.transform(this.p8.getPoint2D(), p8);
 		rotateAffineTransform.transform(this.p9.getPoint2D(), p9);
 		rotateAffineTransform.transform(this.p10.getPoint2D(), p10);
+
 		rotateAffineTransform.transform(this.p11.getPoint2D(), p11);
 		rotateAffineTransform.transform(this.cp1.getPoint2D(), cp1);
 		rotateAffineTransform.transform(this.cp2.getPoint2D(), cp2);
@@ -171,7 +171,8 @@ public final class Ffk_Lp extends Figure {
 		this.p7 = new Point(p7);
 		this.p8 = new Point(p8);
 		this.p9 = new Point(p9);
-		this.p10= new Point(p10);
+		this.p10 = new Point(p10);
+		
 		this.p11 = new Point(p11);
 		this.cp1 = new Point(cp1);
 		this.cp2 = new Point(cp2);
@@ -190,5 +191,4 @@ public final class Ffk_Lp extends Figure {
 
 		return true;
 	}
-
 }

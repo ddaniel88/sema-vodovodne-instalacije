@@ -29,14 +29,6 @@ public final class Q_Lp extends Figure {
 		
 		double sin_cos45 = Math.sqrt(2) / 2;
 		
-		double sin_30 = 0.5;
-		double cos_30 = Math.sqrt(3)/2;
-		
-		double sin_25 = 0.42261826174069943618697848964773;
-		double cos_25= 	0.90630778703664996324255265675432;
-		
-		double sin_35=  0.57357643635104609610803191282616;
-		double cos_35= 	0.81915204428899178968448838591684;
 		
 		this.p1 = new Point(x ,y);
 		this.p2 = new Point(x + width,y);
@@ -46,23 +38,21 @@ public final class Q_Lp extends Figure {
 		//ostale taèke
 		
 		double radius_2 = 3*height/2;
-		double radius_4 = height/2;
 		
 		
 		// left arc
-		this.p5= new Point(x + width/2 - height * sin_cos45, y + radius_2 - height*sin_cos45);
+		this.p5= new Point(x + width/2 - height*sin_cos45, y + radius_2 - height*sin_cos45);
 		this.p6= new Point(x + width/2 - radius_2 * sin_cos45, y + radius_2 - radius_2*sin_cos45);
-		this.p7 = new Point(x + width/2 - 2*height*sin_cos45,  y + radius_2 - radius_2*sin_cos45);
+		
 		
 		// right arc
-		this.p8 = new Point(x + width/2 + height * sin_cos45, y + radius_2 - height*sin_cos45);
+		this.p8 = new Point(x + width/2 + height*sin_cos45, y + radius_2 - height*sin_cos45);
 		this.p9 = new Point(x + width/2 + radius_2 * sin_cos45, y + radius_2 - radius_2*sin_cos45);
-		this.p10 = new Point(x + width/2 + 2*height*sin_cos45,  y + radius_2 - radius_2*sin_cos45);
 		// middle arc
 		this.p11= new Point(x + width / 2, y);
 		
-		this.cp1 = new Point(x + width/2 - radius_2 * sin_cos45 , y + radius_2 - radius_2*sin_cos45 );
-		this.cp2 = new Point(x + width/2 + radius_2 * sin_cos45, y + radius_2 - radius_2*sin_cos45);
+		this.cp1 = new Point(x + width/2 - radius_2 * sin_cos45 -10, y + radius_2 - radius_2*sin_cos45 + 10);
+		this.cp2 = new Point(x + width/2 + radius_2 * sin_cos45 + 10, y + radius_2 - radius_2*sin_cos45 + 10);
 	}
 
 	@Override
@@ -81,10 +71,9 @@ public final class Q_Lp extends Figure {
 		Color currentColor = graphics.getColor();
 
 
-		Line2D.Float l1 = new Line2D.Float(p5.getX(),p5.getY(),p7.getX(),p7.getY());
-		Line2D.Float l2 = new Line2D.Float(p8.getX(),p8.getY(),p10.getX(),p10.getY());
-		Arc2D arc1 = DrawHelper.makeArc(p5, p6, p7);
-		Arc2D arc2 = DrawHelper.makeArc(p8, p9, p10);
+		Line2D.Float l1 = new Line2D.Float(p1.getX(),p1.getY(),p5.getX(),p5.getY());
+		Line2D.Float l2 = new Line2D.Float(p2.getX(),p2.getY(),p8.getX(),p8.getY());
+		
 		Arc2D arc3 = DrawHelper.makeArc(p6, p11, p9);
 		
 		graphics.draw(l1);
@@ -114,11 +103,9 @@ public final class Q_Lp extends Figure {
 		this.p4.movePointFor(dx, dy);
 		this.p5.movePointFor(dx, dy);
 		this.p6.movePointFor(dx, dy);
-		this.p7.movePointFor(dx, dy);
 		this.p8.movePointFor(dx, dy);
 		this.p9.movePointFor(dx, dy);
 
-		this.p10.movePointFor(dx, dy);
 		this.p11.movePointFor(dx, dy);
 		
 		GeneralPath path = new GeneralPath();
@@ -149,11 +136,9 @@ public final class Q_Lp extends Figure {
 		Point2D.Float p4 = new Point2D.Float();
 		Point2D.Float p5 = new Point2D.Float();
 		Point2D.Float p6 = new Point2D.Float();
-		Point2D.Float p7 = new Point2D.Float();
 		Point2D.Float p8 = new Point2D.Float();
 		Point2D.Float p9 = new Point2D.Float();
 
-		Point2D.Float p10 = new Point2D.Float();
 		Point2D.Float p11 = new Point2D.Float();
 		Point2D.Float cp1 = new Point2D.Float();
 		Point2D.Float cp2 = new Point2D.Float();
@@ -164,11 +149,9 @@ public final class Q_Lp extends Figure {
 		rotateAffineTransform.transform(this.p4.getPoint2D(), p4);
 		rotateAffineTransform.transform(this.p5.getPoint2D(), p5);
 		rotateAffineTransform.transform(this.p6.getPoint2D(), p6);
-		rotateAffineTransform.transform(this.p7.getPoint2D(), p7);
 		rotateAffineTransform.transform(this.p8.getPoint2D(), p8);
 		rotateAffineTransform.transform(this.p9.getPoint2D(), p9);
 
-		rotateAffineTransform.transform(this.p10.getPoint2D(), p10);
 		rotateAffineTransform.transform(this.p11.getPoint2D(), p11);
 		rotateAffineTransform.transform(this.cp1.getPoint2D(), cp1);
 		rotateAffineTransform.transform(this.cp2.getPoint2D(), cp2);
@@ -179,11 +162,9 @@ public final class Q_Lp extends Figure {
 		this.p4 = new Point(p4);
 		this.p5 = new Point(p5);
 		this.p6 = new Point(p6);
-		this.p7 = new Point(p7);
 		this.p8 = new Point(p8);
 		this.p9 = new Point(p9);
 
-		this.p10 = new Point(p10);
 		this.p11 = new Point(p11);
 		this.cp1 = new Point(cp1);
 		this.cp2 = new Point(cp2);

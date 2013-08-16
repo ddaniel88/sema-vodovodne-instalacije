@@ -26,129 +26,38 @@ public final class K extends Figure {
 
 	public K(float x, float y, float width, float height) {
 		super(x, y, width, height);
-
-		double radius = 1.5 * height; // 2 * (3/4)
-		double radius_2 = radius / 2;
 		
-		this.p1 = new Point(x, y);
-		this.p2 = new Point(x + width, y);
-		this.p3 = new Point(x + width, y + height);
-		this.p4 = new Point(x, y + height);
+		float radius = 2*height;
+		float radius2 = height/3;
 		
-		// levi polukrug
-		double pl = x + 0.25 * height;
-		double ql = y + 0.25 * height;
+		double sin_15 = 0.25881904510; 
+		double cos_15 = 0.96592582628; 
 		
-		double left_intersect; // J taèka
-		QuadraticEquationResult verticalIntersect =
-				IntersectionPoints.getVerticalResultFromPQR(pl, ql, radius_2, x);
-		if (verticalIntersect.getX1() >= y && verticalIntersect.getX1() <= y + height) {
-			left_intersect = verticalIntersect.getX1();
-		}
-		else {
-			left_intersect = verticalIntersect.getX2();
-		}
+		double sin_30 = Math.sin(Math.PI/6);
+		double cos_30 = Math.cos(Math.PI/6); 
+		double tan_30 = Math.tan(Math.PI/6);
 		
-		this.p5 = new Point(x, left_intersect); // J taèka
-		this.p6 = new Point(x + 0.25 * height, y + height); // F taèka
+		double sin_cos45 = Math.sqrt(2) / 2;
 		
-		double up_left_intersect;
-		QuadraticEquationResult horizontalIntersect =
-				IntersectionPoints.getHorizontalResultFromPQR(pl, ql, radius_2, y + height);
-		if (horizontalIntersect.getX1() >= x && horizontalIntersect.getX1() <= x + width) {
-			up_left_intersect = horizontalIntersect.getX1();
-		}
-		else {
-			up_left_intersect = horizontalIntersect.getX2();
-		}
+		this.p1 = new Point(x ,y);
+		this.p2 = new Point(x + width,y);
+		this.p3 = new Point(x + width,y + height);
+		this.p4 = new Point(x,y + height);
 		
-		this.p7 = new Point(up_left_intersect, y); // I taèka
-		// levi polukrug - kraj
+		//veliki luk
+		this.p5 = new Point(x + 3*width/4, y + height);
+		this.p6 = new Point(x + 3*width/4 - radius*sin_15, y - radius/2 + radius*cos_15 - height/14);
+		this.p7 = new Point(x + 3*width/4- radius*sin_30, y - radius/2 + radius*cos_30);
+	
+		//levi polukrug
+		this.p8 = new Point(x + (height/5)*tan_30 - height/12, y + 4*height/5 + height/12);
+		this.p9 = new Point(x + (4*height/5)*tan_30 - height/12, y + height/5 + height/12);
 		
-		// desni polukrug
-		double radiusR = width * 4;
-		double radiusR_2 = width * 2;
 		
-		// centar desnog luka
-		double pr = x + width;
-		double qr = y + height - 2 * width;
+		this.p10 = new Point(x + width*3/4,y + height);
 		
-		//presek dve kružnice...
-		double a = pl;
-		double b = ql;
-		double c = pr;
-		double d = qr;
-		
-		// rastojanje izmeðu centra kružnica (lukova)
-		double D = Math.sqrt((c - a) * (c - a) + (d - b) * (d - b));
-		double delta = 0.25 *
-						  Math.sqrt((D + radius_2 + radiusR_2) *
-									(D + radius_2 - radiusR_2) *
-									(D - radius_2 + radiusR_2) *
-									(-D + radius_2 + radiusR_2));
-		
-		double x1 = 0.5 * (a + c) + ((c - a) * ((radius_2 * radius_2 - radiusR_2 * radiusR_2)) / (2 * D * D)) +
-					(2 * (b - d) * delta) / (D * D);
-		double x2 = 0.5 * (a + c) + ((c - a) * ((radius_2 * radius_2 - radiusR_2 * radiusR_2)) / (2 * D * D)) -
-				(2 * (b - d) * delta) / (D * D);
-		
-		double y1 = 0.5 * (b + d) + ((d - b) * ((radius_2 * radius_2 - radiusR_2 * radiusR_2)) / (2 * D * D)) -
-				(2 * (a - c) * delta) / (D * D);
-		double y2 = 0.5 * (b + d) + ((d - b) * ((radius_2 * radius_2 - radiusR_2 * radiusR_2)) / (2 * D * D)) +
-				(2 * (a - c) * delta) / (D * D);
-		
-//		double tmp1 = (Math.pow(radius_2, 2) - Math.pow(radiusR_2, 2)) / (2 * Math.pow(D, 2));
-//		double tmp2 = (2 * delta) / Math.pow(D, 2);
-//		double tmpx = (a + c) / 2 + (c - a) * tmp1;
-//		double tmpy = (b + d) / 2 + (d - b) * tmp2;
-//		double x1 = tmpx + (b - d) / tmp2;
-//		double x2 = tmpx - (b - d) / tmp2;
-//		double y1 = tmpy - (a - c) / tmp2;
-//		double y2 = tmpy + (a - c) / tmp2;
-		
-		// taèka preseka 2 kružnice - T taèka
-		if (x1 >= x && x1 <= x + width && y1 >= y && y1 <= y + height) {
-			this.p8 = new Point(x1, y1);
-		}
-		else {
-			this.p8 = new Point(x2, y2);
-		}
-		
-//		// drugi naèin
-//		double de2 = (pr - pl) * (pr - pl) + (qr - ql) * (qr - ql); 
-//		double K_ = 0.25 * Math.sqrt(((radius_2 + radiusR_2) * (radius_2 + radiusR_2) - de2) *
-//				(de2 - (radius_2 - radiusR_2) * (radius_2 - radiusR_2)));
-//		
-//		x1 = 0.5 * (pr + pl) + 0.5 * (pr - pl) * (radius_2 * radius_2 - radiusR_2 * radiusR_2) / de2 + 2 * (qr - ql) * K_ / de2;
-//		x2 = 0.5 * (pr + pl) + 0.5 * (pr - pl) * (radius_2 * radius_2 - radiusR_2 * radiusR_2) / de2 - 2 * (qr - ql) * K_ / de2;
-//		
-//		y1 = 0.5 * (qr + ql) + 0.5 * (qr - ql) * (radius_2 * radius_2 - radiusR_2 * radiusR_2) / de2 - 2 * (pr - pl) * K_ / de2;
-//		y2 = 0.5 * (qr + ql) + 0.5 * (qr - ql) * (radius_2 * radius_2 - radiusR_2 * radiusR_2) / de2 + 2 * (pr - pl) * K_ / de2;
-//		
-//		if (x1 >= x && x1 <= x + width && y1 >= y && y1 <= y + height) {
-//			this.p8 = new Point(x1, y1);
-//		}
-//		else {
-//			this.p8 = new Point(x2, y2);
-//		}
-		
-		double middle_intersect;
-		QuadraticEquationResult rightVerticalIntersect =
-				IntersectionPoints.getVerticalResultFromPQR(pr, qr, radiusR_2, x);
-		if (rightVerticalIntersect.getX1() >= y && rightVerticalIntersect.getX1() <= y + height) {
-			middle_intersect = rightVerticalIntersect.getX1();
-		}
-		else {
-			middle_intersect = rightVerticalIntersect.getX2();
-		}
-		
-		this.p9 = new Point(x + width / 2, y + height - (middle_intersect - y));
-		this.p10 = new Point(x + width, y + height);
-		
-		// desni polukrug - kraj
-
-		this.cp1 = new Point(x - 10, y + height * 2 / 3);
-		this.cp2 = new Point(x + width + 10, y + height * 2 / 3);
+		this.cp1= new Point(x + 3*width/4- radius*sin_30 - radius2*cos_30, y - radius/2 + radius*cos_30 - radius2*sin_30);
+		this.cp2 = new Point(x + width + 10, y + height);
 	}
 
 	@Override
@@ -157,40 +66,67 @@ public final class K extends Figure {
 		super.y = y;
 		super.width = width;
 		super.height = height;
-
+		
 		return draw(g);
 	}
 
+//	@Override
+//	public boolean draw(Graphics g) {
+//		Graphics2D graphics = (Graphics2D) g;
+//		
+//		float radius = height * 2 / 3;
+//		float offset = height / 3;
+//		
+//		Rectangle2D rectangleForArc = new Rectangle();
+//		// left arc
+//		rectangleForArc.setRect(x - offset, y + offset, radius, radius);
+//		graphics.draw(new Arc2D.Double(rectangleForArc, 270, 180, Arc2D.OPEN));
+//		
+//		// right arc
+//		rectangleForArc.setRect(x + width - offset, y + offset, radius, radius);
+//		graphics.draw(new Arc2D.Double(rectangleForArc, 90, 180, Arc2D.OPEN));
+//		
+//		// line between arcs
+//		graphics.draw(new Line2D.Double(x + radius / 2, y + radius, x + width - radius / 2, y + radius));
+//		
+//		// vertical line on middle
+//		graphics.draw(new Line2D.Double(x + width / 2, y, x + width / 2, y + offset + radius / 2));
+//		
+//		// horizontal line on middle
+//		graphics.draw(new Line2D.Double(x + width / 2 - offset, y, x + width / 2 + offset, y));
+//		
+//		return true;
+//	}
+	
 	@Override
 	public boolean draw(Graphics g) {
 		// TODO Auto-generated method stub
 		Graphics2D graphics = (Graphics2D) g;
-
+		
+		
 		Color currentColor = graphics.getColor();
 
-		Arc2D arc1 = DrawHelper.makeArc(p5, p6, p7);
-		Arc2D arc2 = DrawHelper.makeArc(p8, p9, p10);
+		Arc2D arc1 = DrawHelper.makeArc(p7, p6, p3);
+		Arc2D arc2 = DrawHelper.makeArc(p8, p7, p9);
 		
 		graphics.draw(arc1);
 		graphics.draw(arc2);
-
-		Ellipse2D.Float ee1 = new Ellipse2D.Float(cp1.getX() - 5,
-				cp1.getY() - 5, 10.0F, 10.0F);
-		Ellipse2D.Float ee2 = new Ellipse2D.Float(cp2.getX() - 5,
-				cp2.getY() - 5, 10.0F, 10.0F);
-
+		
+		Ellipse2D.Float ee1 = new Ellipse2D.Float(cp1.getX() - 5, cp1.getY() - 5, 10.0F, 10.0F);
+		Ellipse2D.Float ee2 = new Ellipse2D.Float(cp2.getX() - 5, cp2.getY() - 5, 10.0F, 10.0F);
+		
 		if (this.getSelected())
 			graphics.setColor(Color.RED);
 		else
 			graphics.setColor(Color.GRAY);
 		graphics.fill(ee1);
 		graphics.fill(ee2);
-
+		
 		graphics.setColor(currentColor);
-
+		
 		return true;
 	}
-
+	
 	@Override
 	public boolean moveFigureFor(float dx, float dy, Point endCanvas) {
 
@@ -204,37 +140,29 @@ public final class K extends Figure {
 		this.p8.movePointFor(dx, dy);
 		this.p9.movePointFor(dx, dy);
 		this.p10.movePointFor(dx, dy);
-
+		
 		GeneralPath path = new GeneralPath();
-		path.append(
-				new Line2D.Float(p1.getX(), p1.getY(), p2.getX(), p2.getY()),
-				false);
-		path.append(
-				new Line2D.Float(p2.getX(), p2.getY(), p3.getX(), p3.getY()),
-				false);
-		path.append(
-				new Line2D.Float(p3.getX(), p3.getY(), p4.getX(), p4.getY()),
-				false);
+		path.append(new Line2D.Float(p1.getX(),p1.getY(),p2.getX(),p2.getY()), false);
+		path.append(new Line2D.Float(p2.getX(),p2.getY(),p3.getX(),p3.getY()), false);
+		path.append(new Line2D.Float(p3.getX(),p3.getY(),p4.getX(),p4.getY()), false);
 		path.closePath();
-
+		
 		this.cp1.movePointFor(dx, dy);
 		this.cp2.movePointFor(dx, dy);
 
 		Rectangle2D bound = path.getBounds2D();
-		this.x = (float) bound.getX();
-		this.y = (float) bound.getY();
-		this.height = (float) bound.getHeight();
-		this.width = (float) bound.getWidth();
+		this.x = (float)bound.getX();
+		this.y = (float)bound.getY();
+		this.height = (float)bound.getHeight();
+		this.width = (float)bound.getWidth();
 
 		return true;
 	}
-
+	
 	@Override
 	public boolean rotateFigure(double angle, Graphics2D g) {
 
-		AffineTransform rotateAffineTransform = AffineTransform
-				.getRotateInstance(angle, this.getCentralPosition().getX(),
-						this.getCentralPosition().getY());
+		AffineTransform rotateAffineTransform = AffineTransform.getRotateInstance(angle, this.getCentralPosition().getX(), this.getCentralPosition().getY());
 		Point2D.Float p1 = new Point2D.Float();
 		Point2D.Float p2 = new Point2D.Float();
 		Point2D.Float p3 = new Point2D.Float();
@@ -247,7 +175,7 @@ public final class K extends Figure {
 		Point2D.Float p10 = new Point2D.Float();
 		Point2D.Float cp1 = new Point2D.Float();
 		Point2D.Float cp2 = new Point2D.Float();
-
+		
 		rotateAffineTransform.transform(this.p1.getPoint2D(), p1);
 		rotateAffineTransform.transform(this.p2.getPoint2D(), p2);
 		rotateAffineTransform.transform(this.p3.getPoint2D(), p3);
@@ -260,7 +188,7 @@ public final class K extends Figure {
 		rotateAffineTransform.transform(this.p10.getPoint2D(), p10);
 		rotateAffineTransform.transform(this.cp1.getPoint2D(), cp1);
 		rotateAffineTransform.transform(this.cp2.getPoint2D(), cp2);
-
+		
 		this.p1 = new Point(p1);
 		this.p2 = new Point(p2);
 		this.p3 = new Point(p3);
@@ -270,27 +198,21 @@ public final class K extends Figure {
 		this.p7 = new Point(p7);
 		this.p8 = new Point(p8);
 		this.p9 = new Point(p9);
-		this.p10 = new Point(p10);
+		this.p10= new Point(p10);
 		this.cp1 = new Point(cp1);
 		this.cp2 = new Point(cp2);
-
+		
 		GeneralPath path = new GeneralPath();
-		path.append(
-				new Line2D.Float(this.p1.getX(), this.p1.getY(),
-						this.p2.getX(), this.p2.getY()), false);
-		path.append(
-				new Line2D.Float(this.p2.getX(), this.p2.getY(),
-						this.p3.getX(), this.p3.getY()), false);
-		path.append(
-				new Line2D.Float(this.p3.getX(), this.p3.getY(),
-						this.p4.getX(), this.p4.getY()), false);
+		path.append(new Line2D.Float(this.p1.getX(),this.p1.getY(),this.p2.getX(),this.p2.getY()), false);
+		path.append(new Line2D.Float(this.p2.getX(),this.p2.getY(),this.p3.getX(),this.p3.getY()), false);
+		path.append(new Line2D.Float(this.p3.getX(),this.p3.getY(),this.p4.getX(),this.p4.getY()), false);
 		path.closePath();
-
+		
 		Rectangle2D bound = path.getBounds2D();
-		this.x = (float) bound.getX();
-		this.y = (float) bound.getY();
-		this.height = (float) bound.getHeight();
-		this.width = (float) bound.getWidth();
+		this.x = (float)bound.getX();
+		this.y = (float)bound.getY();
+		this.height = (float)bound.getHeight();
+		this.width = (float)bound.getWidth();
 
 		return true;
 	}
